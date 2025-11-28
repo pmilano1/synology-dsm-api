@@ -210,7 +210,7 @@ All methods include actual JSON response examples with detailed field descriptio
 
 ## ⚠️ Disclaimer
 
-This is **unofficial documentation** created through reverse-engineering. It is not endorsed by or affiliated with Synology Inc. Use at your own risk.
+This is **unofficial documentation** created through reverse-engineering. It is not endorsed by or affiliated with Synology Inc. Use at your own risk. Always backup your data before making changes via API.
 
 ## 📄 License
 
