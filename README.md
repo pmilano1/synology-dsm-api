@@ -1,7 +1,7 @@
 # Synology DSM API Documentation
 
-[![API Coverage](https://img.shields.io/badge/API%20Coverage-600+%20Methods-brightgreen)](docs/api-reference/)
-[![DSM APIs](https://img.shields.io/badge/DSM%20APIs-85+%20Categories-blue)](docs/api-reference/)
+[![API Coverage](https://img.shields.io/badge/API%20Coverage-650+%20Methods-brightgreen)](docs/api-reference/)
+[![DSM APIs](https://img.shields.io/badge/DSM%20APIs-95+%20Categories-blue)](docs/api-reference/)
 [![ActiveBackup APIs](https://img.shields.io/badge/ActiveBackup-100%25%20Coverage-blue)](docs/api-reference/activebackup/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -34,11 +34,13 @@ This repository contains comprehensive documentation for Synology DSM APIs, incl
 - ✅ **VPN Server** - VPN settings, connections, logs, protocols (10+ methods)
 - ✅ **Snapshot Replication** - Volume snapshots, LUN snapshots, replication plans (10+ methods)
 - ✅ **Virtual Machine Manager** - VM lifecycle, power control, images, tasks (20+ methods)
-- ✅ **System Services** - DHCP server, Log Center, Security Advisor (20+ methods)
+- ✅ **System Services** - DHCP server, Log Center, Security Advisor, Universal Search, Note Station, USB Copy (25+ methods)
+- ✅ **Task Scheduler** - Script tasks, service control, scheduled automation (15+ methods)
+- ✅ **Cloud Sync** - Cloud connections, sync tasks, Google Drive, OneDrive, Dropbox, S3 (20+ methods)
 
 **Total Coverage:**
-- ✅ **85+ API categories** documented
-- ✅ **600+ methods** with examples and parameters
+- ✅ **95+ API categories** documented
+- ✅ **650+ methods** with examples and parameters
 - ✅ Authentication flows and error handling
 - ✅ Clean, concise UDM-style documentation format
 
@@ -109,7 +111,9 @@ curl "http://YOUR_NAS_IP:5000/webapi/entry.cgi" \
 - **[VPN Server](docs/api-reference/vpn/)** - VPN settings, connections, logs, protocols
 - **[Snapshot Replication](docs/api-reference/snapshot/)** - Volume snapshots, LUN snapshots, replication plans
 - **[Virtual Machine Manager](docs/api-reference/virtualization/)** - VM lifecycle, power control, images, tasks
-- **[System Services](docs/api-reference/system-services/)** - DHCP server, Log Center, Security Advisor
+- **[System Services](docs/api-reference/system-services/)** - DHCP server, Log Center, Security Advisor, Universal Search, Note Station, USB Copy
+- **[Task Scheduler](docs/api-reference/task-scheduler/)** - Script tasks, service control, scheduled automation
+- **[Cloud Sync](docs/api-reference/cloud-sync/)** - Cloud connections, sync tasks, Google Drive, OneDrive, Dropbox, S3
 - **[ActiveBackup for Business](docs/api-reference/activebackup/)** - Backup, restore, device management (100% coverage)
 
 
@@ -130,7 +134,9 @@ curl "http://YOUR_NAS_IP:5000/webapi/entry.cgi" \
 | **VPN Server** | 5 | 10+ | VPN settings, connections, logs, PPTP, OpenVPN, L2TP |
 | **Snapshot Replication** | 3 | 10+ | Volume snapshots, LUN snapshots, replication plans |
 | **Virtual Machine Manager** | 3 | 20+ | VM lifecycle, power control, images, tasks |
-| **System Services** | 3 | 20+ | DHCP server, Log Center, Security Advisor |
+| **System Services** | 6 | 25+ | DHCP server, Log Center, Security Advisor, Universal Search, Note Station, USB Copy |
+| **Task Scheduler** | 3 | 15+ | Script tasks, service control, scheduled automation |
+| **Cloud Sync** | 4 | 20+ | Cloud connections, sync tasks, filters, Google Drive, OneDrive, Dropbox, S3 |
 | **ActiveBackup** | 35 | 215 | Device backup, restore, versioning, AEM, VM backup |
 
 ### Authentication Flow
@@ -150,10 +156,10 @@ sequenceDiagram
 ## 📊 API Coverage
 
 **DSM APIs:**
-- **Total API Categories:** 85+
-- **Total Methods:** 600+
-- **Fully Documented:** 600+ methods
-- **With Response Examples:** 600+ methods
+- **Total API Categories:** 95+
+- **Total Methods:** 650+
+- **Fully Documented:** 650+ methods
+- **With Response Examples:** 650+ methods
 
 **ActiveBackup APIs:**
 - **Total APIs:** 35
@@ -163,7 +169,7 @@ sequenceDiagram
 ## 🔑 Key Features
 
 ### Complete Coverage
-Comprehensive documentation for 600+ API methods across DSM Core, FileStation, DownloadStation, Docker, Photos, Surveillance Station, AudioStation, VPN Server, Snapshot Replication, Virtual Machine Manager, System Services, and ActiveBackup.
+Comprehensive documentation for 650+ API methods across DSM Core, FileStation, DownloadStation, Docker, Photos, Surveillance Station, AudioStation, VPN Server, Snapshot Replication, Virtual Machine Manager, System Services, Task Scheduler, Cloud Sync, and ActiveBackup.
 
 ### Clean UDM-Style Format
 All documentation follows the clean, concise format used in UniFi Dream Machine API documentation - easy to read and navigate.
@@ -187,6 +193,8 @@ All methods include actual JSON response examples with detailed field descriptio
 - **Snapshot Management** - Automate volume and LUN snapshots, replication
 - **VM Automation** - Manage virtual machines, power control, image creation
 - **Network Services** - Monitor DHCP, logs, security scans
+- **Task Automation** - Schedule scripts, service control, system tasks
+- **Cloud Integration** - Sync with Google Drive, OneDrive, Dropbox, S3
 - **System Monitoring** - Build custom monitoring dashboards for DSM
 - **User & Permission Management** - Automate user and group administration
 - **Integration** - Integrate Synology NAS with other systems and platforms

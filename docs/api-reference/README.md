@@ -194,6 +194,29 @@ USB copy task management and logs
 
 ---
 
+## Task Scheduler APIs
+
+### [Task Management](task-scheduler/task-management.md)
+List, get, enable, disable, run, delete tasks
+
+### [Script Tasks](task-scheduler/script-tasks.md)
+Create and modify script execution tasks
+
+### [Service Tasks](task-scheduler/service-tasks.md)
+Create and modify service control tasks
+
+---
+
+## Cloud Sync APIs
+
+### [Connections](cloud-sync/connections.md)
+Cloud connection management, authentication, status
+
+### [Tasks](cloud-sync/tasks.md)
+Sync task management, filters, scheduling
+
+---
+
 ## ActiveBackup for Business APIs
 
 ### Core
