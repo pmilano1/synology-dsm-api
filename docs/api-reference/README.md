@@ -146,6 +146,45 @@ PPTP, OpenVPN, L2TP settings and configuration export
 
 ---
 
+## Snapshot Replication APIs
+
+### [Volume Snapshots](snapshot/volume-snapshots.md)
+Create, list, delete volume snapshots
+
+### [LUN Snapshots](snapshot/lun-snapshots.md)
+Create, list, delete LUN snapshots
+
+### [Replication](snapshot/replication.md)
+Replication plan management and synchronization
+
+---
+
+## Virtual Machine Manager APIs
+
+### [Virtual Machines](virtualization/virtual-machines.md)
+VM listing, info, power control, configuration
+
+### [Images](virtualization/images.md)
+VM image management and creation
+
+### [Tasks](virtualization/tasks.md)
+Task monitoring and management
+
+---
+
+## System Services APIs
+
+### [DHCP Server](system-services/dhcp-server.md)
+DHCP server configuration, client list, reservations
+
+### [Log Center](system-services/log-center.md)
+System logs, remote logging, log archives
+
+### [Security Advisor](system-services/security-advisor.md)
+Security scans, checklist, login activity
+
+---
+
 ## ActiveBackup for Business APIs
 
 ### Core
