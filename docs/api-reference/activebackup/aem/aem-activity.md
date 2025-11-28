@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `backup_result`
@@ -22,7 +20,7 @@
 - `api` (required): `SYNO.ActiveBackup.AEM.Activity`
 - `version` (required): `1`
 - `method` (required): `backup_status`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -45,7 +43,7 @@
 - `version` (required): `1`
 - `method` (required): `write_vmm_log`
 - `guest_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `guest_id`

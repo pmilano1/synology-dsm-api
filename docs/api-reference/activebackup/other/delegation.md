@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `create_or_update`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `create_or_update`
 - `uids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `uids`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `delete`
 - `uids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `uids`
@@ -51,7 +49,7 @@
 - `api` (required): `SYNO.ActiveBackup.Delegation`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

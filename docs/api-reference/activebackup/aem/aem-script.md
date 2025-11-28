@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `delete`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `delete`
 - `script_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `script_id`
@@ -35,7 +33,7 @@
 - `api` (required): `SYNO.ActiveBackup.AEM.Script`
 - `version` (required): `1`
 - `method` (required): `prepare_file_for_join`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -58,7 +56,7 @@
 - `version` (required): `1`
 - `method` (required): `update`
 - `script_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `script_id`

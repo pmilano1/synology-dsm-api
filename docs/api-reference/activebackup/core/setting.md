@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `get_phys_memsize`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.Setting`
 - `version` (required): `1`
 - `method` (required): `get_phys_memsize`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -40,7 +38,7 @@
 - `api` (required): `SYNO.ActiveBackup.Setting`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -90,7 +88,7 @@
 - `version` (required): `1`
 - `method` (required): `set`
 - `settings` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `settings`

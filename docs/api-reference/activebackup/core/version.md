@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `delete`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `delete`
 - `task_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_id`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `download`
 - `device_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_id`
@@ -53,7 +51,7 @@
 - `version` (required): `1`
 - `method` (required): `list`
 - `task_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_id`
@@ -69,7 +67,7 @@
 - `version` (required): `1`
 - `method` (required): `list_node`
 - `device_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_id`
@@ -85,7 +83,7 @@
 - `version` (required): `1`
 - `method` (required): `lock`
 - `task_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_id`
@@ -101,7 +99,7 @@
 - `version` (required): `1`
 - `method` (required): `restore`
 - `device_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_id`

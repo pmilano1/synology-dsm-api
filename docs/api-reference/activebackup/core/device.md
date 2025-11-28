@@ -1,14 +1,16 @@
-# SYNO.ActiveBackup.Device
+# ActiveBackup - Device Management
 
-**Category:** Core
+**Category:** Data Protection
 
-[← Back to API Reference](../README.md)
+[← Back to ActiveBackup](../README.md)
 
 ---
 
+**Endpoint:** `/webapi/entry.cgi`
 
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+---
+
+## SYNO.ActiveBackup.Device
 
 
 #### Method: `list`
@@ -19,7 +21,7 @@
 - `api` (required): `SYNO.ActiveBackup.Device`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -76,7 +78,7 @@
 - `version` (required): `1`
 - `method` (required): `list_restorable_version`
 - `device_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_id`
@@ -92,7 +94,7 @@
 - `version` (required): `1`
 - `method` (required): `list_tasks`
 - `device_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_ids`
@@ -109,7 +111,7 @@
 - `version` (required): `1`
 - `method` (required): `remove`
 - `device_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_ids`
@@ -125,7 +127,7 @@
 - `version` (required): `1`
 - `method` (required): `set_credential`
 - `device_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_ids`

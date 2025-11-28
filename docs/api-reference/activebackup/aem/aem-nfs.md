@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `apply_state`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `apply_state`
 - `interfaces` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `interfaces`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `check_state`
 - `interfaces` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `interfaces`

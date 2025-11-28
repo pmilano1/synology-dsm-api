@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `list`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.UserGroup`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -49,7 +47,7 @@
 - `api` (required): `SYNO.ActiveBackup.UserGroup`
 - `version` (required): `1`
 - `method` (required): `list_admin`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

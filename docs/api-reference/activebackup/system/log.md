@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `cancel_download`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `cancel_download`
 - `export_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `export_id`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `check_progress`
 - `export_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `export_id`
@@ -51,7 +49,7 @@
 - `api` (required): `SYNO.ActiveBackup.Log`
 - `version` (required): `1`
 - `method` (required): `clear`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -70,7 +68,7 @@
 - `version` (required): `1`
 - `method` (required): `download`
 - `output_format` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `output_format`
@@ -86,7 +84,7 @@
 - `api` (required): `SYNO.ActiveBackup.Log`
 - `version` (required): `1`
 - `method` (required): `get_info`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -119,7 +117,7 @@
 - `api` (required): `SYNO.ActiveBackup.Log`
 - `version` (required): `1`
 - `method` (required): `list_log`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -170,7 +168,7 @@
 - `api` (required): `SYNO.ActiveBackup.Log`
 - `version` (required): `1`
 - `method` (required): `list_result`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -220,7 +218,7 @@
 - `api` (required): `SYNO.ActiveBackup.Log`
 - `version` (required): `1`
 - `method` (required): `send_test_log`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -238,7 +236,7 @@
 - `api` (required): `SYNO.ActiveBackup.Log`
 - `version` (required): `1`
 - `method` (required): `set_info`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -256,7 +254,7 @@
 - `api` (required): `SYNO.ActiveBackup.Log`
 - `version` (required): `1`
 - `method` (required): `set_send_log_setting`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -275,7 +273,7 @@
 - `version` (required): `1`
 - `method` (required): `upload_cert`
 - `file_tmp` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `file_tmp`

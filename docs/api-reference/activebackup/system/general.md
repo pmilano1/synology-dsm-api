@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `fsync`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `fsync`
 - `path` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `path`
@@ -35,7 +33,7 @@
 - `api` (required): `SYNO.ActiveBackup.General`
 - `version` (required): `1`
 - `method` (required): `get_sys_mem_info`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -60,7 +58,7 @@
 - `api` (required): `SYNO.ActiveBackup.General`
 - `version` (required): `1`
 - `method` (required): `is_syno_internal`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

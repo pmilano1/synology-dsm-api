@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `clear`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `clear`
 - `sessions` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `sessions`
@@ -35,7 +33,7 @@
 - `api` (required): `SYNO.ActiveBackup.Restore`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -61,7 +59,7 @@
 - `version` (required): `1`
 - `method` (required): `pause`
 - `job_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `job_ids`
@@ -77,7 +75,7 @@
 - `version` (required): `1`
 - `method` (required): `resume`
 - `job_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `job_ids`
@@ -93,7 +91,7 @@
 - `version` (required): `1`
 - `method` (required): `status`
 - `job_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `job_id`
@@ -109,7 +107,7 @@
 - `api` (required): `SYNO.ActiveBackup.Restore`
 - `version` (required): `1`
 - `method` (required): `stop`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

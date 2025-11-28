@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `create`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `create`
 - `workload_uuid` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `workload_uuid`
@@ -54,7 +52,7 @@
 - `version` (required): `1`
 - `method` (required): `list_entry`
 - `id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `id`
@@ -70,7 +68,7 @@
 - `version` (required): `1`
 - `method` (required): `post_hook`
 - `action_type` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `action_type`
@@ -86,7 +84,7 @@
 - `version` (required): `1`
 - `method` (required): `pre_hook`
 - `action_type` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `action_type`
@@ -102,7 +100,7 @@
 - `version` (required): `1`
 - `method` (required): `restore_entry`
 - `version_additional_meta` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `version_additional_meta`
@@ -118,7 +116,7 @@
 - `version` (required): `1`
 - `method` (required): `rollback_copy_versions`
 - `versions` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `versions`
@@ -134,7 +132,7 @@
 - `version` (required): `1`
 - `method` (required): `validate_external_storage`
 - `connection_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `connection_id`

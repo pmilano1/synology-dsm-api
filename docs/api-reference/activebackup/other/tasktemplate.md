@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `create`
@@ -22,7 +20,7 @@
 - `api` (required): `SYNO.ActiveBackup.TaskTemplate`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -120,7 +118,7 @@
 - `version` (required): `1`
 - `method` (required): `remove`
 - `template_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `template_ids`
@@ -135,7 +133,7 @@
 - `api` (required): `SYNO.ActiveBackup.TaskTemplate`
 - `version` (required): `1`
 - `method` (required): `set`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -153,7 +151,7 @@
 - `api` (required): `SYNO.ActiveBackup.TaskTemplate`
 - `version` (required): `1`
 - `method` (required): `set_priority`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

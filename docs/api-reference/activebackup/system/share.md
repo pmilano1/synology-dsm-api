@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `check_file`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.Share`
 - `version` (required): `1`
 - `method` (required): `check_file`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -41,7 +39,7 @@
 - `version` (required): `1`
 - `method` (required): `create_fs_dir`
 - `paths` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `paths`
@@ -56,7 +54,7 @@
 - `api` (required): `SYNO.ActiveBackup.Share`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -100,7 +98,7 @@
 - `api` (required): `SYNO.ActiveBackup.Share`
 - `version` (required): `1`
 - `method` (required): `list_encrypted`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -122,7 +120,7 @@
 - `version` (required): `1`
 - `method` (required): `list_file`
 - `root_path` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `root_path`
@@ -137,7 +135,7 @@
 - `api` (required): `SYNO.ActiveBackup.Share`
 - `version` (required): `1`
 - `method` (required): `list_storage`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -205,7 +203,7 @@
 - `api` (required): `SYNO.ActiveBackup.Share`
 - `version` (required): `1`
 - `method` (required): `list_volume`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -236,7 +234,7 @@
 - `version` (required): `1`
 - `method` (required): `relink`
 - `share_name` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `share_name`
@@ -252,7 +250,7 @@
 - `version` (required): `1`
 - `method` (required): `remove`
 - `is_remove_data` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `is_remove_data`

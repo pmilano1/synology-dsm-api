@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `cancel_check_job`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `cancel_check_job`
 - `session` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `session`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `check_identity`
 - `inventory_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `inventory_id`
@@ -52,7 +50,7 @@
 - `version` (required): `1`
 - `method` (required): `check_iscsi`
 - `inventory_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `inventory_id`
@@ -68,7 +66,7 @@
 - `version` (required): `1`
 - `method` (required): `create`
 - `host_name` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `host_name`
@@ -84,7 +82,7 @@
 - `version` (required): `1`
 - `method` (required): `create_check_job`
 - `session` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `session`
@@ -100,7 +98,7 @@
 - `version` (required): `1`
 - `method` (required): `get_check_status`
 - `session` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `session`
@@ -117,7 +115,7 @@
 - `version` (required): `1`
 - `method` (required): `get_host_interface`
 - `inventory_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `inventory_id`
@@ -133,7 +131,7 @@
 - `version` (required): `1`
 - `method` (required): `get_node_infos`
 - `ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `ids`
@@ -149,7 +147,7 @@
 - `version` (required): `1`
 - `method` (required): `get_node_path`
 - `node_path_list` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `node_path_list`
@@ -165,7 +163,7 @@
 - `version` (required): `1`
 - `method` (required): `get_server_cache`
 - `inventory_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `inventory_id`
@@ -182,7 +180,7 @@
 - `version` (required): `1`
 - `method` (required): `get_server_info`
 - `inventory_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `inventory_id`
@@ -198,7 +196,7 @@
 - `api` (required): `SYNO.ActiveBackup.Inventory`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -227,7 +225,7 @@
 - `version` (required): `1`
 - `method` (required): `list_cluster_shared_volume`
 - `inventory_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `inventory_id`
@@ -243,7 +241,7 @@
 - `version` (required): `1`
 - `method` (required): `list_guest_node`
 - `inventory_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `inventory_id`
@@ -259,7 +257,7 @@
 - `version` (required): `1`
 - `method` (required): `list_node`
 - `parent_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `parent_id`
@@ -275,7 +273,7 @@
 - `version` (required): `1`
 - `method` (required): `merge_auto_backup_rule`
 - `aem_uuid` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `aem_uuid`
@@ -290,7 +288,7 @@
 - `api` (required): `SYNO.ActiveBackup.Inventory`
 - `version` (required): `1`
 - `method` (required): `remove`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -312,7 +310,7 @@
 - `version` (required): `1`
 - `method` (required): `update`
 - `auth_user` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `auth_user`
@@ -328,7 +326,7 @@
 - `version` (required): `1`
 - `method` (required): `update_cache`
 - `inventory_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `inventory_id`

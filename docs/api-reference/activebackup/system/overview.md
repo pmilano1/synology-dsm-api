@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `list_activity`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.Overview`
 - `version` (required): `1`
 - `method` (required): `list_activity`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -44,7 +42,7 @@
 - `api` (required): `SYNO.ActiveBackup.Overview`
 - `version` (required): `1`
 - `method` (required): `list_device_last_backup`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -78,7 +76,7 @@
 - `version` (required): `1`
 - `method` (required): `list_device_transfer_size`
 - `time_start` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `time_start`
@@ -93,7 +91,7 @@
 - `api` (required): `SYNO.ActiveBackup.Overview`
 - `version` (required): `1`
 - `method` (required): `list_result_status_summary`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 - `filter` (required): Used value: `{}`
 
 **Response:**
@@ -126,7 +124,7 @@
 - `api` (required): `SYNO.ActiveBackup.Overview`
 - `version` (required): `1`
 - `method` (required): `list_type_transfer_size`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 - `filter` (required): Used value: `{}`
 
 **Response:**

@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `check_key`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `check_key`
 - `key` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `key`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `check_leader_address`
 - `leader_addr` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `leader_addr`
@@ -52,7 +50,7 @@
 - `version` (required): `1`
 - `method` (required): `edit_connection`
 - `hostname` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `hostname`
@@ -67,7 +65,7 @@
 - `api` (required): `SYNO.ActiveBackup.AEM`
 - `version` (required): `1`
 - `method` (required): `get_info`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -94,7 +92,7 @@
 - `version` (required): `1`
 - `method` (required): `join`
 - `key` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `key`
@@ -109,7 +107,7 @@
 - `api` (required): `SYNO.ActiveBackup.AEM`
 - `version` (required): `1`
 - `method` (required): `leave`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -127,7 +125,7 @@
 - `api` (required): `SYNO.ActiveBackup.AEM`
 - `version` (required): `1`
 - `method` (required): `leave_by_leader`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

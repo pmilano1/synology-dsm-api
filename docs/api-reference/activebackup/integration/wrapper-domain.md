@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `get`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.Wrapper.Domain`
 - `version` (required): `1`
 - `method` (required): `get`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -40,7 +38,7 @@
 - `api` (required): `SYNO.ActiveBackup.Wrapper.Domain`
 - `version` (required): `1`
 - `method` (required): `get_domain_list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -61,7 +59,7 @@
 - `api` (required): `SYNO.ActiveBackup.Wrapper.Domain`
 - `version` (required): `1`
 - `method` (required): `test_dc`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

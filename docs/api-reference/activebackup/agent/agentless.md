@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `create_device`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `create_device`
 - `remote_connection_info` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `remote_connection_info`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `get_datapath_on_storage`
 - `share_name` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `share_name`
@@ -52,7 +50,7 @@
 - `version` (required): `1`
 - `method` (required): `get_task_setting`
 - `task_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_id`
@@ -68,7 +66,7 @@
 - `version` (required): `1`
 - `method` (required): `list_device_folder`
 - `remote_connection_info` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `remote_connection_info`
@@ -84,7 +82,7 @@
 - `version` (required): `1`
 - `method` (required): `remove_ssh_key_tmp_file`
 - `ssh_key_file` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `ssh_key_file`
@@ -100,7 +98,7 @@
 - `version` (required): `1`
 - `method` (required): `set_device`
 - `remote_connection_info` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `remote_connection_info`
@@ -116,7 +114,7 @@
 - `version` (required): `1`
 - `method` (required): `smb_list_remote_folder`
 - `host_ip` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `host_ip`
@@ -132,7 +130,7 @@
 - `version` (required): `1`
 - `method` (required): `test_connection`
 - `remote_connection_info` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `remote_connection_info`
@@ -148,7 +146,7 @@
 - `version` (required): `1`
 - `method` (required): `test_rsync_module_connection`
 - `remote_connection_info` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `remote_connection_info`
@@ -164,7 +162,7 @@
 - `version` (required): `1`
 - `method` (required): `test_ssh_key`
 - `ssh_key_file_path` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `ssh_key_file_path`
@@ -179,7 +177,7 @@
 - `api` (required): `SYNO.ActiveBackup.Agentless`
 - `version` (required): `1`
 - `method` (required): `test_task_settings`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `backup`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `backup`
 - `task_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_ids`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `cancel`
 - `task_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_ids`
@@ -51,7 +49,7 @@
 - `api` (required): `SYNO.ActiveBackup.Task`
 - `version` (required): `1`
 - `method` (required): `cancel_waiting_backup`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -81,7 +79,7 @@
 - `api` (required): `SYNO.ActiveBackup.Task`
 - `version` (required): `1`
 - `method` (required): `create_vm_check`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -104,7 +102,7 @@
 - `version` (required): `1`
 - `method` (required): `get_default_task_name`
 - `backup_type` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `backup_type`
@@ -119,7 +117,7 @@
 - `api` (required): `SYNO.ActiveBackup.Task`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -273,7 +271,7 @@
 - `api` (required): `SYNO.ActiveBackup.Task`
 - `version` (required): `1`
 - `method` (required): `list_vm_check`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -292,7 +290,7 @@
 - `api` (required): `SYNO.ActiveBackup.Task`
 - `version` (required): `1`
 - `method` (required): `list_with_device`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -461,7 +459,7 @@
 - `version` (required): `1`
 - `method` (required): `remove`
 - `task_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_ids`
@@ -479,7 +477,7 @@
 - `api` (required): `SYNO.ActiveBackup.Task`
 - `version` (required): `1`
 - `method` (required): `vm_check_cancel`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

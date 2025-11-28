@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `get`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.Wrapper.NFS`
 - `version` (required): `1`
 - `method` (required): `get`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -50,7 +48,7 @@
 - `version` (required): `1`
 - `method` (required): `set`
 - `enable_nfs` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `enable_nfs`

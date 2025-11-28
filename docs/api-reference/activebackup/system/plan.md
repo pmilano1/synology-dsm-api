@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `create`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `create`
 - `plan_uuid` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `plan_uuid`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `delete`
 - `plan_uuid` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `plan_uuid`
@@ -52,7 +50,7 @@
 - `version` (required): `1`
 - `method` (required): `get`
 - `plan_uuid` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `plan_uuid`
@@ -67,7 +65,7 @@
 - `api` (required): `SYNO.ActiveBackup.Plan`
 - `version` (required): `1`
 - `method` (required): `list`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -86,7 +84,7 @@
 - `version` (required): `1`
 - `method` (required): `update`
 - `plan_uuid` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `plan_uuid`

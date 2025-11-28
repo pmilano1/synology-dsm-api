@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `list_auto_backup_rule`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.AEM.Task`
 - `version` (required): `1`
 - `method` (required): `list_auto_backup_rule`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -38,7 +36,7 @@
 - `version` (required): `1`
 - `method` (required): `list_with_device`
 - `backup_type` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `backup_type`

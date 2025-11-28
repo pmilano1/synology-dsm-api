@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `automount_get`
@@ -22,7 +20,7 @@
 - `api` (required): `SYNO.ActiveBackup.Storage`
 - `version` (required): `1`
 - `method` (required): `automount_list_location`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -47,7 +45,7 @@
 - `version` (required): `1`
 - `method` (required): `check_dsm_share_mount`
 - `task_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_id`
@@ -66,7 +64,7 @@
 - `version` (required): `1`
 - `method` (required): `download_private_key`
 - `pwd` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `pwd`
@@ -83,7 +81,7 @@
 - `version` (required): `1`
 - `method` (required): `list_dsm_share`
 - `task_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_id`
@@ -99,7 +97,7 @@
 - `version` (required): `1`
 - `method` (required): `mount_dsm_enc_share`
 - `name` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `name`
@@ -115,7 +113,7 @@
 - `version` (required): `1`
 - `method` (required): `umount_dsm_enc_share`
 - `mount_path` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `mount_path`
@@ -131,7 +129,7 @@
 - `version` (required): `1`
 - `method` (required): `unmount`
 - `storage_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `storage_id`
@@ -150,7 +148,7 @@
 - `version` (required): `1`
 - `method` (required): `verify`
 - `automount_enabled` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `automount_enabled`

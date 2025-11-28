@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `backup`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.Workload`
 - `version` (required): `1`
 - `method` (required): `backup`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -37,7 +35,7 @@
 - `api` (required): `SYNO.ActiveBackup.Workload`
 - `version` (required): `1`
 - `method` (required): `cancel`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -55,7 +53,7 @@
 - `api` (required): `SYNO.ActiveBackup.Workload`
 - `version` (required): `1`
 - `method` (required): `cancel_by_activity_uid`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -76,7 +74,7 @@
 - `api` (required): `SYNO.ActiveBackup.Workload`
 - `version` (required): `1`
 - `method` (required): `create`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -94,7 +92,7 @@
 - `api` (required): `SYNO.ActiveBackup.Workload`
 - `version` (required): `1`
 - `method` (required): `delete`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -112,7 +110,7 @@
 - `api` (required): `SYNO.ActiveBackup.Workload`
 - `version` (required): `1`
 - `method` (required): `delete_without_dedup`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -136,7 +134,7 @@
 - `api` (required): `SYNO.ActiveBackup.Workload`
 - `version` (required): `1`
 - `method` (required): `update`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

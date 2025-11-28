@@ -275,3 +275,37 @@ Sync task management, filters, scheduling
 - **[SYNO.ActiveBackup.TaskTemplate](activebackup/other/tasktemplate.md)**
 - **[SYNO.ActiveBackup.Workload](activebackup/other/workload.md)**
 
+---
+
+## Directory Server APIs
+
+### [Directory Management](directory-server/directory-management.md)
+Directory info, object listing, domain sync
+
+### [User Management](directory-server/user-management.md)
+Create, modify, delete users, password management
+
+### [Group Management](directory-server/group-management.md)
+Create, modify, delete groups, member management
+
+---
+
+## Synology Drive APIs
+
+### [Status & Configuration](drive/status-config.md)
+Drive status, configuration, settings, database usage
+
+### [Connections](drive/connections.md)
+Active connections, sync connections, user profiles
+
+### [Logs & Monitoring](drive/logs-monitoring.md)
+Activity logs, share monitoring, deletion status
+
+---
+
+## Hyper Backup APIs
+
+### [Tasks](hyper-backup/tasks.md)
+Backup task management, run, cancel, suspend, resume
+
+---

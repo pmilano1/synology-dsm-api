@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `duplicate_workload`
@@ -20,7 +18,7 @@
 - `version` (required): `1`
 - `method` (required): `duplicate_workload`
 - `workload_uuid` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `workload_uuid`
@@ -36,7 +34,7 @@
 - `version` (required): `1`
 - `method` (required): `list_nodes`
 - `device_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_id`
@@ -52,7 +50,7 @@
 - `version` (required): `1`
 - `method` (required): `set_update_policy`
 - `auto_update` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `auto_update`
@@ -67,7 +65,7 @@
 - `api` (required): `SYNO.ActiveBackup.Agent.Device`
 - `version` (required): `1`
 - `method` (required): `update_agent`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -86,7 +84,7 @@
 - `version` (required): `1`
 - `method` (required): `upgrade`
 - `device_ids` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_ids`

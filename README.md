@@ -1,7 +1,7 @@
 # Synology DSM API Documentation
 
-[![API Coverage](https://img.shields.io/badge/API%20Coverage-650+%20Methods-brightgreen)](docs/api-reference/)
-[![DSM APIs](https://img.shields.io/badge/DSM%20APIs-95+%20Categories-blue)](docs/api-reference/)
+[![API Coverage](https://img.shields.io/badge/API%20Coverage-750+%20Methods-brightgreen)](docs/api-reference/)
+[![DSM APIs](https://img.shields.io/badge/DSM%20APIs-110+%20Categories-blue)](docs/api-reference/)
 [![ActiveBackup APIs](https://img.shields.io/badge/ActiveBackup-100%25%20Coverage-blue)](docs/api-reference/activebackup/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -37,10 +37,13 @@ This repository contains comprehensive documentation for Synology DSM APIs, incl
 - ✅ **System Services** - DHCP server, Log Center, Security Advisor, Universal Search, Note Station, USB Copy (25+ methods)
 - ✅ **Task Scheduler** - Script tasks, service control, scheduled automation (15+ methods)
 - ✅ **Cloud Sync** - Cloud connections, sync tasks, Google Drive, OneDrive, Dropbox, S3 (20+ methods)
+- ✅ **Directory Server** - LDAP/AD management, users, groups, domain sync (15+ methods)
+- ✅ **Synology Drive** - File collaboration, connections, logs, monitoring (15+ methods)
+- ✅ **Hyper Backup** - Backup tasks, repositories, integrity checks, vault (20+ methods)
 
 **Total Coverage:**
-- ✅ **95+ API categories** documented
-- ✅ **650+ methods** with examples and parameters
+- ✅ **110+ API categories** documented
+- ✅ **750+ methods** with examples and parameters
 - ✅ Authentication flows and error handling
 - ✅ Clean, concise UDM-style documentation format
 
@@ -114,7 +117,10 @@ curl "http://YOUR_NAS_IP:5000/webapi/entry.cgi" \
 - **[System Services](docs/api-reference/system-services/)** - DHCP server, Log Center, Security Advisor, Universal Search, Note Station, USB Copy
 - **[Task Scheduler](docs/api-reference/task-scheduler/)** - Script tasks, service control, scheduled automation
 - **[Cloud Sync](docs/api-reference/cloud-sync/)** - Cloud connections, sync tasks, Google Drive, OneDrive, Dropbox, S3
-- **[ActiveBackup for Business](docs/api-reference/activebackup/)** - Backup, restore, device management (100% coverage)
+- **[Directory Server](docs/api-reference/directory-server/)** - LDAP/AD management, users, groups, domain sync
+- **[Synology Drive](docs/api-reference/drive/)** - File collaboration, connections, logs, monitoring
+- **[Hyper Backup](docs/api-reference/hyper-backup/)** - Backup tasks, repositories, integrity checks, vault
+- **[ActiveBackup for Business](docs/api-reference/activebackup/)** - Device backup, VM backup, restore, versioning (100% coverage)
 
 
 
@@ -137,6 +143,9 @@ curl "http://YOUR_NAS_IP:5000/webapi/entry.cgi" \
 | **System Services** | 6 | 25+ | DHCP server, Log Center, Security Advisor, Universal Search, Note Station, USB Copy |
 | **Task Scheduler** | 3 | 15+ | Script tasks, service control, scheduled automation |
 | **Cloud Sync** | 4 | 20+ | Cloud connections, sync tasks, filters, Google Drive, OneDrive, Dropbox, S3 |
+| **Directory Server** | 3 | 15+ | LDAP/AD management, users, groups, domain sync |
+| **Synology Drive** | 3 | 15+ | File collaboration, connections, logs, monitoring |
+| **Hyper Backup** | 4 | 20+ | Backup tasks, repositories, integrity checks, vault |
 | **ActiveBackup** | 35 | 215 | Device backup, restore, versioning, AEM, VM backup |
 
 ### Authentication Flow

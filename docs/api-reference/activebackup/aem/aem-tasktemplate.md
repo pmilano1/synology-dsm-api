@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `create`
@@ -22,7 +20,7 @@
 - `api` (required): `SYNO.ActiveBackup.AEM.TaskTemplate`
 - `version` (required): `1`
 - `method` (required): `delete`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -43,7 +41,7 @@
 - `api` (required): `SYNO.ActiveBackup.AEM.TaskTemplate`
 - `version` (required): `1`
 - `method` (required): `update`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json

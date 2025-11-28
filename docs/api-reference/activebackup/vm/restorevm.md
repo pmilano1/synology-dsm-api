@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `abe_cancel`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.RestoreVM`
 - `version` (required): `1`
 - `method` (required): `abe_cancel`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -37,7 +35,7 @@
 - `api` (required): `SYNO.ActiveBackup.RestoreVM`
 - `version` (required): `1`
 - `method` (required): `abe_verify`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -56,7 +54,7 @@
 - `version` (required): `1`
 - `method` (required): `check_spec`
 - `device_list` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_list`
@@ -71,7 +69,7 @@
 - `api` (required): `SYNO.ActiveBackup.RestoreVM`
 - `version` (required): `1`
 - `method` (required): `check_support_tcmu`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -90,7 +88,7 @@
 - `api` (required): `SYNO.ActiveBackup.RestoreVM`
 - `version` (required): `1`
 - `method` (required): `check_vmm`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -119,7 +117,7 @@
 - `version` (required): `1`
 - `method` (required): `clone_enc_cmp_image`
 - `file_path` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `file_path`
@@ -135,7 +133,7 @@
 - `version` (required): `1`
 - `method` (required): `create_image`
 - `task_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_id`
@@ -153,7 +151,7 @@
 - `api` (required): `SYNO.ActiveBackup.RestoreVM`
 - `version` (required): `1`
 - `method` (required): `get_available_mem`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -174,7 +172,7 @@
 - `api` (required): `SYNO.ActiveBackup.RestoreVM`
 - `version` (required): `1`
 - `method` (required): `get_vmm_meta`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -195,7 +193,7 @@
 - `api` (required): `SYNO.ActiveBackup.RestoreVM`
 - `version` (required): `1`
 - `method` (required): `job_check`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -214,7 +212,7 @@
 - `version` (required): `1`
 - `method` (required): `list_latest_version`
 - `single_mode` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `single_mode`
@@ -230,7 +228,7 @@
 - `version` (required): `1`
 - `method` (required): `list_spec`
 - `device_list` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_list`
@@ -246,7 +244,7 @@
 - `version` (required): `1`
 - `method` (required): `migrate`
 - `device_list` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_list`
@@ -262,7 +260,7 @@
 - `version` (required): `1`
 - `method` (required): `remove_image`
 - `task_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `task_id`
@@ -277,7 +275,7 @@
 - `api` (required): `SYNO.ActiveBackup.RestoreVM`
 - `version` (required): `1`
 - `method` (required): `remove_vmm_meta`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -296,7 +294,7 @@
 - `version` (required): `1`
 - `method` (required): `restore`
 - `device_list` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `device_list`
@@ -311,7 +309,7 @@
 - `api` (required): `SYNO.ActiveBackup.RestoreVM`
 - `version` (required): `1`
 - `method` (required): `set_vmm_meta`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -330,7 +328,7 @@
 - `version` (required): `1`
 - `method` (required): `status_image`
 - `serial_id` (required): Required parameter
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Notes:**
 - Requires parameter: `serial_id`

@@ -6,9 +6,7 @@
 
 ---
 
-
-**Endpoint:** `entry.cgi`
-**Versions:** 1-2
+**Endpoint:** `/webapi/entry.cgi`
 
 
 #### Method: `get`
@@ -19,7 +17,7 @@
 - `api` (required): `SYNO.ActiveBackup.Wrapper.LDAP`
 - `version` (required): `1`
 - `method` (required): `get`
-- `_sid` (required): Session ID from login
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
