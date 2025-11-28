@@ -2,61 +2,163 @@
 
 [← Back to Documentation](../../README.md)
 
-Complete reference for all 35 Synology ActiveBackup for Business APIs.
+Complete reference for all Synology DSM APIs.
 
-## Core
+---
 
-- **[SYNO.ActiveBackup.Device](core/device.md)**
-- **[SYNO.ActiveBackup.Restore](core/restore.md)**
-- **[SYNO.ActiveBackup.Setting](core/setting.md)**
-- **[SYNO.ActiveBackup.Task](core/task.md)**
-- **[SYNO.ActiveBackup.Version](core/version.md)**
+## DSM Core APIs
 
-## Aem
+### [Authentication](dsm-core/authentication.md)
+Login, logout, session management, API discovery
 
-- **[SYNO.ActiveBackup.AEM](aem/aem.md)**
-- **[SYNO.ActiveBackup.AEM.Activity](aem/aem-activity.md)**
-- **[SYNO.ActiveBackup.AEM.AgentInstaller](aem/aem-agentinstaller.md)**
-- **[SYNO.ActiveBackup.AEM.NFS](aem/aem-nfs.md)**
-- **[SYNO.ActiveBackup.AEM.Script](aem/aem-script.md)**
-- **[SYNO.ActiveBackup.AEM.Task](aem/aem-task.md)**
-- **[SYNO.ActiveBackup.AEM.TaskTemplate](aem/aem-tasktemplate.md)**
-- **[SYNO.ActiveBackup.AEM.Version](aem/aem-version.md)**
+### [System Info](dsm-core/system-info.md)
+System information, utilization, file services, hardware status
 
-## Vm
+### [Users](dsm-core/users.md)
+User management, password policies, password expiry
 
-- **[SYNO.ActiveBackup.Inventory](vm/inventory.md)**
-- **[SYNO.ActiveBackup.RestoreVM](vm/restorevm.md)**
+### [Groups](dsm-core/groups.md)
+Group management, membership, permissions
 
-## System
+### [Packages](dsm-core/packages.md)
+Package installation, control, updates
 
-- **[SYNO.ActiveBackup.Activation](system/activation.md)**
-- **[SYNO.ActiveBackup.General](system/general.md)**
-- **[SYNO.ActiveBackup.Log](system/log.md)**
-- **[SYNO.ActiveBackup.Overview](system/overview.md)**
-- **[SYNO.ActiveBackup.Plan](system/plan.md)**
-- **[SYNO.ActiveBackup.Report](system/report.md)**
-- **[SYNO.ActiveBackup.ReportConfig](system/reportconfig.md)**
-- **[SYNO.ActiveBackup.Share](system/share.md)**
-- **[SYNO.ActiveBackup.Storage](system/storage.md)**
-- **[SYNO.ActiveBackup.UserGroup](system/usergroup.md)**
+### [Shares](dsm-core/shares.md)
+Shared folder management, permissions
 
-## Agent
+### [Certificates](dsm-core/certificates.md)
+SSL certificate management, Let's Encrypt
 
-- **[SYNO.ActiveBackup.Agent](agent/agent.md)**
-- **[SYNO.ActiveBackup.Agent.Device](agent/agent-device.md)**
-- **[SYNO.ActiveBackup.Agentless](agent/agentless.md)**
+---
 
-## Integration
+## FileStation APIs
 
-- **[SYNO.ActiveBackup.Wrapper.Domain](integration/wrapper-domain.md)**
-- **[SYNO.ActiveBackup.Wrapper.LDAP](integration/wrapper-ldap.md)**
-- **[SYNO.ActiveBackup.Wrapper.NFS](integration/wrapper-nfs.md)**
-- **[SYNO.ActiveBackup.Wrapper.NFSPrivilege](integration/wrapper-nfsprivilege.md)**
+### [Info & Listing](filestation/info-listing.md)
+FileStation info, list files/folders, get file info
 
-## Other
+### [Search](filestation/search.md)
+Search files and folders
 
-- **[SYNO.ActiveBackup.Delegation](other/delegation.md)**
-- **[SYNO.ActiveBackup.TaskTemplate](other/tasktemplate.md)**
-- **[SYNO.ActiveBackup.Workload](other/workload.md)**
+### [File Operations](filestation/file-operations.md)
+Create, rename, copy, move, delete files and folders
+
+### [Upload & Download](filestation/upload-download.md)
+Upload and download files
+
+### [Sharing](filestation/sharing.md)
+Create and manage sharing links
+
+### [Compression](filestation/compression.md)
+Compress and extract files
+
+### [Favorites](filestation/favorites.md)
+Manage favorite files and folders
+
+### [Background Tasks](filestation/background-tasks.md)
+Background task management, directory size, MD5 calculation
+
+---
+
+## DownloadStation APIs
+
+### [Info & Config](downloadstation/info-config.md)
+DownloadStation info, configuration, schedule
+
+### [Tasks](downloadstation/tasks.md)
+Download task management
+
+### [Statistics](downloadstation/statistics.md)
+Download statistics
+
+### [RSS](downloadstation/rss.md)
+RSS feed management
+
+### [BT Search](downloadstation/bt-search.md)
+BitTorrent search
+
+---
+
+## Docker APIs
+
+### [Containers](docker/containers.md)
+Container management (list, start, stop, create, delete)
+
+### [Images](docker/images.md)
+Image management (list, pull, delete, search)
+
+### [Networks](docker/networks.md)
+Network management
+
+### [Volumes](docker/volumes.md)
+Volume management
+
+---
+
+## Photos APIs
+
+### [Folders](photos/folders.md)
+Folder browsing and management
+
+### [Albums](photos/albums.md)
+Album creation and management
+
+---
+
+## ActiveBackup for Business APIs
+
+### Core
+
+- **[SYNO.ActiveBackup.Device](activebackup/core/device.md)**
+- **[SYNO.ActiveBackup.Restore](activebackup/core/restore.md)**
+- **[SYNO.ActiveBackup.Setting](activebackup/core/setting.md)**
+- **[SYNO.ActiveBackup.Task](activebackup/core/task.md)**
+- **[SYNO.ActiveBackup.Version](activebackup/core/version.md)**
+
+### Aem
+
+- **[SYNO.ActiveBackup.AEM](activebackup/aem/aem.md)**
+- **[SYNO.ActiveBackup.AEM.Activity](activebackup/aem/aem-activity.md)**
+- **[SYNO.ActiveBackup.AEM.AgentInstaller](activebackup/aem/aem-agentinstaller.md)**
+- **[SYNO.ActiveBackup.AEM.NFS](activebackup/aem/aem-nfs.md)**
+- **[SYNO.ActiveBackup.AEM.Script](activebackup/aem/aem-script.md)**
+- **[SYNO.ActiveBackup.AEM.Task](activebackup/aem/aem-task.md)**
+- **[SYNO.ActiveBackup.AEM.TaskTemplate](activebackup/aem/aem-tasktemplate.md)**
+- **[SYNO.ActiveBackup.AEM.Version](activebackup/aem/aem-version.md)**
+
+### Vm
+
+- **[SYNO.ActiveBackup.Inventory](activebackup/vm/inventory.md)**
+- **[SYNO.ActiveBackup.RestoreVM](activebackup/vm/restorevm.md)**
+
+### System
+
+- **[SYNO.ActiveBackup.Activation](activebackup/system/activation.md)**
+- **[SYNO.ActiveBackup.General](activebackup/system/general.md)**
+- **[SYNO.ActiveBackup.Log](activebackup/system/log.md)**
+- **[SYNO.ActiveBackup.Overview](activebackup/system/overview.md)**
+- **[SYNO.ActiveBackup.Plan](activebackup/system/plan.md)**
+- **[SYNO.ActiveBackup.Report](activebackup/system/report.md)**
+- **[SYNO.ActiveBackup.ReportConfig](activebackup/system/reportconfig.md)**
+- **[SYNO.ActiveBackup.Share](activebackup/system/share.md)**
+- **[SYNO.ActiveBackup.Storage](activebackup/system/storage.md)**
+- **[SYNO.ActiveBackup.UserGroup](activebackup/system/usergroup.md)**
+
+### Agent
+
+- **[SYNO.ActiveBackup.Agent](activebackup/agent/agent.md)**
+- **[SYNO.ActiveBackup.Agent.Device](activebackup/agent/agent-device.md)**
+- **[SYNO.ActiveBackup.Agentless](activebackup/agent/agentless.md)**
+
+### Integration
+
+- **[SYNO.ActiveBackup.Wrapper.Domain](activebackup/integration/wrapper-domain.md)**
+- **[SYNO.ActiveBackup.Wrapper.LDAP](activebackup/integration/wrapper-ldap.md)**
+- **[SYNO.ActiveBackup.Wrapper.NFS](activebackup/integration/wrapper-nfs.md)**
+- **[SYNO.ActiveBackup.Wrapper.NFSPrivilege](activebackup/integration/wrapper-nfsprivilege.md)**
+
+### Other
+
+- **[SYNO.ActiveBackup.Delegation](activebackup/other/delegation.md)**
+- **[SYNO.ActiveBackup.TaskTemplate](activebackup/other/tasktemplate.md)**
+- **[SYNO.ActiveBackup.Workload](activebackup/other/workload.md)**
 

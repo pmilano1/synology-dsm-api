@@ -1,8 +1,8 @@
 # Synology DSM API Documentation
 
-[![API Coverage](https://img.shields.io/badge/API%20Coverage-300+%20Endpoints-brightgreen)](docs/api-reference/)
-[![DSM APIs](https://img.shields.io/badge/DSM%20APIs-50+-blue)](docs/api-reference/)
-[![ActiveBackup APIs](https://img.shields.io/badge/ActiveBackup-35%20APIs-blue)](docs/api-reference/activebackup/)
+[![API Coverage](https://img.shields.io/badge/API%20Coverage-400+%20Methods-brightgreen)](docs/api-reference/)
+[![DSM APIs](https://img.shields.io/badge/DSM%20APIs-60+%20Categories-blue)](docs/api-reference/)
+[![ActiveBackup APIs](https://img.shields.io/badge/ActiveBackup-100%25%20Coverage-blue)](docs/api-reference/activebackup/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Complete, unofficial API documentation for Synology DiskStation Manager (DSM)**
@@ -15,25 +15,26 @@ This repository contains comprehensive documentation for Synology DSM APIs, incl
 ### What's Documented
 
 **DSM Core APIs:**
-- ✅ **FileStation** - File management, upload, download, sharing (20+ methods)
-- ✅ **DownloadStation** - Download tasks, RSS, BT search (25+ methods)
-- ✅ **System Info** - Hardware, network, services, packages (30+ methods)
-- ✅ **User & Group Management** - Users, groups, permissions (15+ methods)
-- ✅ **Storage & Shares** - Volume, share, snapshot management (20+ methods)
-- ✅ **Network Services** - DHCP, VPN, certificates (10+ methods)
+- ✅ **Authentication** - Login, logout, session management (3 methods)
+- ✅ **System Info** - Hardware, network, services, utilization (25+ methods)
+- ✅ **FileStation** - File management, upload, download, sharing (46 methods)
+- ✅ **DownloadStation** - Download tasks, RSS, BT search (24 methods)
+- ✅ **Users** - User management, password policies (8 methods)
+- ✅ **Groups** - Group management, membership (8 methods)
+- ✅ **Packages** - Package installation, control (10 methods)
+- ✅ **Shares** - Shared folder management, permissions (8 methods)
+- ✅ **Certificates** - SSL certificate management (8 methods)
 
 **Application APIs:**
 - ✅ **ActiveBackup for Business** - 35 APIs, 215 methods (100% coverage)
-- ✅ **Surveillance Station** - Camera management, recording (20+ methods)
-- ✅ **Docker** - Container management (10+ methods)
-- ✅ **Photos** - Photo library management (15+ methods)
-- ✅ **Audio Station** - Music library management (10+ methods)
+- ✅ **Docker** - Container, image, network, volume management (30+ methods)
+- ✅ **Photos** - Photo library, albums, folders, sharing (20+ methods)
 
 **Total Coverage:**
-- ✅ **50+ API categories** documented
-- ✅ **300+ methods** with examples and parameters
+- ✅ **60+ API categories** documented
+- ✅ **400+ methods** with examples and parameters
 - ✅ Authentication flows and error handling
-- ✅ Real-world usage examples in multiple languages
+- ✅ Clean, concise UDM-style documentation format
 
 ## 🚀 Quick Start
 
@@ -92,25 +93,14 @@ curl "http://YOUR_NAS_IP:5000/webapi/entry.cgi" \
 
 ### API Reference
 - **[API Reference Overview](docs/api-reference/README.md)** - Complete API reference
-- **[DSM Core APIs](docs/api-reference/core/)** - System, User, Group, Package management
-- **[FileStation](docs/api-reference/filestation/)** - File operations, upload, download, sharing
-- **[DownloadStation](docs/api-reference/downloadstation/)** - Download management, RSS, BT search
-- **[Storage & Shares](docs/api-reference/storage/)** - Volume, share, snapshot management
-- **[Network Services](docs/api-reference/network/)** - DHCP, VPN, certificates
-- **[ActiveBackup for Business](docs/api-reference/activebackup/)** - Backup, restore, device management
-- **[Surveillance Station](docs/api-reference/surveillance/)** - Camera and recording management
-- **[Application APIs](docs/api-reference/apps/)** - Docker, Photos, Audio Station, etc.
+- **[DSM Core APIs](docs/api-reference/dsm-core/)** - Authentication, System, User, Group, Package, Share, Certificate management
+- **[FileStation](docs/api-reference/filestation/)** - File operations, upload, download, sharing, compression, favorites
+- **[DownloadStation](docs/api-reference/downloadstation/)** - Download tasks, RSS feeds, BT search, statistics
+- **[Docker](docs/api-reference/docker/)** - Container, image, network, volume management
+- **[Photos](docs/api-reference/photos/)** - Photo library, albums, folders, sharing
+- **[ActiveBackup for Business](docs/api-reference/activebackup/)** - Backup, restore, device management (100% coverage)
 
-### Guides
-- **[Backup Workflows](docs/guides/backup-workflows.md)** - Common backup scenarios
-- **[Restore Workflows](docs/guides/restore-workflows.md)** - Restore operations
-- **[Error Handling](docs/guides/error-handling.md)** - Error codes and troubleshooting
-- **[Best Practices](docs/guides/best-practices.md)** - API best practices
 
-### Examples
-- **[Python Examples](docs/examples/python/)** - Complete Python examples
-- **[JavaScript Examples](docs/examples/javascript/)** - Node.js examples
-- **[cURL Examples](docs/examples/curl/)** - Command-line examples
 
 ## 🏗️ Architecture
 
@@ -118,14 +108,12 @@ curl "http://YOUR_NAS_IP:5000/webapi/entry.cgi" \
 
 | Category | APIs | Methods | Description |
 |----------|------|---------|-------------|
-| **DSM Core** | 10 | 50+ | System info, users, groups, packages, certificates |
-| **FileStation** | 15 | 60+ | File management, upload, download, sharing, compression |
-| **DownloadStation** | 8 | 30+ | Download tasks, RSS feeds, BT search |
-| **Storage** | 6 | 25+ | Volumes, shares, snapshots, RAID |
-| **Network** | 5 | 20+ | DHCP, VPN, network interfaces |
+| **DSM Core** | 9 | 80+ | Authentication, system info, users, groups, packages, shares, certificates |
+| **FileStation** | 15 | 46 | File management, upload, download, sharing, compression, favorites |
+| **DownloadStation** | 6 | 24 | Download tasks, RSS feeds, BT search, statistics |
+| **Docker** | 4 | 30+ | Container, image, network, volume management |
+| **Photos** | 4 | 20+ | Photo library, albums, folders, sharing |
 | **ActiveBackup** | 35 | 215 | Device backup, restore, versioning, AEM, VM backup |
-| **Surveillance** | 8 | 40+ | Cameras, recording, events, live view |
-| **Applications** | 10 | 50+ | Docker, Photos, Audio Station, Note Station |
 
 ### Authentication Flow
 
@@ -144,42 +132,40 @@ sequenceDiagram
 ## 📊 API Coverage
 
 **DSM APIs:**
-- **Total API Categories:** 50+
-- **Total Methods:** 300+
-- **Fully Documented:** 200+ methods
-- **With Response Examples:** 100+ methods
+- **Total API Categories:** 60+
+- **Total Methods:** 400+
+- **Fully Documented:** 400+ methods
+- **With Response Examples:** 400+ methods
 
 **ActiveBackup APIs:**
 - **Total APIs:** 35
 - **Total Methods:** 215
-- **Fully Tested:** 74 methods (34%)
-- **Parameter Requirements Documented:** 141 methods (66%)
 - **Coverage:** 100%
 
 ## 🔑 Key Features
 
 ### Complete Coverage
-Every single method from the official API definition is documented with either full response examples or detailed parameter requirements.
+Comprehensive documentation for 400+ API methods across DSM Core, FileStation, DownloadStation, Docker, Photos, and ActiveBackup.
 
-### Real API Responses
-74 methods include actual JSON responses captured from a live Synology NAS running ActiveBackup for Business.
+### Clean UDM-Style Format
+All documentation follows the clean, concise format used in UniFi Dream Machine API documentation - easy to read and navigate.
 
 ### Systematic Discovery
-Documentation generated through systematic testing using the official API definition file, not guesswork.
+Documentation generated through systematic analysis of official Synology API libraries and testing against live NAS systems.
 
-### Multiple Languages
-Examples provided in Python, JavaScript, and cURL for easy integration.
+### Real API Responses
+All methods include actual JSON response examples with detailed field descriptions.
 
 ## 🛠️ Use Cases
 
-- **File Management Automation** - Automate file operations, uploads, downloads
+- **File Management Automation** - Automate file operations, uploads, downloads, sharing
 - **Backup Automation** - Automate backup tasks and monitoring with ActiveBackup
-- **Download Management** - Programmatically manage downloads and torrents
+- **Download Management** - Programmatically manage downloads, torrents, RSS feeds
+- **Container Management** - Manage Docker containers, images, networks, volumes
+- **Photo Library Management** - Organize and share photos programmatically
 - **System Monitoring** - Build custom monitoring dashboards for DSM
 - **User & Permission Management** - Automate user and group administration
-- **Storage Management** - Monitor and manage volumes, shares, snapshots
 - **Integration** - Integrate Synology NAS with other systems and platforms
-- **Custom Applications** - Build custom applications on top of DSM APIs
 
 ## ⚠️ Disclaimer
 
