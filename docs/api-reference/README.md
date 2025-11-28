@@ -104,6 +104,48 @@ Album creation and management
 
 ---
 
+## Surveillance Station APIs
+
+### [Info & Cameras](surveillancestation/info-cameras.md)
+Station info, camera list, camera control
+
+### [Live View](surveillancestation/live-view.md)
+Live camera streams, snapshots
+
+### [PTZ Control](surveillancestation/ptz-control.md)
+Pan/tilt/zoom camera control, presets, patrols
+
+### [Recording](surveillancestation/recording.md)
+Recording management, playback, download
+
+### [Events](surveillancestation/events.md)
+Event query, motion detection, event management
+
+---
+
+## AudioStation APIs
+
+### [Info & Playlists](audiostation/info-playlists.md)
+AudioStation info, playlists, pinned songs
+
+### [Remote Players](audiostation/remote-players.md)
+Remote player control (play, stop, next, prev)
+
+---
+
+## VPN Server APIs
+
+### [Settings & Status](vpn/settings-status.md)
+VPN server settings, active connections, logs
+
+### [Network & Security](vpn/network-security.md)
+Network interface settings, security autoblock, permissions
+
+### [Protocols](vpn/protocols.md)
+PPTP, OpenVPN, L2TP settings and configuration export
+
+---
+
 ## ActiveBackup for Business APIs
 
 ### Core

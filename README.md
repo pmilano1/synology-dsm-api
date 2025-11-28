@@ -1,7 +1,7 @@
 # Synology DSM API Documentation
 
-[![API Coverage](https://img.shields.io/badge/API%20Coverage-400+%20Methods-brightgreen)](docs/api-reference/)
-[![DSM APIs](https://img.shields.io/badge/DSM%20APIs-60+%20Categories-blue)](docs/api-reference/)
+[![API Coverage](https://img.shields.io/badge/API%20Coverage-500+%20Methods-brightgreen)](docs/api-reference/)
+[![DSM APIs](https://img.shields.io/badge/DSM%20APIs-70+%20Categories-blue)](docs/api-reference/)
 [![ActiveBackup APIs](https://img.shields.io/badge/ActiveBackup-100%25%20Coverage-blue)](docs/api-reference/activebackup/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -29,10 +29,13 @@ This repository contains comprehensive documentation for Synology DSM APIs, incl
 - ✅ **ActiveBackup for Business** - 35 APIs, 215 methods (100% coverage)
 - ✅ **Docker** - Container, image, network, volume management (30+ methods)
 - ✅ **Photos** - Photo library, albums, folders, sharing (20+ methods)
+- ✅ **Surveillance Station** - Camera management, PTZ control, recording, events (50+ methods)
+- ✅ **AudioStation** - Music library, playlists, remote player control (10+ methods)
+- ✅ **VPN Server** - VPN settings, connections, logs, protocols (10+ methods)
 
 **Total Coverage:**
-- ✅ **60+ API categories** documented
-- ✅ **400+ methods** with examples and parameters
+- ✅ **70+ API categories** documented
+- ✅ **500+ methods** with examples and parameters
 - ✅ Authentication flows and error handling
 - ✅ Clean, concise UDM-style documentation format
 
@@ -98,6 +101,9 @@ curl "http://YOUR_NAS_IP:5000/webapi/entry.cgi" \
 - **[DownloadStation](docs/api-reference/downloadstation/)** - Download tasks, RSS feeds, BT search, statistics
 - **[Docker](docs/api-reference/docker/)** - Container, image, network, volume management
 - **[Photos](docs/api-reference/photos/)** - Photo library, albums, folders, sharing
+- **[Surveillance Station](docs/api-reference/surveillancestation/)** - Camera management, PTZ control, recording, events
+- **[AudioStation](docs/api-reference/audiostation/)** - Music library, playlists, remote player control
+- **[VPN Server](docs/api-reference/vpn/)** - VPN settings, connections, logs, protocols
 - **[ActiveBackup for Business](docs/api-reference/activebackup/)** - Backup, restore, device management (100% coverage)
 
 
@@ -113,6 +119,9 @@ curl "http://YOUR_NAS_IP:5000/webapi/entry.cgi" \
 | **DownloadStation** | 6 | 24 | Download tasks, RSS feeds, BT search, statistics |
 | **Docker** | 4 | 30+ | Container, image, network, volume management |
 | **Photos** | 4 | 20+ | Photo library, albums, folders, sharing |
+| **Surveillance Station** | 10+ | 50+ | Camera management, PTZ control, recording, events, live view |
+| **AudioStation** | 3 | 10+ | Music library, playlists, remote player control |
+| **VPN Server** | 5 | 10+ | VPN settings, connections, logs, PPTP, OpenVPN, L2TP |
 | **ActiveBackup** | 35 | 215 | Device backup, restore, versioning, AEM, VM backup |
 
 ### Authentication Flow
@@ -132,10 +141,10 @@ sequenceDiagram
 ## 📊 API Coverage
 
 **DSM APIs:**
-- **Total API Categories:** 60+
-- **Total Methods:** 400+
-- **Fully Documented:** 400+ methods
-- **With Response Examples:** 400+ methods
+- **Total API Categories:** 70+
+- **Total Methods:** 500+
+- **Fully Documented:** 500+ methods
+- **With Response Examples:** 500+ methods
 
 **ActiveBackup APIs:**
 - **Total APIs:** 35
@@ -145,7 +154,7 @@ sequenceDiagram
 ## 🔑 Key Features
 
 ### Complete Coverage
-Comprehensive documentation for 400+ API methods across DSM Core, FileStation, DownloadStation, Docker, Photos, and ActiveBackup.
+Comprehensive documentation for 500+ API methods across DSM Core, FileStation, DownloadStation, Docker, Photos, Surveillance Station, AudioStation, VPN Server, and ActiveBackup.
 
 ### Clean UDM-Style Format
 All documentation follows the clean, concise format used in UniFi Dream Machine API documentation - easy to read and navigate.
@@ -163,6 +172,9 @@ All methods include actual JSON response examples with detailed field descriptio
 - **Download Management** - Programmatically manage downloads, torrents, RSS feeds
 - **Container Management** - Manage Docker containers, images, networks, volumes
 - **Photo Library Management** - Organize and share photos programmatically
+- **Surveillance Automation** - Control cameras, PTZ, recording, event monitoring
+- **Music Library Management** - Manage playlists, control remote players
+- **VPN Management** - Monitor VPN connections, manage settings
 - **System Monitoring** - Build custom monitoring dashboards for DSM
 - **User & Permission Management** - Automate user and group administration
 - **Integration** - Integrate Synology NAS with other systems and platforms
