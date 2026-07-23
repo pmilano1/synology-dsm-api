@@ -201,3 +201,103 @@
 }
 ```
 
+---
+
+## SYNO.Core.User.Home
+
+Controls the User Home service (per-user home folders under the `homes` shared folder).
+
+#### Method: `get`
+
+**HTTP Method:** GET
+
+**Parameters:**
+- `api` (required): `SYNO.Core.User.Home`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID
+- `additional` (optional): Additional fields (comma-separated): `personal_photo_enable`
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "enable": false
+  }
+}
+```
+
+---
+
+#### Method: `validate_set`
+
+**HTTP Method:** POST
+
+Validates a proposed User Home change before applying it. Returns hard/soft blocking reasons.
+
+**Parameters:**
+- `api` (required): `SYNO.Core.User.Home`
+- `version` (required): `1`
+- `method` (required): `validate_set`
+- `enable` (required): Enable User Home (`true`/`false`)
+- `location` (required): Volume that hosts the `homes` folder (e.g. `volume1`)
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "hard_reasons": [],
+    "soft_reasons": []
+  }
+}
+```
+
+---
+
+#### Method: `set`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.User.Home`
+- `version` (required): `1`
+- `method` (required): `set`
+- `enable` (required): Enable User Home (`true`/`false`)
+- `location` (required): Volume that hosts the `homes` folder (e.g. `volume1`)
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
+**Error codes:**
+- `3103` — missing the required `location` parameter (`enable` alone is rejected).
+- `3101` — cannot create the `homes` shared folder (e.g. `/volume<n>/homes` already exists on disk). Enabling User Home creates the reserved `homes` share; an existing folder at that path blocks it.
+
+---
+
+#### Method: `stop`
+
+**HTTP Method:** POST
+
+Stops the User Home service.
+
+**Parameters:**
+- `api` (required): `SYNO.Core.User.Home`
+- `version` (required): `1`
+- `method` (required): `stop`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+

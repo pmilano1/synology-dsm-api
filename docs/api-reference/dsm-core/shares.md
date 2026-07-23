@@ -101,6 +101,16 @@
 }
 ```
 
+**Notes:**
+- `create` targets a new folder and does **not** adopt an existing folder at
+  `<vol_path>/<name>`. If the folder already exists on disk, `create` fails with
+  **403** (via a local privileged session) or **119** (via an authenticated
+  `_sid`+`SynoToken` session).
+- **Reserved share names** — `photo`, `homes`, `home`, `music`, `video`,
+  `surveillance`, `web` and similar are owned by their packages/services and are
+  created when the owning feature is enabled (Synology Photos creates `photo`;
+  [User Home](users.md#syno-core-user-home) creates `homes`/`home`), not via `create`.
+
 ---
 
 #### Method: `set`
