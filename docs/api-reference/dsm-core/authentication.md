@@ -176,3 +176,41 @@ curl "http://192.168.20.11:5000/webapi/auth.cgi" \
   -d "_sid=YOUR_SESSION_ID"
 ```
 
+
+---
+
+## SYNO.API.Encryption
+
+Some privileged write APIs (e.g. [`SYNO.Core.Share` `create`/`set`](shares.md), password changes) reject **plaintext** params with **error 403** — the sensitive params must be encrypted with a per-request RSA/AES envelope obtained from this API. The DSM web UI does this transparently (`encryption: [...]` on the API call). (Local `synowebapi --exec` as SYSTEM_ADMIN does **not** need it.)
+
+#### Method: `getinfo`
+
+**HTTP Method:** GET
+
+**Parameters:**
+- `api` (required): `SYNO.API.Encryption`
+- `version` (required): `1`
+- `method` (required): `getinfo`
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "cipherkey": "__cIpHeRtExT",
+    "ciphertoken": "__cIpHeRtOkEn",
+    "public_key": "<base64 DER RSA public key>",
+    "server_time": 1784819806
+  }
+}
+```
+
+**Building the encrypted request** (verified on DSM 7.4):
+
+1. `getinfo` → `public_key`, `cipherkey` (`__cIpHeRtExT`), `ciphertoken` (`__cIpHeRtOkEn`), `server_time`.
+2. Generate a random `passphrase`.
+3. **AES**-encrypt the target request as an OpenSSL-compatible blob: form the params (including `<ciphertoken>=<server_time>`), URL-encode them, then AES-256-CBC with `passphrase` using OpenSSL `EVP_BytesToKey` (MD5) key/IV derivation and the `Salted__`+salt header; base64 the result.
+4. **RSA**-encrypt the `passphrase` with `public_key` (PKCS#1 v1.5); base64 the result.
+5. POST to `entry.cgi` a single field: `<cipherkey> = {"rsa":"<b64 rsa>","aes":"<b64 aes>"}`.
+
+The server decrypts, then processes the inner params normally. Include `_sid` (and `SynoToken` for CSRF) among the encrypted params for authenticated calls.

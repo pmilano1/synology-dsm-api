@@ -122,11 +122,54 @@
 - `version` (required): `1`
 - `method` (required): `set`
 - `name` (required): Share name
+- `shareinfo` (required): JSON object with the fields to change (see below) — **the settings must be wrapped in `shareinfo`, not passed flat**
 - `_sid` (required): Session ID
-- `desc` (optional): Description
-- `recyclebin` (optional): Enable recycle bin
-- `enable_share_compress` (optional): Enable compression
-- `enable_share_cow` (optional): Enable Btrfs COW
+
+The `shareinfo` object carries the actual settings. At minimum include `name` and `vol_path`; add only the fields you want to change:
+
+| `shareinfo` field | Type | Description |
+| --- | --- | --- |
+| `name` | string | Share name (repeat of the top-level `name`) |
+| `vol_path` | string | Volume path, e.g. `/volume1` |
+| `desc` | string | Description |
+| `recyclebin` | bool | Enable recycle bin |
+| `enable_share_compress` | bool | Enable compression |
+| `enable_share_cow` | bool | Enable Btrfs COW |
+| `nfs_rule` | array | NFS export rules (see below) |
+
+> **The `shareinfo` wrapper is mandatory.** Passing settings flat (e.g. `nfs_rule=[…]` alongside `name`) is rejected with **error 403**, which looks like a permission problem but is actually the malformed request being refused. Wrapping them in `shareinfo` succeeds.
+
+##### `nfs_rule` — NFS export rules
+
+Each element of the `nfs_rule` array is one client rule. Setting it makes DSM
+(re)generate `/etc/exports` and apply it — this is the supported, persistent way
+to add NFS exports (do **not** hand-edit `/etc/exports`; DSM regenerates it):
+
+```json
+"nfs_rule": [
+  {
+    "client": "192.168.20.0/24",
+    "privilege": "RW",
+    "squash": "no_root_squash",
+    "security": "sys",
+    "async": true,
+    "crossmnt": false,
+    "insecure": true
+  }
+]
+```
+
+| Field | Values | Notes |
+| --- | --- | --- |
+| `client` | IP / subnet (`192.168.1.0/24`) / hostname / `*` | one rule per client |
+| `privilege` | `RW` \| `RO` | |
+| `squash` | `no_root_squash` \| `root_squash` \| `all_squash` | |
+| `security` | `sys` (+ `krb5`, `krb5i`, `krb5p`) | |
+| `async` | bool | async writes |
+| `crossmnt` | bool | allow access to mounted subfolders |
+| `insecure` | bool | allow connections from non-privileged ports (>1024) |
+
+**Local execution** — `synowebapi --exec api=SYNO.Core.Share method=set version=1 name=<share> shareinfo='{…}'` works directly as SYSTEM_ADMIN (no encryption). **Over the Web API**, `set`/`create` additionally require the `shareinfo` param to be **encrypted** via [`SYNO.API.Encryption`](authentication.md#syno-api-encryption) plus a valid `SynoToken`.
 
 **Response:**
 ```json
