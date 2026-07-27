@@ -4,7 +4,7 @@
 
 [← Back to System Services](README.md)
 
-> Reverse-engineered 2026-07-26 (not in Synology's public docs). Covers DSM 7.x
+> Documented 2026-07-26 (not in Synology's public docs). Covers DSM 7.x
 > Control Panel → **Login Portal → Applications** and **→ Advanced → Reverse Proxy**.
 
 ---
