@@ -185,6 +185,13 @@ def check_format(f, text):
                         f"method `{name}` **Parameters:** must be a bulleted list of params, not prose")
         if "**Response:**" not in block and "**Response**" not in block:
             add("FORMAT", f, line, f"method `{name}` block has no '**Response:**' section")
+        else:
+            # The reference (SYNO.Backup.App2.Backup) shows the Response as a fenced code
+            # block, not a prose sentence — require one after **Response:** in each method.
+            rm = re.search(r"\*\*Response:?\*\*", block)
+            if rm and "```" not in block[rm.end():]:
+                add("FORMAT", f, line,
+                    f"method `{name}` **Response:** must show a fenced code block (```), not prose only")
 
     # API section headings must be h2 ('## SYNO.x'), matching the reference — an h3 naming a
     # SYNO.* API is the wrong level and reads inconsistently next to the h2 sections.
