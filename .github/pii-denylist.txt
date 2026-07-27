@@ -1,0 +1,21 @@
+# Setup-PII denylist for docs validation (scripts/validate_docs.py).
+# One Python regex per line; blank lines and #-comments ignored.
+# Add real infrastructure identifiers here so they can never be committed to the
+# public docs. Use GENERIC placeholders in examples instead:
+#   IPs -> 192.168.1.0/24 / 10.0.0.0/24    hostnames -> MyNAS / example
+#   shares -> example_share    buckets -> example-bucket    secrets -> REDACTED
+
+# Real LAN subnet (homelab) — use 192.168.1.x as the doc placeholder instead
+192\.168\.20\.\d{1,3}
+
+# Real NAS hostname
+\bsynology01\b
+
+# Real personal domain
+milanese
+
+# Real NAS model (identifies specific hardware) — say "DSM 7.x" generically
+DS1525
+
+# Password fragment that must never appear
+N0thing

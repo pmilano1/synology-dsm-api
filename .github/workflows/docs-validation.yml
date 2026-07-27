@@ -1,0 +1,45 @@
+name: Docs Validation
+
+# Enforces the repository's documentation rules on every pull request and push to
+# master. SECRETS / PII / dead-links are checked across the whole tree; FORMAT and
+# HYGIENE are enforced on the files changed in the PR (a ratchet — new/edited docs
+# must comply, without failing on the pre-existing backlog). See .github/validate_docs.py.
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - ".github/validate_docs.py"
+      - ".github/pii-denylist.txt"
+      - ".github/workflows/docs-validation.yml"
+  push:
+    branches: [master]
+    paths:
+      - "docs/**"
+      - ".github/validate_docs.py"
+      - ".github/pii-denylist.txt"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Determine changed docs
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="origin/${{ github.base_ref }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+          git fetch origin "${{ github.base_ref || 'master' }}" --depth=1 2>/dev/null || true
+          CHANGED=$(git diff --name-only --diff-filter=d "$BASE" HEAD -- 'docs/**/*.md' 2>/dev/null | tr '\n' ' ')
+          echo "files=$CHANGED" >> "$GITHUB_OUTPUT"
+          echo "Changed docs: ${CHANGED:-<none>}"
+      - name: Validate documentation (format · links · secrets · PII · hygiene)
+        run: python3 .github/validate_docs.py --scoped ${{ steps.changed.outputs.files }}

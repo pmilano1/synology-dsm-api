@@ -1,0 +1,150 @@
+#!/usr/bin/env python3
+"""
+Documentation validator for synology-dsm-api.
+
+Enforces the repo's documentation rules on every PR:
+  1. FORMAT   — API-reference pages follow the house per-API template.
+  2. LINKS    — every relative Markdown link resolves (no dead links).
+  3. SECRETS  — no credentials/keys/tokens committed.
+  4. PII      — no real setup identifiers (denylist in .github/pii-denylist.txt).
+  5. HYGIENE  — files end with a newline; no trailing whitespace; no tabs.
+
+Exit code 0 = clean, 1 = violations found. No third-party dependencies.
+"""
+import os, re, sys, glob
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DOCS = os.path.join(ROOT, "docs")
+
+violations = []          # (severity, file, line, message)
+def add(sev, f, line, msg):
+    violations.append((sev, os.path.relpath(f, ROOT), line, msg))
+
+# ---------------------------------------------------------------- secrets
+SECRET_PATTERNS = [
+    (r"AKIA[0-9A-Z]{16}", "AWS access key id"),
+    (r"-----BEGIN [A-Z ]*PRIVATE KEY-----", "private key block"),
+    (r"ghp_[A-Za-z0-9]{36}", "GitHub personal access token"),
+    (r"xox[baprs]-[A-Za-z0-9-]{10,}", "Slack token"),
+    (r"(?i)aws_secret_access_key\s*[=:]\s*[A-Za-z0-9/+]{40}", "AWS secret key"),
+    (r"hvs\.[A-Za-z0-9]{20,}", "Vault service token"),
+]
+
+# ---------------------------------------------------------------- pii denylist
+def load_denylist():
+    path = os.path.join(ROOT, ".github", "pii-denylist.txt")
+    pats = []
+    if os.path.exists(path):
+        for ln in open(path, encoding="utf-8"):
+            ln = ln.split("#", 1)[0].strip()
+            if ln:
+                pats.append(ln)
+    return pats
+PII_PATTERNS = load_denylist()
+
+# ---------------------------------------------------------------- helpers
+def md_files():
+    return sorted(glob.glob(os.path.join(DOCS, "**", "*.md"), recursive=True))
+
+LINK_RE = re.compile(r"\]\(([^)]+?)(?:#[^)]*)?\)")
+
+def is_api_reference(f):
+    rel = os.path.relpath(f, DOCS)
+    return rel.startswith("api-reference" + os.sep) and os.path.basename(f) != "README.md"
+
+# ---------------------------------------------------------------- checks
+def check_links(f, text):
+    d = os.path.dirname(f)
+    for m in LINK_RE.finditer(text):
+        link = m.group(1).strip()
+        if link.startswith(("http://", "https://", "mailto:", "#")) or not link.endswith(".md"):
+            continue
+        target = os.path.normpath(os.path.join(d, link))
+        if not os.path.exists(target):
+            line = text[: m.start()].count("\n") + 1
+            add("LINKS", f, line, f"dead link -> {link}")
+
+def check_secrets(f, text):
+    for pat, label in SECRET_PATTERNS:
+        for m in re.finditer(pat, text):
+            line = text[: m.start()].count("\n") + 1
+            add("SECRETS", f, line, f"possible {label}")
+
+def check_pii(f, text):
+    for pat in PII_PATTERNS:
+        for m in re.finditer(pat, text):
+            line = text[: m.start()].count("\n") + 1
+            add("PII", f, line, f"setup PII matches /{pat}/ : {m.group(0)!r}")
+
+def check_hygiene(f, text):
+    if text and not text.endswith("\n"):
+        add("HYGIENE", f, text.count("\n") + 1, "file must end with a newline")
+    for i, ln in enumerate(text.split("\n"), 1):
+        if ln.rstrip("\n") != ln.rstrip():
+            add("HYGIENE", f, i, "trailing whitespace")
+        if "\t" in ln:
+            add("HYGIENE", f, i, "tab character (use spaces)")
+
+def check_format(f, text):
+    """House template for API-reference pages (structural, robust checks only)."""
+    if not text.lstrip().startswith("# "):
+        add("FORMAT", f, 1, "must start with a top-level '# ' heading")
+    if "**Category:**" not in text:
+        add("FORMAT", f, 1, "missing '**Category:**' line")
+    if "[← Back" not in text:
+        add("FORMAT", f, 1, "missing a back-link '[← Back to ...]'")
+    # if the page documents any Method, it must show request Parameters and a Response
+    if re.search(r"^####\s+Methods?:", text, re.M):
+        if "**Parameters:**" not in text and "**Parameters**" not in text:
+            add("FORMAT", f, 1, "documents Method(s) but has no '**Parameters:**' section")
+        if "**Response:**" not in text and "**Response**" not in text:
+            add("FORMAT", f, 1, "documents Method(s) but has no '**Response:**' section")
+
+# ---------------------------------------------------------------- run
+def main():
+    files = md_files()
+    if not files:
+        print("no markdown files found under docs/", file=sys.stderr)
+        return 1
+
+    # With --scoped, FORMAT + HYGIENE are enforced only on the file args that follow
+    # (the PR's changed docs — a ratchet so new/edited docs must comply while the
+    # existing backlog is not a blocker). SECRETS / PII / LINKS always run repo-wide.
+    # Without --scoped, every check runs on every file (a full local audit).
+    args = sys.argv[1:]
+    scoped = "--scoped" in args
+    changed = {os.path.normpath(os.path.abspath(a)) for a in args if a != "--scoped"}
+    if scoped:
+        print(f"FORMAT/HYGIENE scoped to {len(changed)} changed file(s); "
+              f"SECRETS/PII/LINKS repo-wide.\n")
+
+    for f in files:
+        text = open(f, encoding="utf-8", errors="replace").read()
+        check_links(f, text)
+        check_secrets(f, text)
+        check_pii(f, text)
+        if not scoped or os.path.normpath(os.path.abspath(f)) in changed:
+            check_hygiene(f, text)
+            if is_api_reference(f):
+                check_format(f, text)
+
+    if not violations:
+        print(f"✓ docs validation passed — {len(files)} files, 0 violations")
+        return 0
+
+    by_sev = {}
+    for sev, f, line, msg in violations:
+        by_sev.setdefault(sev, []).append((f, line, msg))
+    print(f"✗ docs validation failed — {len(violations)} violation(s) across {len(files)} files\n")
+    for sev in ("SECRETS", "PII", "LINKS", "FORMAT", "HYGIENE"):
+        rows = by_sev.get(sev)
+        if not rows:
+            continue
+        print(f"── {sev} ({len(rows)}) ──")
+        for f, line, msg in sorted(rows):
+            print(f"   {f}:{line}: {msg}")
+        print()
+    return 1
+
+if __name__ == "__main__":
+    sys.exit(main())
