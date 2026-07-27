@@ -92,3 +92,32 @@ Per-DSM-app portal settings (alias / customized port / redirect). `version` up t
 ## Serving Synology Photos on a custom hostname (worked example)
 
 Synology Photos is **not** portal-eligible via `AppPortal` (`4101`) and has no Foto-specific portal API. Route it with a Reverse Proxy entry (`frontend: your host` → `backend: the Photos upstream`). Point your external/front proxy's `Host` at the DSM reverse-proxy listener. Backend `localhost:5001` reaches DSM (login) — set the backend to the actual Photos upstream to land on the app.
+
+---
+
+## Root cause: why reverse-proxying Synology Photos shows the DSM login (verified 2026-07-26)
+
+Empirically scanned a DSM 7.x NAS (DSM moved to **5800/5801**; 80/443 serve the app portal):
+
+| URL | Result |
+|-----|--------|
+| `https://NAS:5801/` | DSM **login** page |
+| `https://NAS:5801/photo/` | **404** |
+| `https://NAS:5801/?launchApp=SYNO.Foto.AppInstance` | 200, launches Photos (after DSM login) |
+| `http(s)://NAS:80|443/photo/` | **200 — but a redirect shell** |
+
+The `/photo/` page on 80/443 is **not the app** — it's a bootstrap that hardcodes the DSM port:
+```html
+<input id="https" value="5801"><input id="prefer_https" value="true">
+<script> var protocol="https:"; var port=5801;
+  var URL=protocol+"//"+location.hostname+":"+port+... </script>
+```
+So the browser is **JS-redirected to `:5801`**. Any reverse proxy that forwards Synology Photos without handling this lands on DSM (login), because the app forces the client back to the DSM port. `backend: localhost:5001` (or 5801) → DSM login / 502.
+
+### The correct fix
+DSM **Control Panel → Login Portal → Applications → Synology Photos → Customized Port (or Customized Domain)**. DSM then serves Photos **cleanly on that port/domain without the :5801 redirect**; reverse-proxy your host → that port.
+
+### API status (unsolved via API alone)
+- `SYNO.Core.AppPortal.set` is the setter, but every param combo tried (`app`/`apps`/`portal` + `customize_https_port` etc.) returns **`114` (missing param)** or **`4101`** — the exact required param name is **not in any public catalog** and Synology Photos is **not** in `AppPortal.list` (only apps with a portal appear). `AppPortal.Config` only exposes `show_titlebar`.
+- **To capture the exact payload:** set the customized port in the DSM UI with browser DevTools open and read the `SYNO.Core.AppPortal set` request. (Blocked here: needs the interactive display.)
+- `ReverseProxy.create` works (documented above) but only helps once the app is served on a clean port.
