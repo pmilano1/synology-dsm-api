@@ -79,9 +79,18 @@ Hyper Backup UI, including the Backup Explorer browse + download + progress APIs
 
 **HTTP Method:** GET — aggregate counts/size across a task's versions.
 
-**Parameters:** `api`, `version`=`1`, `method`=`summary`, `task_id`, `_sid`.
+**Parameters:**
+- `api` (required): `SYNO.Backup.Version`
+- `version` (required): `1`
+- `method` (required): `summary`
+- `task_id` (required): Task ID
+- `_sid` (required): Session ID
 
-**Response:** `{ "success": true, "data": { ... } }` (totals used by the version-list header).
+**Response:**
+```json
+{ "success": true, "data": {} }
+```
+(aggregate totals used by the version-list header.)
 
 ---
 
@@ -175,22 +184,15 @@ download individual files. It is **undocumented anywhere public** — captured h
 file-level recovery path (e.g. pulling one lost file out of an old restore point) with no
 whole-share restore.
 
-Every call takes a common **Explorer param bundle** (send it on all of them):
-
-```
-task_id=1
-version_id="141"                     # ⚠️ JSON-quoted string
-backend="HyperBackup-backend"        # ⚠️ REQUIRED — omitting it fails downloads with 4400
-filter_keyword=""  filter_type="any"  filter_size_option="any"
-filter_size=0  filter_date_from=0  filter_date_to=0
-```
-
 All methods below are on `/webapi/entry.cgi` under the `SYNO.SDS.Backup.Client.Explore.*`
-API family. Each carries the Explorer param bundle above in addition to its own params.
+API family. `backend` **must** be `"HyperBackup-backend"` on every call (omitting it fails
+with `4400`), and each call carries the common filter params (`filter_keyword`, `filter_type`,
+`filter_size_option`, `filter_size`, `filter_date_from`, `filter_date_to`) — all listed
+explicitly in each method's parameters below.
 
 ---
 
-### SYNO.SDS.Backup.Client.Explore.Version
+## SYNO.SDS.Backup.Client.Explore.Version
 
 #### Method: `list`
 
@@ -200,7 +202,14 @@ API family. Each carries the Explorer param bundle above in addition to its own 
 - `api` (required): `SYNO.SDS.Backup.Client.Explore.Version`
 - `version` (required): `1`
 - `method` (required): `list`
-- `task_id` (required): Task ID (+ the Explorer param bundle above)
+- `task_id` (required): Task ID
+- `backend` (required): `"HyperBackup-backend"`
+- `filter_keyword` (required): `""`
+- `filter_type` (required): `"any"`
+- `filter_size_option` (required): `"any"`
+- `filter_size` (required): `0`
+- `filter_date_from` (required): `0`
+- `filter_date_to` (required): `0`
 - `offset` (optional): paging offset
 - `limit` (optional): page size
 - `filter_name` (optional): quoted JSON string, e.g. `"success"`
@@ -211,7 +220,7 @@ API family. Each carries the Explorer param bundle above in addition to its own 
 
 ---
 
-### SYNO.SDS.Backup.Client.Explore.Target
+## SYNO.SDS.Backup.Client.Explore.Target
 
 #### Method: `get`
 
@@ -221,7 +230,15 @@ API family. Each carries the Explorer param bundle above in addition to its own 
 - `api` (required): `SYNO.SDS.Backup.Client.Explore.Target`
 - `version` (required): `1`
 - `method` (required): `get`
-- `task_id` (required): Task ID (+ the Explorer param bundle)
+- `task_id` (required): Task ID
+- `version_id` (required): quoted JSON string, e.g. `"141"`
+- `backend` (required): `"HyperBackup-backend"`
+- `filter_keyword` (required): `""`
+- `filter_type` (required): `"any"`
+- `filter_size_option` (required): `"any"`
+- `filter_size` (required): `0`
+- `filter_date_from` (required): `0`
+- `filter_date_to` (required): `0`
 - `additional` (optional): JSON array — `["support_filter","account_meta","from_cache"]`
 - `_sid` (required): Session ID
 
@@ -230,7 +247,7 @@ API family. Each carries the Explorer param bundle above in addition to its own 
 
 ---
 
-### SYNO.SDS.Backup.Client.Explore.Folder
+## SYNO.SDS.Backup.Client.Explore.Folder
 
 #### Method: `list`
 
@@ -240,7 +257,15 @@ API family. Each carries the Explorer param bundle above in addition to its own 
 - `api` (required): `SYNO.SDS.Backup.Client.Explore.Folder`
 - `version` (required): `1`
 - `method` (required): `list`
-- `task_id`, `version_id`, `backend` (required) (+ the filter bundle)
+- `task_id` (required): Task ID
+- `version_id` (required): quoted JSON string, e.g. `"141"`
+- `backend` (required): `"HyperBackup-backend"`
+- `filter_keyword` (required): `""`
+- `filter_type` (required): `"any"`
+- `filter_size_option` (required): `"any"`
+- `filter_size` (required): `0`
+- `filter_date_from` (required): `0`
+- `filter_date_to` (required): `0`
 - `node` (required): the folder to expand. **Raw relative path, no leading slash** (e.g. `docker` or `docker/stacks/myapp`). Special token **`@pathRoot`** lists the backup root (the shared folders). *(The DSM UI JSON-quotes `node`; unquoted also works.)*
 - `limit` (optional): e.g. `10001`
 - `_sid` (required): Session ID
@@ -250,15 +275,27 @@ API family. Each carries the Explorer param bundle above in addition to its own 
 
 ---
 
-### SYNO.SDS.Backup.Client.Explore.File
+## SYNO.SDS.Backup.Client.Explore.File
 
 #### Method: `list`
 
 **HTTP Method:** GET — files (and folders) at a path.
 
-**Parameters:** same as `SYNO.SDS.Backup.Client.Explore.Folder` `list` (`node` = the folder),
-but with `api` = `SYNO.SDS.Backup.Client.Explore.File`, `version` = `1`, `method` = `list`,
-plus the Explorer param bundle and `_sid`.
+**Parameters:**
+- `api` (required): `SYNO.SDS.Backup.Client.Explore.File`
+- `version` (required): `1`
+- `method` (required): `list`
+- `task_id` (required): Task ID
+- `version_id` (required): quoted JSON string, e.g. `"141"`
+- `backend` (required): `"HyperBackup-backend"`
+- `node` (required): the folder to list. **Raw relative path, no leading slash** (e.g. `docker/stacks/myapp`); `@pathRoot` lists the backup root
+- `filter_keyword` (required): `""`
+- `filter_type` (required): `"any"`
+- `filter_size_option` (required): `"any"`
+- `filter_size` (required): `0`
+- `filter_date_from` (required): `0`
+- `filter_date_to` (required): `0`
+- `_sid` (required): Session ID
 
 **Response:** entries carry `type` (`File`/`Folder`) — filter to `File` for downloadable files.
 
@@ -276,7 +313,13 @@ Content-type is the file, not JSON.
 - `method` (required): `download`
 - `task_id` (required): Task ID
 - `version_id` (required): quoted JSON string, e.g. `"141"`
-- `backend` (required): **`"HyperBackup-backend"`** (+ the filter bundle)
+- `backend` (required): **`"HyperBackup-backend"`**
+- `filter_keyword` (required): `""`
+- `filter_type` (required): `"any"`
+- `filter_size_option` (required): `"any"`
+- `filter_size` (required): `0`
+- `filter_date_from` (required): `0`
+- `filter_date_to` (required): `0`
 - `source_path` (required): the file's full relative path (raw, no leading slash), e.g. `docker/stacks/myapp/config.yaml`
 - `download_id` (required): any client-generated unique string (`Date.now()+random`); **not** server-issued
 - `support_utf8_name` (required): `true`
@@ -292,13 +335,22 @@ usual cause is a missing **`backend`** param.
 **HTTP Method:** GET or POST — restores an in-backup file **onto the NAS** at a chosen
 destination (vs `download`, which streams bytes to the client). Runs as an **async job**.
 
-**Parameters:** the Explorer bundle (`task_id`, `version_id`, `backend`, filters) plus:
+**Parameters:**
 - `api` (required): `SYNO.SDS.Backup.Client.Explore.File`
 - `version` (required): `1`
 - `method` (required): `restore`
+- `task_id` (required): Task ID
+- `version_id` (required): quoted JSON string, e.g. `"141"`
+- `backend` (required): `"HyperBackup-backend"`
 - `source_path` (required): the file's path inside the backup
 - `dest_path` (required): where to write it on the NAS
 - `overwrite` (required): `true`/`false` (a `restore_unsafe_warn`/`ERR_SHARE_READ_ONLY` may gate it)
+- `filter_keyword` (required): `""`
+- `filter_type` (required): `"any"`
+- `filter_size_option` (required): `"any"`
+- `filter_size` (required): `0`
+- `filter_date_from` (required): `0`
+- `filter_date_to` (required): `0`
 - `_sid` (required): Session ID
 
 **Response:** returns a **`restore_id`**; the UI then opens a progress panel. Poll progress
@@ -312,7 +364,7 @@ with a **`status` method keyed by `restore_id`** every ~2 s (same cadence as the
 
 ---
 
-### SYNO.SDS.Backup.Client.Explore.Job
+## SYNO.SDS.Backup.Client.Explore.Job
 
 #### Method: `list`
 
@@ -350,7 +402,7 @@ drops out of `job_list`. Cancel is a further `Explore.Job` method (`can_cancel` 
 
 ---
 
-### Minimal headless recovery (verified)
+## Minimal headless recovery (verified)
 
 ```bash
 # 1) auth -> sid + synotoken (see best-practices)
@@ -368,7 +420,7 @@ curl ... -o config.yaml \
 
 ---
 
-### Whole-share restore (alternative)
+## Whole-share restore (alternative)
 
 For restoring entire shares/apps into place (not file-by-file), the DSM Restore wizard
 uses `SYNO.Backup.Restore` / `SYNO.Backup.Share.Restore` (`list` observed) /
