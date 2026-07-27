@@ -299,7 +299,7 @@
     "cms_info": {
       "is_managed": false,
       "leader_address": "",
-      "local_address": "synology01",
+      "local_address": "MyNAS",
       "unfiltered_task_size": 5
     },
     "has_hyperv_inventories": false,
