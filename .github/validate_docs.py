@@ -156,6 +156,43 @@ def check_format(f, text):
     if "**Response:**" not in text and "**Response**" not in text:
         add("FORMAT", f, 1, "documents Method(s) but has no '**Response:**' section")
 
+    # ---- per-method structural enforcement (SYNO.Backup.App2.Backup is the golden template) ----
+    # Each '#### Method:' block, bounded by the next heading (levels 1-4), must carry its
+    # OWN **HTTP Method:** / **Parameters:** / **Response:**, and **Parameters:** must be a
+    # bulleted list (one `- ` param per line), not prose. This is what makes every method
+    # render identically to the App2.Backup reference rather than "close enough".
+    heading_starts = [h.start() for h in re.finditer(r"^#{1,4}\s", text, re.M)]
+    for mm in re.finditer(r"^####\s+Methods?:\s*`?(?P<name>[^`\n]*)`?.*$", text, re.M):
+        blk_start = mm.start()
+        later = [h for h in heading_starts if h > blk_start]
+        block = text[blk_start:(min(later) if later else len(text))]
+        line = text[:blk_start].count("\n") + 1
+        name = (mm.group("name") or "").strip() or "?"
+        if "**HTTP Method:**" not in block:
+            add("FORMAT", f, line, f"method `{name}` block has no '**HTTP Method:**' line")
+        if "**Parameters:**" not in block and "**Parameters**" not in block:
+            add("FORMAT", f, line, f"method `{name}` block has no '**Parameters:**' section")
+        else:
+            # content may sit inline on the label line or on the following line(s);
+            # either way the first non-empty content must be a bullet, else it's prose.
+            pm = re.search(r"\*\*Parameters:?\*\*[ \t]*(?P<inline>[^\n]*)\n+(?P<first>[^\n]*)", block)
+            if pm:
+                inline = pm.group("inline").strip()
+                content = inline if inline else pm.group("first").strip()
+                if content and not content.startswith(("- ", "* ", "|")):
+                    pl = line + (0 if inline else block[: pm.start("first")].count("\n"))
+                    add("FORMAT", f, pl,
+                        f"method `{name}` **Parameters:** must be a bulleted list of params, not prose")
+        if "**Response:**" not in block and "**Response**" not in block:
+            add("FORMAT", f, line, f"method `{name}` block has no '**Response:**' section")
+
+    # API section headings must be h2 ('## SYNO.x'), matching the reference — an h3 naming a
+    # SYNO.* API is the wrong level and reads inconsistently next to the h2 sections.
+    for m3 in re.finditer(r"^###\s+`?(?P<h>SYNO\.[A-Za-z0-9.]+)", text, re.M):
+        line = text[: m3.start()].count("\n") + 1
+        add("FORMAT", f, line,
+            f"API section heading '{m3.group('h')}' must be an h2 '## ', not '### '")
+
 # ---------------------------------------------------------------- run
 def main():
     files = md_files()
