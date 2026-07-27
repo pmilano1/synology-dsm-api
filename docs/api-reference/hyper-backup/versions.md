@@ -10,7 +10,7 @@
 
 Restore points (**versions**), the folder/app **sources** a task backs up, and the
 **restore / file-browse** surface. Read methods verified on DSM 7.x by capturing the
-Hyper Backup UI; the per-file browse/restore methods are noted where still uncaptured.
+Hyper Backup UI, including the Backup Explorer browse + download + progress APIs.
 
 ---
 
@@ -166,32 +166,141 @@ Per-version change history (`[v1-2]`). Present on DSM 7; methods not yet capture
 
 ---
 
-## Restore & file-browse (recovery path)
+## Backup Explorer — browse & download individual files (recovery path)
 
-Browsing the files **inside** a version and restoring/downloading an individual file is
-driven by the APIs below. These are **present on DSM 7** (confirmed via
-[`SYNO.API.Info`](../dsm-core/authentication.md)) but their methods/params are **not
-documented publicly** anywhere — the natural next capture target. Capture them against a
-**throwaway task**, never a production one.
+The **`SYNO.SDS.Backup.Client.Explore.*`** family is what DSM's **Backup Explorer**
+(Hyper Backup → *Backup Explorer*) uses to browse the file tree **inside** a version and
+download individual files. It is **undocumented anywhere public** — captured here live
+(DSM 7.x, Hyper Backup 4.2.2) from the DSM client JS + the wire. This is the headless
+file-level recovery path (e.g. pulling one lost file out of an old restore point) with no
+whole-share restore.
 
-| API | Ver | Role | Status |
-|-----|-----|------|--------|
-| `SYNO.SDS.Backup.Client.Explore.Version` | 1-2 | list a task's versions to explore | methods uncaptured |
-| `SYNO.SDS.Backup.Client.Explore.Folder` | 1-2 | browse folders inside a version | **uncaptured (capture target)** |
-| `SYNO.SDS.Backup.Client.Explore.File` | 1-2 | browse/select files inside a version | **uncaptured (capture target)** |
-| `SYNO.SDS.Backup.Client.Fuse.Target` | 1 | FUSE-mount a version as a filesystem | methods uncaptured |
-| `SYNO.Backup.Restore` | 1-2 | restore action | partially seen |
-| `SYNO.Backup.Share.Restore` | 1-2 | restore whole shares from a version | `list` seen |
-| `SYNO.Backup.App2.Restore` | 1-2 | restore application data | methods uncaptured |
+Every call takes a common **Explorer param bundle** (send it on all of them):
 
-Captured from the Restore wizard (Folders-and-Packages path, read-only steps only):
+```
+task_id=1
+version_id="141"                     # ⚠️ JSON-quoted string
+backend="HyperBackup-backend"        # ⚠️ REQUIRED — omitting it fails downloads with 4400
+filter_keyword=""  filter_type="any"  filter_size_option="any"
+filter_size=0  filter_date_from=0  filter_date_to=0
+```
 
-- **`SYNO.Backup.Version list` v2** — `filter_name="success"`, `sort_direction="desc"`, `limit=-1` → all versions (see above).
-- **`SYNO.Backup.Version summary` v1**.
-- **`SYNO.Backup.Share.Restore` — `list` v1** — lists the shares restorable from the chosen version.
+#### `SYNO.SDS.Backup.Client.Explore.Version` — `list` (v1)
+
+Versions available to explore for a task. Params: `task_id` (+ bundle), `offset`,
+`limit`, `filter_name="success"`. Response `data.version_info_list[]` with `version_id`,
+`name`, `timestamp`, `status`, `locked`.
+
+#### `SYNO.SDS.Backup.Client.Explore.Target` — `get` (v1)
+
+Opens the explore session / returns target capability (`data_enc`, `support_filter`,
+`support_multi_version`, `uni_key`, …). Params: `task_id` + bundle + `additional=["support_filter","account_meta","from_cache"]`.
+
+#### `SYNO.SDS.Backup.Client.Explore.Folder` — `list` (v1)
+
+Sub-folders at a path inside a version.
+
+**Parameters:** `task_id`, `version_id`, `backend` (+ filter bundle), `_sid`, plus:
+- `node` — the folder to expand. **Raw relative path, no leading slash** (e.g. `docker` or `docker/stacks/myapp`). Special token **`@pathRoot`** lists the backup root (the shared folders). *(The DSM UI JSON-quotes `node`; unquoted also works.)*
+- `limit` (optional) — e.g. `10001`
+
+**Response:** array of `{name, path, type:"Folder", size, mtime, is_bad, browseable}`.
+`path` is the full relative path — pass it back as the next `node` to descend.
+
+#### `SYNO.SDS.Backup.Client.Explore.File` — `list` (v1)
+
+Files (and folders) at a path. Same params as `Folder list` (`node` = the folder).
+Response entries carry `type` (`File`/`Folder`) — filter to `File` for downloadable files.
+
+#### `SYNO.SDS.Backup.Client.Explore.File` — `download` (v1)
+
+Downloads one file's bytes. **Synchronous** — a single call returns the file body
+(DSM fetches from the remote/cloud target inline; verified with a 6 MB file). Content-type
+is the file, not JSON.
+
+**Parameters:**
+- `api`=`SYNO.SDS.Backup.Client.Explore.File`, `method`=`download`, `version`=`1`
+- `task_id`, `version_id` (quoted), **`backend="HyperBackup-backend"`** + the filter bundle
+- `source_path` — the file's full relative path (raw, no leading slash), e.g. `docker/stacks/myapp/config.yaml`
+- `download_id` — any client-generated unique string (`Date.now()+random`); not server-issued
+- `support_utf8_name=true`
+- `_sid` + `X-SYNO-TOKEN` header
+
+**Response:** the raw file bytes. On bad params → `{"error":{"code":4400}}` (JSON) — the
+usual cause is a missing **`backend`** param.
+
+#### `SYNO.SDS.Backup.Client.Explore.Job` — `list` (v1) — download progress / monitor
+
+Tracks in-flight downloads. The client's **JobTray** polls this every **2 s** with the
+`download_id`(s) it issued, to render progress and offer cancel.
+
+**Parameters:**
+- `api`=`SYNO.SDS.Backup.Client.Explore.Job`, `method`=`list`, `version`=`1`
+- `backend="HyperBackup-backend"`
+- `download_ids` — JSON array of the `download_id`(s) passed to `Explore.File download`
+- `_sid`
+
+**Response:**
+```json
+{ "success": true, "data": { "job_list": [
+  { "id": "…", "unique": "…", "name": "config.yaml",
+    "processed_size": 1048576, "total_size": 6239978,
+    "status": "download", "can_cancel": true }
+] } }
+```
+
+**Progress** = `processed_size / total_size` (`status`: `download`; `total_size` starts 0 while the server prepares/fetches from the cloud target, then fills in). A completed
+or tiny download leaves `job_list` empty. To poll a download to completion: issue the
+`download` call, then `Explore.Job list` with its `download_id` every ~2 s until the job
+drops out of `job_list`. Cancel is a further `Explore.Job` method (`can_cancel` gates it).
+
+> The `Explore.File download` HTTP response still streams the bytes directly; `Explore.Job`
+> is the **side-channel progress** the UI uses (so a large/slow cloud fetch can show a bar
+> and be cancelled). `isPreparingDownload` is just the client guard that blocks starting a
+> second download while `download_ids` is non-empty (`wait_another_file_downloaded`).
+
+### Minimal headless recovery (verified)
+
+```bash
+# 1) auth -> sid + synotoken (see best-practices)
+# 2) find versions
+curl ... api=SYNO.SDS.Backup.Client.Explore.Version method=list version=1 task_id=1 backend='"HyperBackup-backend"' <filter bundle>
+# 3) browse:  Explore.Folder/File list with node="docker/stacks/myapp"
+# 4) download one file (returns bytes):
+curl ... -o config.yaml \
+  api=SYNO.SDS.Backup.Client.Explore.File method=download version=1 \
+  task_id=1 version_id='"141"' backend='"HyperBackup-backend"' \
+  source_path=docker/stacks/myapp/config.yaml download_id=$(date +%s%N) \
+  filter_keyword='""' filter_type='"any"' filter_size_option='"any"' \
+  filter_size=0 filter_date_from=0 filter_date_to=0 support_utf8_name=true
+```
+
+#### `SYNO.SDS.Backup.Client.Explore.File` — `restore` (v1) — put a file back (async)
+
+Restores an in-backup file **onto the NAS** at a chosen destination (vs `download`, which
+streams bytes to the client). Runs as an **async job**.
+
+**Parameters:** the Explorer bundle (`task_id`, `version_id`, `backend`, filters) plus:
+- `source_path` — the file's path inside the backup
+- `dest_path` — where to write it on the NAS
+- `overwrite` — `true`/`false` (a `restore_unsafe_warn`/`ERR_SHARE_READ_ONLY` may gate it)
+
+**Response:** returns a **`restore_id`**; the UI then opens a progress panel. Poll progress
+with a **`status` method keyed by `restore_id`** every ~2 s (same cadence as the download
+`Explore.Job` poller). Task-level `Task.status` flags `is_restoring` / `is_data_restoring`
+/ `is_snapshot_restoring` / `is_lun_restoring` also reflect an in-flight restore.
+
+> **Async pattern (mirrors download):** kick off `restore` → get `restore_id` → poll the
+> `status` method until done. Not fired against a production task here; verify `dest_path`
+> semantics + the exact `status` API on a throwaway task before automating.
+
+### Whole-share restore (alternative)
+
+For restoring entire shares/apps into place (not file-by-file), the DSM Restore wizard
+uses `SYNO.Backup.Restore` / `SYNO.Backup.Share.Restore` (`list` observed) /
+`SYNO.Backup.App2.Restore`. `SYNO.SDS.Backup.Client.Fuse.Target` FUSE-mounts a version as
+a filesystem.
 
 > **Offline alternative:** a multi-version archive (`.hbk`) is a directory of plain SQLite
-> indexes + an LZ4 chunk store. [`cloakster/hyperbackup-tools`](https://github.com/cloakster/hyperbackup-tools)
-> maps the schema (per-share/version `version_list` table; `candidate_chunk.db`; Pool
-> `.index` over LZ4 buckets) and **enumerates** an archive without DSM — but does not yet
-> reassemble file bytes.
+> indexes + an LZ4 chunk store — [`cloakster/hyperbackup-tools`](https://github.com/cloakster/hyperbackup-tools)
+> maps the schema and enumerates an archive without DSM, but does not reassemble file bytes.
