@@ -141,7 +141,7 @@
 ### Login Example
 
 ```bash
-curl -X POST "http://192.168.20.11:5000/webapi/auth.cgi" \
+curl -X POST "http://192.168.1.100:5000/webapi/auth.cgi" \
   -d "api=SYNO.API.Auth" \
   -d "version=7" \
   -d "method=login" \
@@ -154,7 +154,7 @@ curl -X POST "http://192.168.20.11:5000/webapi/auth.cgi" \
 ### Login with 2FA
 
 ```bash
-curl -X POST "http://192.168.20.11:5000/webapi/auth.cgi" \
+curl -X POST "http://192.168.1.100:5000/webapi/auth.cgi" \
   -d "api=SYNO.API.Auth" \
   -d "version=7" \
   -d "method=login" \
@@ -168,7 +168,7 @@ curl -X POST "http://192.168.20.11:5000/webapi/auth.cgi" \
 ### Logout Example
 
 ```bash
-curl "http://192.168.20.11:5000/webapi/auth.cgi" \
+curl "http://192.168.1.100:5000/webapi/auth.cgi" \
   -d "api=SYNO.API.Auth" \
   -d "version=7" \
   -d "method=logout" \
