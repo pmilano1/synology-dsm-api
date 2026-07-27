@@ -172,7 +172,11 @@ Task monitoring and management
 
 ---
 
-## System Services APIs
+## System Services
+
+### [Login Portal](system-services/login-portal.md)
+Application Portal + Reverse Proxy (reverse-engineered)
+ APIs
 
 ### [DHCP Server](system-services/dhcp-server.md)
 DHCP server configuration, client list, reservations
