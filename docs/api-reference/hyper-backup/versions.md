@@ -215,8 +215,23 @@ explicitly in each method's parameters below.
 - `filter_name` (optional): quoted JSON string, e.g. `"success"`
 - `_sid` (required): Session ID
 
-**Response:** `data.version_info_list[]`, each entry with `version_id`, `name`, `timestamp`,
-`status`, `locked`.
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "version_info_list": [
+      {
+        "version_id": "141",
+        "name": "2026-07-20 00:00:23",
+        "timestamp": 1753000000,
+        "status": "success",
+        "locked": false
+      }
+    ]
+  }
+}
+```
 
 ---
 
@@ -242,8 +257,18 @@ explicitly in each method's parameters below.
 - `additional` (optional): JSON array — `["support_filter","account_meta","from_cache"]`
 - `_sid` (required): Session ID
 
-**Response:** target capability fields — `data_enc`, `support_filter`,
-`support_multi_version`, `uni_key`, ….
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "data_enc": false,
+    "support_filter": true,
+    "support_multi_version": true,
+    "uni_key": "…"
+  }
+}
+```
 
 ---
 
@@ -270,7 +295,23 @@ explicitly in each method's parameters below.
 - `limit` (optional): e.g. `10001`
 - `_sid` (required): Session ID
 
-**Response:** array of `{name, path, type:"Folder", size, mtime, is_bad, browseable}`.
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "name": "myapp",
+      "path": "docker/stacks/myapp",
+      "type": "Folder",
+      "size": 0,
+      "mtime": 1753000000,
+      "is_bad": false,
+      "browseable": true
+    }
+  ]
+}
+```
 `path` is the full relative path — pass it back as the next `node` to descend.
 
 ---
@@ -297,7 +338,17 @@ explicitly in each method's parameters below.
 - `filter_date_to` (required): `0`
 - `_sid` (required): Session ID
 
-**Response:** entries carry `type` (`File`/`Folder`) — filter to `File` for downloadable files.
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
+    { "name": "config.yaml", "path": "docker/stacks/myapp/config.yaml", "type": "File", "size": 6239978, "mtime": 1753000000 },
+    { "name": "logs", "path": "docker/stacks/myapp/logs", "type": "Folder" }
+  ]
+}
+```
+Entries carry `type` (`File`/`Folder`) — filter to `File` for downloadable files.
 
 ---
 
@@ -325,8 +376,12 @@ Content-type is the file, not JSON.
 - `support_utf8_name` (required): `true`
 - `_sid` (required): Session ID (+ `X-SYNO-TOKEN` header)
 
-**Response:** the raw file bytes. On bad params → `{"error":{"code":4400}}` (JSON) — the
-usual cause is a missing **`backend`** param.
+**Response:** on success, the raw file bytes (Content-Type is the file, not JSON). On bad
+params it returns JSON:
+```json
+{ "error": { "code": 4400 } }
+```
+The usual cause of `4400` is a missing **`backend`** param.
 
 ---
 
@@ -353,10 +408,13 @@ destination (vs `download`, which streams bytes to the client). Runs as an **asy
 - `filter_date_to` (required): `0`
 - `_sid` (required): Session ID
 
-**Response:** returns a **`restore_id`**; the UI then opens a progress panel. Poll progress
-with a **`status` method keyed by `restore_id`** every ~2 s (same cadence as the download
-`Explore.Job` poller). Task-level `Task.status` flags `is_restoring` / `is_data_restoring`
-/ `is_snapshot_restoring` / `is_lun_restoring` also reflect an in-flight restore.
+**Response:**
+```json
+{ "success": true, "data": { "restore_id": "…" } }
+```
+Then poll progress with a **`status` method keyed by `restore_id`** every ~2 s (same cadence
+as the download `Explore.Job` poller). Task-level `Task.status` flags `is_restoring` /
+`is_data_restoring` / `is_snapshot_restoring` / `is_lun_restoring` also reflect an in-flight restore.
 
 > **Async pattern (mirrors download):** kick off `restore` → get `restore_id` → poll the
 > `status` method until done. Not fired against a production task here; verify `dest_path`
