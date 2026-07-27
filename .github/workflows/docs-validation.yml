@@ -29,6 +29,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+      - name: Pin validator to base (a PR cannot weaken its own gate)
+        run: |
+          git fetch origin "${{ github.base_ref || 'master' }}" --depth=1
+          git checkout FETCH_HEAD -- .github/validate_docs.py .github/pii-denylist.txt 2>/dev/null \
+            || echo "validator not yet on base (bootstrap) — using PR copy"
       - name: Determine changed docs
         id: changed
         run: |
