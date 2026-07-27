@@ -85,20 +85,76 @@ def check_hygiene(f, text):
         if "\t" in ln:
             add("HYGIENE", f, i, "tab character (use spaces)")
 
+# A conforming per-method heading: "#### Method: `name`" (or "#### Methods:").
+CONFORMING_METHOD_RE = re.compile(r"^####\s+Methods?:", re.M)
+
+# A #### subheading that documents an API method but does NOT use the house
+# "#### Method:" template — the styles that used to dodge the gate, e.g.
+#   #### `SYNO.SDS.Backup.Client.Explore.File` — `download` (v1)
+#   #### `SYNO.Backup.Version` list (v2)
+# Matches an h4 that names a SYNO.* API, or a backtick verb tagged with a
+# version marker like "(v1)". Non-method h4s ("#### Overview") never match.
+DODGING_METHOD_HEADING_RE = re.compile(
+    r"^####\s+(?!Methods?:)(?P<h>.*(?:SYNO\.[A-Za-z0-9.]+|`\w+`\s*\(v\d+\)).*)$",
+    re.M,
+)
+
+# Indicators that a page documents API methods at all (even purely in prose or
+# tables). Any one of these turns on the per-method template requirements.
+METHOD_INDICATORS = [
+    CONFORMING_METHOD_RE,                              # #### Method: headings
+    re.compile(r"\*\*HTTP Method:\*\*"),               # per-method HTTP verb label
+    re.compile(r"^####\s+`?SYNO\.", re.M),             # dodging SYNO.x subheading
+    re.compile(r"[?&]method=\w"),                      # method= in a query string / curl
+    re.compile(r"`method`\s*\(required\)"),            # `method` (required) param row
+    re.compile(r"method=`?[a-z_][a-z_0-9]*`?", re.I),  # method=<verb> in prose/code
+    DODGING_METHOD_HEADING_RE,                         # SYNO.x — `verb` (vN) subheading
+]
+
+def _documents_methods(text):
+    return any(p.search(text) for p in METHOD_INDICATORS)
+
 def check_format(f, text):
-    """House template for API-reference pages (structural, robust checks only)."""
+    """House template for API-reference pages (structural, robust checks only).
+
+    Every API-reference page needs a top-level heading, a **Category:** line and
+    a back-link. If a page documents API methods (in ANY style), then it must use
+    the house per-method template: each method under a `#### Method:` heading with
+    **HTTP Method:** / **Parameters:** / **Response:** sections. Pages that clearly
+    document methods but use an alternative heading style (e.g. an h4 naming the
+    SYNO.* API directly) FORMAT-fail regardless of that style.
+    """
     if not text.lstrip().startswith("# "):
         add("FORMAT", f, 1, "must start with a top-level '# ' heading")
     if "**Category:**" not in text:
         add("FORMAT", f, 1, "missing '**Category:**' line")
     if "[← Back" not in text:
         add("FORMAT", f, 1, "missing a back-link '[← Back to ...]'")
-    # if the page documents any Method, it must show request Parameters and a Response
-    if re.search(r"^####\s+Methods?:", text, re.M):
-        if "**Parameters:**" not in text and "**Parameters**" not in text:
-            add("FORMAT", f, 1, "documents Method(s) but has no '**Parameters:**' section")
-        if "**Response:**" not in text and "**Response**" not in text:
-            add("FORMAT", f, 1, "documents Method(s) but has no '**Response:**' section")
+
+    # Conceptual / overview API-ref pages that document no methods are exempt from
+    # the per-method template (README.md is already excluded by is_api_reference).
+    if not _documents_methods(text):
+        return
+
+    # Every documented method must use the '#### Method:' house heading.
+    if not CONFORMING_METHOD_RE.search(text):
+        add("FORMAT", f, 1,
+            "documents API methods but has no '#### Method:' heading — every method "
+            "must use the house '#### Method: `<name>`' template")
+    # Flag each method heading that dodges the template with an alternative style,
+    # even on pages that also have some conforming headings (mixed pages).
+    for m in DODGING_METHOD_HEADING_RE.finditer(text):
+        line = text[: m.start()].count("\n") + 1
+        add("FORMAT", f, line,
+            "method heading not in house format — use '#### Method: `<name>`' "
+            f"(found: '#### {m.group('h').strip()[:60]}')")
+    # A method-documenting page must show each per-method section at least once.
+    if "**HTTP Method:**" not in text:
+        add("FORMAT", f, 1, "documents Method(s) but has no '**HTTP Method:**' line")
+    if "**Parameters:**" not in text and "**Parameters**" not in text:
+        add("FORMAT", f, 1, "documents Method(s) but has no '**Parameters:**' section")
+    if "**Response:**" not in text and "**Response**" not in text:
+        add("FORMAT", f, 1, "documents Method(s) but has no '**Response:**' section")
 
 # ---------------------------------------------------------------- run
 def main():
