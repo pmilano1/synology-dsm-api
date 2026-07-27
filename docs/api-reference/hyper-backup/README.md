@@ -20,10 +20,15 @@ Hyper Backup APIs provide comprehensive backup management including task control
 
 | Category | Description |
 |----------|-------------|
-| **[Tasks](tasks.md)** | Backup task management, run, cancel, suspend, resume |
-| **[Repositories](repositories.md)** | Repository information and management |
-| **[Integrity](integrity.md)** | Integrity check operations |
-| **[Vault](vault.md)** | Hyper Backup Vault management |
+| **[Tasks](tasks.md)** | `SYNO.Backup.Task` — list / get / status / backup / cancel / suspend / resume / delete |
+| **[Versions, Sources & Restore](versions.md)** | `SYNO.Backup.Version`, `Source.Folder`, `App2.Backup`, and the restore / file-browse (`Explore.*`) surface |
+| **[Repositories & Targets](repositories.md)** | `SYNO.Backup.Repository` + `SYNO.Backup.Target` (destination record & live state) |
+| **[Integrity](integrity.md)** | Integrity-check operations (`Target.error_detect`) |
+| **[Vault](vault.md)** | Hyper Backup Vault (server / receiver side) |
+
+> Methods are verified against a live NAS (DSM 7.x) by capturing the Hyper Backup UI's
+> own requests, or marked *community-confirmed* from [`N4S4/synology-api`](https://github.com/N4S4/synology-api).
+> The full endpoint list comes from `SYNO.API.Info?query=all` (54 `SYNO.Backup.*` APIs).
 
 ---
 

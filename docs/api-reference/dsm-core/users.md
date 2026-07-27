@@ -267,6 +267,7 @@ Validates a proposed User Home change before applying it. Returns hard/soft bloc
 - `method` (required): `set`
 - `enable` (required): Enable User Home (`true`/`false`)
 - `location` (required): Volume that hosts the `homes` folder (e.g. `volume1`)
+- `force` (optional): Proceed past the **soft** warnings reported by `validate_set` (e.g. "Synology Photos/Drive use the home service"). Without it, `set` is rejected with **3101** when soft reasons are present.
 - `_sid` (required): Session ID
 
 **Response:**
@@ -276,9 +277,10 @@ Validates a proposed User Home change before applying it. Returns hard/soft bloc
 }
 ```
 
-**Error codes:**
+**Error codes / notes:**
 - `3103` — missing the required `location` parameter (`enable` alone is rejected).
-- `3101` — cannot create the `homes` shared folder (e.g. `/volume<n>/homes` already exists on disk). Enabling User Home creates the reserved `homes` share; an existing folder at that path blocks it.
+- `3101` — rejected. Two causes seen: (a) unacknowledged **soft warnings** from `validate_set` → add `force=true`; (b) the reserved `homes` share can't be created because `/volume<n>/homes` already exists on disk — move the folder aside first, then swap the data back after the share is created.
+- **Must run through the encrypted Web session.** Like `SYNO.Core.Share.set`, enabling User Home via local `synowebapi --exec` may return `success:true` **without** actually flipping `userHomeEnable` — issue it over the authenticated Web API (with [param encryption](authentication.md#syno-api-encryption) + `SynoToken`).
 
 ---
 
