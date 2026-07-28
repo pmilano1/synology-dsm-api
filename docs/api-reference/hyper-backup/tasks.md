@@ -155,7 +155,11 @@ Live run-state of a task (this is the real method — earlier drafts guessed `Ge
 
 **HTTP Method:** GET
 
-**Parameters:** `api`, `version`=`1`, `method`=`get_support_cloud`, `_sid`.
+**Parameters:**
+- `api` (required): `SYNO.Backup.Task`
+- `version` (required): `1`
+- `method` (required): `get_support_cloud`
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -170,6 +174,12 @@ Live run-state of a task (this is the real method — earlier drafts guessed `Ge
 
 Maintenance call fired on app load (reconciles the local `.synorbd` bookkeeping DB). No
 parameters beyond `api`/`version`/`method`/`_sid`.
+
+**Parameters:**
+- `api` (required): `SYNO.Backup.Task`
+- `version` (required): `1`
+- `method` (required): `correct_synorbd`
+- `_sid` (required): Session ID
 
 **Response:**
 ```json
@@ -190,13 +200,24 @@ parameters beyond `api`/`version`/`method`/`_sid`.
 - `_sid` (required): Session ID
 - `X-SYNO-TOKEN` header (required): CSRF token (state-changing call)
 
-**Response:** `{ "success": true }`
+**Response:**
+```json
+{ "success": true }
+```
 
 ---
 
 #### Methods: `cancel`, `suspend`, `resume`, `discard`, `delete` *(community-confirmed)*
 
-**HTTP Method:** POST — same shape as `backup` (`task_id` + `X-SYNO-TOKEN`).
+**HTTP Method:** POST — same shape as `backup`.
+
+**Parameters:**
+- `api` (required): `SYNO.Backup.Task`
+- `version` (required): `1`
+- `method` (required): one of `cancel`, `suspend`, `resume`, `discard`, `delete`
+- `task_id` (required): Task ID
+- `_sid` (required): Session ID
+- `X-SYNO-TOKEN` header (required): CSRF token (state-changing call)
 
 | Method | Effect |
 |--------|--------|
@@ -206,7 +227,10 @@ parameters beyond `api`/`version`/`method`/`_sid`.
 | `discard` | Discard a suspended/partial backup |
 | `delete` | Delete the task |
 
-**Response:** `{ "success": true }`
+**Response:**
+```json
+{ "success": true }
+```
 
 > Method names in this block are from `N4S4/synology-api` and were **not** fired against
 > the live production task during capture. Verify against a throwaway task before relying

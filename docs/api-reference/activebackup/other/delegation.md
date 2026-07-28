@@ -24,6 +24,13 @@
 - Requires parameter: `uids`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `delete`
 
@@ -39,6 +46,13 @@
 **Notes:**
 - Requires parameter: `uids`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `list`

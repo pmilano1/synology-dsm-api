@@ -17,15 +17,15 @@ sequenceDiagram
     participant Client
     participant Auth as auth.cgi
     participant API as entry.cgi
-    
+
     Client->>Auth: POST login (username, password)
     Auth-->>Client: Return session ID (sid)
-    
+
     loop API Calls
         Client->>API: Request with _sid parameter
         API-->>Client: Response
     end
-    
+
     Client->>Auth: POST logout (sid)
     Auth-->>Client: Success
 ```
@@ -118,7 +118,7 @@ class ActiveBackupClient:
         self.base_url = f"http://{host}:5000/webapi"
         self.sid = None
         self.login(username, password)
-    
+
     def login(self, username, password):
         response = requests.post(
             f"{self.base_url}/auth.cgi",
@@ -137,7 +137,7 @@ class ActiveBackupClient:
             self.sid = data["data"]["sid"]
         else:
             raise Exception(f"Login failed: {data}")
-    
+
     def call_api(self, api, method, **params):
         params.update({
             "api": api,

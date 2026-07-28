@@ -82,6 +82,14 @@
 - Requires parameter: `time_start`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `list_result_status_summary`
 

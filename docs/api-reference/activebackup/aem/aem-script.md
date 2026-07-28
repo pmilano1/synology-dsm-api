@@ -24,6 +24,13 @@
 - Requires parameter: `script_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `prepare_file_for_join`
 
@@ -61,6 +68,13 @@
 **Notes:**
 - Requires parameter: `script_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

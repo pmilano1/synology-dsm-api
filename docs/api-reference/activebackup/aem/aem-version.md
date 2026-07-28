@@ -24,23 +24,124 @@
 - Requires parameter: `workload_uuid`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `download`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.Version`
+- `version` (required): `1`
+- `method` (required): `download`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `download_meta`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.Version`
+- `version` (required): `1`
+- `method` (required): `download_meta`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `get_apdb_result`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.Version`
+- `version` (required): `1`
+- `method` (required): `get_apdb_result`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `get_db_backup_info`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.Version`
+- `version` (required): `1`
+- `method` (required): `get_db_backup_info`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `get_detail`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.Version`
+- `version` (required): `1`
+- `method` (required): `get_detail`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `get_volume_info`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.Version`
+- `version` (required): `1`
+- `method` (required): `get_volume_info`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `list_entry`
@@ -58,6 +159,14 @@
 - Requires parameter: `id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `post_hook`
 
@@ -73,6 +182,13 @@
 **Notes:**
 - Requires parameter: `action_type`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `pre_hook`
@@ -90,6 +206,13 @@
 - Requires parameter: `action_type`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `restore_entry`
 
@@ -105,6 +228,13 @@
 **Notes:**
 - Requires parameter: `version_additional_meta`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `rollback_copy_versions`
@@ -122,6 +252,13 @@
 - Requires parameter: `versions`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `validate_external_storage`
 
@@ -137,6 +274,13 @@
 **Notes:**
 - Requires parameter: `connection_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

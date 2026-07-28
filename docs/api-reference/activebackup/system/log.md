@@ -24,6 +24,13 @@
 - Requires parameter: `export_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `check_progress`
 
@@ -39,6 +46,14 @@
 **Notes:**
 - Requires parameter: `export_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `clear`
@@ -74,6 +89,13 @@
 - Requires parameter: `output_format`
 - Error code 120 when parameter missing
 - Supports file download
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `get_info`
@@ -209,6 +231,22 @@
 
 #### Method: `list_result_detail`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Log`
+- `version` (required): `1`
+- `method` (required): `list_result_detail`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `send_test_log`
 
@@ -279,6 +317,13 @@
 - Requires parameter: `file_tmp`
 - Error code 120 when parameter missing
 - Supports file upload
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

@@ -80,7 +80,9 @@
 - `_sid` (required): Session ID
 
 **Response:**
-Binary ZIP file containing OpenVPN configuration files
+```
+Binary ZIP archive containing the OpenVPN configuration files (no JSON envelope on success).
+```
 
 **Notes:**
 - Response is a ZIP file, not JSON

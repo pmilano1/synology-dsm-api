@@ -11,6 +11,22 @@
 
 #### Method: `backup_result`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.Activity`
+- `version` (required): `1`
+- `method` (required): `backup_result`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `backup_status`
 
@@ -33,6 +49,22 @@
 
 #### Method: `restore_result`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.Activity`
+- `version` (required): `1`
+- `method` (required): `restore_result`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `write_vmm_log`
 
@@ -48,6 +80,13 @@
 **Notes:**
 - Requires parameter: `guest_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

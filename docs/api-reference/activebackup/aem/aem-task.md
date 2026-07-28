@@ -42,5 +42,13 @@
 - Requires parameter: `backup_type`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 ---

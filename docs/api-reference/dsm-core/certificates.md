@@ -126,7 +126,9 @@
 - `_sid` (required): Session ID
 
 **Response:**
-- Returns a ZIP file containing certificate files
+```
+Binary ZIP archive containing the certificate files (no JSON envelope on success).
+```
 
 ---
 

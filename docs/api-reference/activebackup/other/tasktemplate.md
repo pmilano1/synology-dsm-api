@@ -11,6 +11,21 @@
 
 #### Method: `create`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.TaskTemplate`
+- `version` (required): `1`
+- `method` (required): `create`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `list`
 
@@ -124,6 +139,13 @@
 - Requires parameter: `template_ids`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `set`
 
@@ -162,6 +184,22 @@
 
 
 #### Method: `translate_target_id`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.TaskTemplate`
+- `version` (required): `1`
+- `method` (required): `translate_target_id`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 ---

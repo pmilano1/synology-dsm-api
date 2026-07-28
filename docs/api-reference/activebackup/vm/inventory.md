@@ -24,6 +24,13 @@
 - Requires parameter: `session`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `check_identity`
 
@@ -39,6 +46,14 @@
 **Notes:**
 - Requires parameter: `inventory_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `check_iscsi`
@@ -56,6 +71,14 @@
 - Requires parameter: `inventory_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `create`
 
@@ -72,6 +95,13 @@
 - Requires parameter: `host_name`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `create_check_job`
 
@@ -87,6 +117,13 @@
 **Notes:**
 - Requires parameter: `session`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `get_check_status`
@@ -105,6 +142,14 @@
 - Error code 120 when parameter missing
 - May take longer to respond
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `get_host_interface`
 
@@ -120,6 +165,14 @@
 **Notes:**
 - Requires parameter: `inventory_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `get_node_infos`
@@ -137,6 +190,14 @@
 - Requires parameter: `ids`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `get_node_path`
 
@@ -152,6 +213,14 @@
 **Notes:**
 - Requires parameter: `node_path_list`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `get_server_cache`
@@ -170,6 +239,14 @@
 - Error code 120 when parameter missing
 - May take longer to respond
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `get_server_info`
 
@@ -186,6 +263,14 @@
 - Requires parameter: `inventory_id`
 - Error code 120 when parameter missing
 - May take longer to respond
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `list`
@@ -212,8 +297,40 @@
 
 #### Method: `list_category_with_tag`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Inventory`
+- `version` (required): `1`
+- `method` (required): `list_category_with_tag`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `list_child`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Inventory`
+- `version` (required): `1`
+- `method` (required): `list_child`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `list_cluster_shared_volume`
@@ -231,6 +348,14 @@
 - Requires parameter: `inventory_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `list_guest_node`
 
@@ -246,6 +371,14 @@
 **Notes:**
 - Requires parameter: `inventory_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `list_node`
@@ -263,6 +396,14 @@
 - Requires parameter: `parent_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `merge_auto_backup_rule`
 
@@ -278,6 +419,13 @@
 **Notes:**
 - Requires parameter: `aem_uuid`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `remove`
@@ -300,6 +448,22 @@
 
 #### Method: `test_connection`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Inventory`
+- `version` (required): `1`
+- `method` (required): `test_connection`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `update`
 
@@ -315,6 +479,13 @@
 **Notes:**
 - Requires parameter: `auth_user`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `update_cache`
@@ -332,6 +503,13 @@
 - Requires parameter: `inventory_id`
 - Error code 120 when parameter missing
 - May take longer to respond
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

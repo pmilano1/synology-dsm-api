@@ -11,6 +11,21 @@
 
 #### Method: `create`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.TaskTemplate`
+- `version` (required): `1`
+- `method` (required): `create`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `delete`
 
@@ -31,6 +46,21 @@
 
 
 #### Method: `set_order`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM.TaskTemplate`
+- `version` (required): `1`
+- `method` (required): `set_order`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `update`

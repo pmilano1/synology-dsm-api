@@ -146,7 +146,7 @@ def get_all_devices(client):
     all_devices = []
     offset = 0
     limit = 100
-    
+
     while True:
         response = client.call_api(
             "SYNO.ActiveBackup.Device",
@@ -154,17 +154,17 @@ def get_all_devices(client):
             limit=limit,
             offset=offset
         )
-        
+
         if not response.get("success"):
             break
-        
+
         devices = response["data"].get("devices", [])
         if not devices:
             break
-        
+
         all_devices.extend(devices)
         offset += limit
-    
+
     return all_devices
 ```
 
@@ -234,7 +234,7 @@ class ActiveBackupClient:
     def __init__(self, host, username, password):
         self.sid = None
         self.login(username, password)
-    
+
     def call_api(self, api, method, **params):
         if not self.sid:
             raise Exception("Not logged in")
@@ -266,7 +266,7 @@ def get_device_info(client, device_id):
             "get",
             device_id=device_id
         )
-        
+
         if response.get("success"):
             return response["data"]
         else:

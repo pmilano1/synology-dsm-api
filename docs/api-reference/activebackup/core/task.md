@@ -24,6 +24,13 @@
 - Requires parameter: `task_ids`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `cancel`
 
@@ -39,6 +46,13 @@
 **Notes:**
 - Requires parameter: `task_ids`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `cancel_waiting_backup`
@@ -64,11 +78,56 @@
 
 #### Method: `create_agent`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Task`
+- `version` (required): `1`
+- `method` (required): `create_agent`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `create_agentless`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Task`
+- `version` (required): `1`
+- `method` (required): `create_agentless`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `create_vm`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Task`
+- `version` (required): `1`
+- `method` (required): `create_vm`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `create_vm_check`
@@ -107,6 +166,14 @@
 **Notes:**
 - Requires parameter: `backup_type`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `list`
@@ -465,8 +532,30 @@
 - Requires parameter: `task_ids`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `set`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Task`
+- `version` (required): `1`
+- `method` (required): `set`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `vm_check_cancel`

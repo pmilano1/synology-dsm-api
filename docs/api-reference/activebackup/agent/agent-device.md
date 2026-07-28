@@ -24,6 +24,13 @@
 - Requires parameter: `workload_uuid`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `list_nodes`
 
@@ -40,6 +47,14 @@
 - Requires parameter: `device_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `set_update_policy`
 
@@ -55,6 +70,13 @@
 **Notes:**
 - Requires parameter: `auto_update`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `update_agent`
@@ -89,6 +111,13 @@
 **Notes:**
 - Requires parameter: `device_ids`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

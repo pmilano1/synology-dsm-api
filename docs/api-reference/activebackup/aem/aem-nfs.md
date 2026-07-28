@@ -24,6 +24,13 @@
 - Requires parameter: `interfaces`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `check_state`
 
@@ -39,6 +46,14 @@
 **Notes:**
 - Requires parameter: `interfaces`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 ---

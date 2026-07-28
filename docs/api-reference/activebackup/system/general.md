@@ -24,6 +24,13 @@
 - Requires parameter: `path`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `get_sys_mem_info`
 

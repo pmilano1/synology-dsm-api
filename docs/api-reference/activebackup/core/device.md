@@ -84,6 +84,14 @@
 - Requires parameter: `device_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `list_tasks`
 
@@ -101,6 +109,14 @@
 - Error code 120 when parameter missing
 - May take longer to respond
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `remove`
 
@@ -117,6 +133,13 @@
 - Requires parameter: `device_ids`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `set_credential`
 
@@ -132,6 +155,13 @@
 **Notes:**
 - Requires parameter: `device_ids`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

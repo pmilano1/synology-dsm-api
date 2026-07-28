@@ -147,7 +147,7 @@ if not response.get("success"):
 import json
 
 # Wrong
-response = client.call_api("SYNO.ActiveBackup.Task", "create", 
+response = client.call_api("SYNO.ActiveBackup.Task", "create",
                           schedule="daily")
 
 # Correct
@@ -177,14 +177,14 @@ class ActiveBackupClient:
     def call_api_with_retry(self, api, method, **params):
         """Auto-retry with re-authentication"""
         response = self.call_api(api, method, **params)
-        
+
         if not response.get("success"):
             error = response.get("error", {})
             # Check if session expired (implementation specific)
             if self._is_session_expired(error):
                 self.login()
                 response = self.call_api(api, method, **params)
-        
+
         return response
 ```
 
@@ -246,19 +246,19 @@ def call_with_retry(func, max_retries=3, delay=1):
             response = func()
             if response.get("success"):
                 return response
-            
+
             error = response.get("error", {})
             if error.get("code") in [102, 103, 120]:
                 # Don't retry client errors
                 return response
-            
+
             # Retry server errors
             time.sleep(delay * (attempt + 1))
         except Exception as e:
             if attempt == max_retries - 1:
                 raise
             time.sleep(delay * (attempt + 1))
-    
+
     return response
 ```
 
@@ -273,11 +273,11 @@ def call_api_with_logging(client, api, method, **params):
     """Call API with error logging"""
     try:
         response = client.call_api(api, method, **params)
-        
+
         if not response.get("success"):
             error = response.get("error", {})
             logger.error(f"API error: {api}.{method} - Code {error.get('code')}")
-        
+
         return response
     except Exception as e:
         logger.exception(f"Exception calling {api}.{method}")
@@ -295,7 +295,7 @@ def get_backup_status(client):
             return response["data"]
     except Exception:
         pass
-    
+
     # Fallback to basic info
     return {"status": "unknown", "devices": 0}
 ```

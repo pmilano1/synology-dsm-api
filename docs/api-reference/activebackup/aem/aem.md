@@ -24,6 +24,14 @@
 - Requires parameter: `key`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `check_leader_address`
 
@@ -40,6 +48,14 @@
 - Requires parameter: `leader_addr`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `edit_connection`
 
@@ -55,6 +71,13 @@
 **Notes:**
 - Requires parameter: `hostname`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `get_info`
@@ -82,6 +105,22 @@
 
 #### Method: `get_join_state`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM`
+- `version` (required): `1`
+- `method` (required): `get_join_state`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `join`
 
@@ -97,6 +136,13 @@
 **Notes:**
 - Requires parameter: `key`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `leave`
@@ -137,8 +183,38 @@
 
 #### Method: `rebuild_version`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM`
+- `version` (required): `1`
+- `method` (required): `rebuild_version`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `rebuild_workload`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.AEM`
+- `version` (required): `1`
+- `method` (required): `rebuild_workload`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

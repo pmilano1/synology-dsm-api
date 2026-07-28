@@ -66,7 +66,7 @@ async function login() {
             format: 'sid'
         })
     );
-    
+
     const sid = response.data.data.sid;
     console.log(`Session ID: ${sid}`);
     return sid;
