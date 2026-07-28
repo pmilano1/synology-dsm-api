@@ -33,5 +33,20 @@
 
 #### Method: `set`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Activation`
+- `version` (required): `1`
+- `method` (required): `set`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 ---

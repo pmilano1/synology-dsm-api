@@ -26,7 +26,9 @@
 - `_sid` (required): Session ID
 
 **Response:**
-Binary JPEG image data
+```
+Binary JPEG image data (no JSON envelope on success).
+```
 
 **Notes:**
 - Response is a JPEG image, not JSON
@@ -89,7 +91,9 @@ Binary JPEG image data
 - `_sid` (required): Session ID
 
 **Response:**
-Binary video stream data (MJPEG format)
+```
+Binary video stream data, MJPEG format (no JSON envelope on success).
+```
 
 **Notes:**
 - Response is a continuous MJPEG stream

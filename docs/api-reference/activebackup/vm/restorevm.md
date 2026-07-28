@@ -60,6 +60,14 @@
 - Requires parameter: `device_list`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `check_support_tcmu`
 
@@ -123,6 +131,13 @@
 - Requires parameter: `file_path`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `create_image`
 
@@ -139,8 +154,31 @@
 - Requires parameter: `task_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `default_restore_name`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.RestoreVM`
+- `version` (required): `1`
+- `method` (required): `default_restore_name`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `get_available_mem`
@@ -218,6 +256,14 @@
 - Requires parameter: `single_mode`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `list_spec`
 
@@ -233,6 +279,14 @@
 **Notes:**
 - Requires parameter: `device_list`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `migrate`
@@ -250,6 +304,13 @@
 - Requires parameter: `device_list`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `remove_image`
 
@@ -265,6 +326,13 @@
 **Notes:**
 - Requires parameter: `task_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `remove_vmm_meta`
@@ -300,6 +368,13 @@
 - Requires parameter: `device_list`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `set_vmm_meta`
 
@@ -333,6 +408,14 @@
 **Notes:**
 - Requires parameter: `serial_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 ---

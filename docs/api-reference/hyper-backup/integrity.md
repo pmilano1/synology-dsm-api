@@ -29,17 +29,31 @@ are noted below.
 - `_sid` (required): Session ID
 - `X-SYNO-TOKEN` header (required): CSRF token
 
-**Response:** `{ "success": true }` (progress is polled via
-[`SYNO.Backup.Task status`](tasks.md#method-status), whose `last_bkp_result` /
-`last_detect_time` reflect the check).
+**Response:**
+```json
+{ "success": true }
+```
+Progress is polled via [`SYNO.Backup.Task status`](tasks.md#method-status), whose
+`last_bkp_result` / `last_detect_time` reflect the check.
 
 ---
 
 #### Method: `error_detect_cancel` *(community-confirmed)*
 
-**HTTP Method:** POST — cancel a running integrity check (`task_id` + `X-SYNO-TOKEN`).
+**HTTP Method:** POST — cancel a running integrity check.
 
-**Response:** `{ "success": true }`
+**Parameters:**
+- `api` (required): `SYNO.Backup.Target`
+- `version` (required): `1`
+- `method` (required): `error_detect_cancel`
+- `task_id` (required): Task ID
+- `_sid` (required): Session ID
+- `X-SYNO-TOKEN` header (required): CSRF token
+
+**Response:**
+```json
+{ "success": true }
+```
 
 ---
 

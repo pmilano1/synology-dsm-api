@@ -20,10 +20,47 @@ Auth: log in first (`SYNO.API.Auth` v7, `session=FileStation`, `format=sid`) and
 DSM's **Reverse Proxy** (Login Portal → Advanced → Reverse Proxy). Entries render to nginx server blocks on the NAS.
 
 #### Method: `list`
-- `api`: `SYNO.Core.AppPortal.ReverseProxy` · `version`: `1` · `method`: `list` · `_sid`
-- Returns `{ "entries": [ ... ] }`.
+
+**HTTP Method:** GET — enumerate reverse-proxy entries.
+
+**Parameters:**
+- `api` (required): `SYNO.Core.AppPortal.ReverseProxy`
+- `version` (required): `1`
+- `method` (required): `list`
+- `_sid` (required): Session ID
+
+**Response:** (verified on DSM 7.x; hostname redacted)
+```json
+{
+  "success": true,
+  "data": {
+    "entries": [
+      {
+        "UUID": "00000000-0000-0000-0000-000000000000",
+        "description": "Synology Photos",
+        "frontend": {
+          "fqdn": "photos.example.com",
+          "port": 443,
+          "protocol": 1,
+          "https": { "hsts": false },
+          "acl": null
+        },
+        "backend": { "fqdn": "localhost", "port": 5001, "protocol": 1 },
+        "proxy_connect_timeout": 60,
+        "proxy_read_timeout": 60,
+        "proxy_send_timeout": 60,
+        "proxy_http_version": 1,
+        "proxy_intercept_errors": false,
+        "customize_headers": []
+      }
+    ]
+  }
+}
+```
 
 #### Method: `create`
+
+**HTTP Method:** POST — add a reverse-proxy entry.
 
 **Parameters:**
 - `api` (required): `SYNO.Core.AppPortal.ReverseProxy`
@@ -59,7 +96,11 @@ DSM's **Reverse Proxy** (Login Portal → Advanced → Reverse Proxy). Entries r
 | `backend.protocol` | int | 1 = HTTPS, 0 = HTTP |
 | `customize_headers` | array | e.g. `[{"name":"Upgrade","value":"$http_upgrade"}]` for websockets |
 
-**Response:** `{ "success": true }`. A new `UUID` appears in `list`.
+**Response:**
+```json
+{ "success": true }
+```
+A new `UUID` appears in `list`.
 
 > ⚠️ `entry` MUST be a JSON string. Passing the object as normal query params → `{"error":{"code":4151}}` (missing/blank `entry`).
 
@@ -72,7 +113,7 @@ Per-DSM-app portal settings (alias / customized port / redirect). `version` up t
 - `method=list` → `{ "portal": [ { "id": "SYNO.SDS.App.FileStation3.Instance", "display_name": "File Station", "enable_redirect": false } ] }`. Only apps with a portal configured appear.
 - `method=set` → requires an app payload; observed error codes: `114` (missing param), `4101` (app not portal-eligible — e.g. **Synology Photos** cannot be given a customized domain this way; use Reverse Proxy instead).
 
-### SYNO.Core.AppPortal.Config
+## SYNO.Core.AppPortal.Config
 - `method=get`/`set` with `id=<app>` → only exposes `{ "show_titlebar": bool }`. **Not** the domain/port setter (common misconception).
 
 ---

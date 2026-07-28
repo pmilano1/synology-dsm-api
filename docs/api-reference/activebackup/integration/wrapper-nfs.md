@@ -54,5 +54,12 @@
 - Requires parameter: `enable_nfs`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 ---

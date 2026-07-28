@@ -59,13 +59,40 @@ capability). Read methods verified on DSM 7.x; `list`/`error_detect` are
 
 ---
 
-#### Method: `list` *(community-confirmed)*
+#### Method: `list`
 
 **HTTP Method:** GET — enumerate all repositories.
 
-**Parameters:** `api`, `version`=`1`, `method`=`list`, `_sid`.
+**Parameters:**
+- `api` (required): `SYNO.Backup.Repository`
+- `version` (required): `1`
+- `method` (required): `list`
+- `_sid` (required): Session ID
 
-**Response:** array of repository objects (same shape as `get`).
+**Response:** (verified on DSM 7.x; destination credentials are masked — never store real values)
+```json
+{
+  "success": true,
+  "data": {
+    "total": 1,
+    "offset": 1,
+    "repo_list": [
+      {
+        "repo_id": 1,
+        "target_type": "cloud_image",
+        "transfer_type": "aws_s3",
+        "bucket": "example-bucket",
+        "container": "example-bucket",
+        "key": "AKIA…REDACTED",
+        "secret": "########",
+        "request_style": "virtual_host_style",
+        "verify_ssl_cert": true
+      }
+    ]
+  }
+}
+```
+Each `repo_list` entry has the same shape as `get`.
 
 ---
 
@@ -118,5 +145,17 @@ capability). Read methods verified on DSM 7.x; `list`/`error_detect` are
 
 #### Methods: `error_detect`, `error_detect_cancel` *(community-confirmed)*
 
-**HTTP Method:** POST — start / cancel a connectivity+integrity probe of the target
-(`task_id` + `X-SYNO-TOKEN`). **Response:** `{ "success": true }`.
+**HTTP Method:** POST — start / cancel a connectivity+integrity probe of the target.
+
+**Parameters:**
+- `api` (required): `SYNO.Backup.Target`
+- `version` (required): `1`
+- `method` (required): `error_detect` (or `error_detect_cancel`)
+- `task_id` (required): Task ID
+- `_sid` (required): Session ID
+- `X-SYNO-TOKEN` header (required): CSRF token (state-changing call)
+
+**Response:**
+```json
+{ "success": true }
+```

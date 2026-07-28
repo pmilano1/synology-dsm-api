@@ -53,7 +53,9 @@
 - `mode` (optional): `open` or `download`
 
 **Response:**
-Binary file data (or ZIP archive for multiple files)
+```
+Binary file data, or a ZIP archive for multiple files (no JSON envelope on success).
+```
 
 ---
 

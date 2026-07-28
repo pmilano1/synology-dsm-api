@@ -45,6 +45,13 @@
 - Requires parameter: `paths`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `list`
 
@@ -125,6 +132,14 @@
 **Notes:**
 - Requires parameter: `root_path`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `list_storage`
@@ -240,6 +255,13 @@
 - Requires parameter: `share_name`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `remove`
 
@@ -255,6 +277,13 @@
 **Notes:**
 - Requires parameter: `is_remove_data`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

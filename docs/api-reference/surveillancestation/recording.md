@@ -135,7 +135,9 @@
 - `_sid` (required): Session ID
 
 **Response:**
-Binary video file data (MP4 format)
+```
+Binary video file data, MP4 format (no JSON envelope on success).
+```
 
 **Notes:**
 - Response is a video file, not JSON

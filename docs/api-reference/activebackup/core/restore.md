@@ -24,6 +24,13 @@
 - Requires parameter: `sessions`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `list`
 
@@ -65,6 +72,13 @@
 - Requires parameter: `job_ids`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `resume`
 
@@ -80,6 +94,13 @@
 **Notes:**
 - Requires parameter: `job_ids`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `status`
@@ -97,6 +118,14 @@
 - Requires parameter: `job_id`
 - Error code 120 when parameter missing
 - May take longer to respond
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `stop`

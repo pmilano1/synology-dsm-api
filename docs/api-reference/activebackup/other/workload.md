@@ -65,6 +65,21 @@
 
 #### Method: `cancel_then_delete`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Workload`
+- `version` (required): `1`
+- `method` (required): `cancel_then_delete`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `create`
 
@@ -122,8 +137,40 @@
 
 #### Method: `get_plan`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Workload`
+- `version` (required): `1`
+- `method` (required): `get_plan`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `get_status`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Workload`
+- `version` (required): `1`
+- `method` (required): `get_status`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `update`

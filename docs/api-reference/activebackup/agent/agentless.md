@@ -24,6 +24,13 @@
 - Requires parameter: `remote_connection_info`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `get_datapath_on_storage`
 
@@ -39,6 +46,14 @@
 **Notes:**
 - Requires parameter: `share_name`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `get_task_setting`
@@ -56,6 +71,14 @@
 - Requires parameter: `task_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `list_device_folder`
 
@@ -71,6 +94,14 @@
 **Notes:**
 - Requires parameter: `remote_connection_info`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `remove_ssh_key_tmp_file`
@@ -88,6 +119,13 @@
 - Requires parameter: `ssh_key_file`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `set_device`
 
@@ -103,6 +141,13 @@
 **Notes:**
 - Requires parameter: `remote_connection_info`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `smb_list_remote_folder`
@@ -120,6 +165,14 @@
 - Requires parameter: `host_ip`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `test_connection`
 
@@ -135,6 +188,14 @@
 **Notes:**
 - Requires parameter: `remote_connection_info`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `test_rsync_module_connection`
@@ -152,6 +213,14 @@
 - Requires parameter: `remote_connection_info`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `test_ssh_key`
 
@@ -167,6 +236,14 @@
 **Notes:**
 - Requires parameter: `ssh_key_file_path`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `test_task_settings`
@@ -188,6 +265,21 @@
 
 
 #### Method: `upload_ssh_key`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Agentless`
+- `version` (required): `1`
+- `method` (required): `upload_ssh_key`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

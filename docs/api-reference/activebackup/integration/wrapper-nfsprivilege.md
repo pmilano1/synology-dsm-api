@@ -24,6 +24,14 @@
 - Requires parameter: `share_name`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `save`
 
@@ -39,4 +47,11 @@
 **Notes:**
 - Requires parameter: `share_name`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 

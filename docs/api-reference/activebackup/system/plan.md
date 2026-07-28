@@ -24,6 +24,13 @@
 - Requires parameter: `plan_uuid`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `delete`
 
@@ -40,6 +47,13 @@
 - Requires parameter: `plan_uuid`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `get`
 
@@ -55,6 +69,14 @@
 **Notes:**
 - Requires parameter: `plan_uuid`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `list`
@@ -89,6 +111,13 @@
 **Notes:**
 - Requires parameter: `plan_uuid`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

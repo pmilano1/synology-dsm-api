@@ -24,6 +24,13 @@
 - Requires parameter: `task_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `download`
 
@@ -41,6 +48,13 @@
 - Error code 120 when parameter missing
 - Supports file download
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `list`
 
@@ -56,6 +70,14 @@
 **Notes:**
 - Requires parameter: `task_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `list_node`
@@ -73,6 +95,14 @@
 - Requires parameter: `device_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `lock`
 
@@ -89,6 +119,13 @@
 - Requires parameter: `task_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `restore`
 
@@ -104,6 +141,13 @@
 **Notes:**
 - Requires parameter: `device_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

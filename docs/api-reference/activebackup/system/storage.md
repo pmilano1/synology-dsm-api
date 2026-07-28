@@ -11,6 +11,22 @@
 
 #### Method: `automount_get`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Storage`
+- `version` (required): `1`
+- `method` (required): `automount_get`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `automount_list_location`
 
@@ -51,8 +67,32 @@
 - Requires parameter: `task_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
 
 #### Method: `check_mount`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Storage`
+- `version` (required): `1`
+- `method` (required): `check_mount`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `download_private_key`
@@ -71,6 +111,13 @@
 - Error code 120 when parameter missing
 - Supports file download
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `list_dsm_share`
 
@@ -86,6 +133,14 @@
 **Notes:**
 - Requires parameter: `task_id`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
 
 
 #### Method: `mount_dsm_enc_share`
@@ -103,6 +158,13 @@
 - Requires parameter: `name`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `umount_dsm_enc_share`
 
@@ -118,6 +180,13 @@
 **Notes:**
 - Requires parameter: `mount_path`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `unmount`
@@ -135,8 +204,30 @@
 - Requires parameter: `storage_id`
 - Error code 120 when parameter missing
 
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `upload_private_key`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Storage`
+- `version` (required): `1`
+- `method` (required): `upload_private_key`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 #### Method: `verify`
@@ -153,6 +244,13 @@
 **Notes:**
 - Requires parameter: `automount_enabled`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---

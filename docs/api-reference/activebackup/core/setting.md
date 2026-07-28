@@ -78,6 +78,21 @@
 
 #### Method: `renew_certificate`
 
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.ActiveBackup.Setting`
+- `version` (required): `1`
+- `method` (required): `renew_certificate`
+- `_sid` (required): Session ID
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
 
 #### Method: `set`
 
@@ -93,6 +108,13 @@
 **Notes:**
 - Requires parameter: `settings`
 - Error code 120 when parameter missing
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
 
 
 ---
