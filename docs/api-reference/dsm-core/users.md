@@ -279,21 +279,46 @@ Validates a proposed User Home change before applying it. Returns hard/soft bloc
 
 **Error codes / notes:**
 - `3103` — missing the required `location` parameter (`enable` alone is rejected).
-- `3101` — rejected. Causes seen:
-  - (a) unacknowledged **soft warnings** from `validate_set` → add `force=true`.
-  - (b) the reserved `homes` share can't be created because `/volume<n>/homes` already
-    exists on disk — move the folder aside first, then swap the data back after the
-    share is created.
-  - (c) **often nothing you can fix from the API.** On DSM 7.x, enabling User Home is a
-    Control Panel operation; the pre-7.0 `synoservice` CLI path was removed and
-    `SYNO.Core.User.Home` `set` can return 3101 with NOTHING actionable behind it.
-    Observed 2026-07-30 on DSM 7.x: `validate_set` returned empty `hard_reasons` and
-    `soft_reasons`; `force=true`, a `SynoToken`-bearing web session, and a local
-    `synowebapi --exec` as `runner=SYSTEM_ADMIN` all returned 3101; and the code was
-    identical with `/volume<n>/homes` present and absent, so (b) was not the cause
-    either. `location=/volume1` returns **3327** instead, and `validate_set` passes for
-    both forms, so neither error distinguishes a good location from a bad one.
-    If you hit this, use the UI rather than escalating against the API.
+- **`requestFormat` is `JSON`** for this API (per DSM's own `SYNO.API.Info`). Params are
+  still **form-encoded**, but each VALUE is parsed as JSON — so a bare word is invalid.
+  `synowebapi` says so out loud: `Not a json value: volume1`. Quote strings
+  (`location='"volume1"'`); booleans and numbers are already valid JSON unquoted.
+  Sending the whole request as a JSON *body* to `entry.cgi` does NOT work — that
+  returns **101** (`No parameter of API, method or version`).
+- `3103` — missing the required `location` parameter (`enable` alone is rejected).
+- `3327` — returned for `location="/volume1"` (a leading-slash volume path).
+- `3101` — returned for `location="volume1"` and `location="volume_1"`.
+
+  **Enabling User Home over the API is UNSOLVED as of 2026-07-30 (DSM 7.x).** Recorded
+  so nobody repeats this: `get` works fine from the same session that `set` rejects, so
+  it is not auth, session, token, or privilege. Ruled out by direct test:
+
+  | Tried | Result |
+  |---|---|
+  | `validate_set` (both location forms) | success, **empty** `hard_reasons` and `soft_reasons` |
+  | `force=true` | 3101 |
+  | curl + valid `SynoToken` | 3101 |
+  | real DSM UI session + token from `_S('SynoToken')` | 3101 |
+  | local `synowebapi --exec`, `runner=SYSTEM_ADMIN` | 3101 |
+  | `/volume<n>/homes` present vs moved aside | 3101 **both** |
+  | JSON-quoted `location` | 3101 (the parse warning clears, the code does not) |
+  | stale `homes` row in `/usr/syno/etc/synoshare.db` | none — DB is clean |
+
+  `SYNO.API.Encryption` is NOT the missing piece: APIs needing it fail with **403**
+  (`SYNO.Core.Share` `create` does exactly that), and a local `synowebapi --exec`
+  needs no encryption yet still returns 3101.
+
+  What the UI does, from `/usr/syno/synoman/webman/modules/AdminCenter/admin_center.js`:
+  the panel declares `webapi:{api:"SYNO.Core.User.Home",version:1,methods:{get:"get",
+  set:"set"},params:{get:{additional:["personal_photo_enable"]}}}`, its form fields are
+  `enable` and `location` (a store-backed combo, `valueField:"value"`), and it holds a
+  `homePollingId` with a `stopHomePollingCallback` — so **enabling is an async job the
+  UI polls**, not a synchronous set. That polling half is the most likely missing piece
+  and is where to look next. No `method:"set"` call for this API appears anywhere in the
+  shipped client JS, so the exact payload has not been recovered from source alone;
+  capturing it from a live UI interaction is the remaining route.
+
+  Until then: enable it in Control Panel → User & Group → Advanced → User Home.
 - **Must run through the encrypted Web session.** Like `SYNO.Core.Share.set`, enabling User Home via local `synowebapi --exec` may return `success:true` **without** actually flipping `userHomeEnable` — issue it over the authenticated Web API (with [param encryption](authentication.md#syno-api-encryption) + `SynoToken`).
 
 ---
