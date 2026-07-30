@@ -279,7 +279,22 @@ Validates a proposed User Home change before applying it. Returns hard/soft bloc
 
 **Error codes / notes:**
 - `3103` — missing the required `location` parameter (`enable` alone is rejected).
-- `3101` — rejected. Two causes seen: (a) unacknowledged **soft warnings** from `validate_set` → add `force=true`; (b) the reserved `homes` share can't be created because `/volume<n>/homes` already exists on disk — move the folder aside first, then swap the data back after the share is created.
+- `3101` — rejected. Three causes seen:
+  - (a) unacknowledged **soft warnings** from `validate_set` → add `force=true`.
+  - (b) the reserved `homes` share can't be created because `/volume<n>/homes` already
+    exists on disk — move the folder aside first, then swap the data back after the
+    share is created.
+  - (c) **the storage pool is mid-migration** (e.g. `status: migrate_to_shr2`). DSM
+    refuses to create a shared folder while the pool is rebuilding, and `homes` is a
+    share like any other. This one is invisible from the User.Home API alone:
+    `validate_set` returns EMPTY `hard_reasons` and `soft_reasons`, `force=true` does
+    not help, and a `SynoToken`-bearing session does not help — the call simply keeps
+    returning 3101. Confirm with `SYNO.Storage.CGI.Storage` `load_info` and read the
+    pool's `status` and `progress.percent`; wait for the migration to finish. Verified
+    2026-07-30 on DSM 7.x with a pool at 34% of a `migrate_to_shr2`, ~10 days
+    remaining. Do NOT interpret 3101 here as the (b) case and start moving
+    `/volume1/homes` around — the folder is not the problem and the move achieves
+    nothing.
 - **Must run through the encrypted Web session.** Like `SYNO.Core.Share.set`, enabling User Home via local `synowebapi --exec` may return `success:true` **without** actually flipping `userHomeEnable` — issue it over the authenticated Web API (with [param encryption](authentication.md#syno-api-encryption) + `SynoToken`).
 
 ---
