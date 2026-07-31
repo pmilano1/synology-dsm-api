@@ -19,6 +19,11 @@ on:
       - ".github/validate_docs.py"
       - ".github/pii-denylist.txt"
 
+concurrency:
+  # Superseded runs are waste — only the newest commit matters for a check.
+  group: docs-validation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate:
     runs-on: ubuntu-latest
