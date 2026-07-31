@@ -280,7 +280,42 @@ Validates a proposed User Home change before applying it. Returns hard/soft bloc
 **Error codes / notes:**
 - `3103` — missing the required `location` parameter (`enable` alone is rejected).
 - **Methods that exist** (probed; `103` = absent): `get`, `set`, `status`, `stop`,
-  `validate_set`. `status` needs a parameter (bare call returns `114`).
+  `validate_set`.
+- **Enabling is ASYNCHRONOUS.** `set` returns a `task_id`; poll `status` with it until
+  the response reports `finish: true`; `stop` cancels an in-flight job. Straight from
+  the DSM UI (`AdminCenter/admin_center.js`):
+
+  ```js
+  homePollingId = this.pollReg({
+    webapi: { api:"SYNO.Core.User.Home", method:"status", version:1,
+              params:{ task_id: e } },
+    interval: 3, immediate: true,
+    status_callback: function(e,t,i,n){ ... t.finish ? ... }
+  })
+  ```
+
+#### Method: `status`
+
+**HTTP Method:** GET or POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.User.Home`
+- `version` (required): `1`
+- `method` (required): `status`
+- `task_id` (required): the id returned by `set`. Ids are prefixed `userhome`.
+- `_sid` (required): Session ID
+
+**Error codes:**
+- `114` — `task_id` omitted.
+- `117` — no task by that id. Confirmed by supplying four different values
+  (`"userhome"`, `"userhome_admin"`, `"bogus"`, `1`): all return 117 while omitting the
+  param returns 114, which is what pins the parameter name.
+
+The UI rediscovers orphaned jobs with
+`SYNO.API.Request.Polling.List({task_id_prefix:"userhome", extra_group_tasks:["admin"]})`.
+**That is a JS helper, not an API** — do not call it directly: `SYNO.Core.Polling`
+returns 102, and `SYNO.Core.Polling.Data` exists but is disk-related (`get` →
+`diskList: []`).
 - **`requestFormat` is `JSON`** (per `SYNO.API.Info`). Params are still form-encoded, but
   each VALUE is parsed as JSON, so bare words are invalid — `synowebapi` says
   `Not a json value: volume1`. Quote strings (`location='"volume1"'`). Sending the whole
@@ -318,6 +353,10 @@ Validates a proposed User Home change before applying it. Returns hard/soft bloc
   (`ppouliot/ansible-collection-synology`, `agaffney/ansible-synology-dsm`) are
   `enable` + `location: "/volume1"` + `enable_recycle_bin` — i.e. the 3327 form. Neither
   project reports the result of that call, so neither corroborates that it succeeds.
+
+  Note the failing `set` returns **no** `task_id`, so there is no orphaned async job to
+  resume — the rejection happens upstream of the async flow, during `location`
+  validation, and the polling contract below is not the missing piece.
 
   Where to look next: the UI panel
   (`/usr/syno/synoman/webman/modules/AdminCenter/admin_center.js`) declares
