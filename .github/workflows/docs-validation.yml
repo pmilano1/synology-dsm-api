@@ -6,12 +6,12 @@ name: Docs Validation
 # must comply, without failing on the pre-existing backlog). See .github/validate_docs.py.
 
 on:
+  # NO path filter on pull_request, deliberately. `CI Gate` is a required status check,
+  # and a required check that never REPORTS leaves a PR stuck on "Expected — Waiting for
+  # status" forever — with enforce_admins on there is no bypass, so main would become
+  # unmergeable. The workflow therefore always runs; `validate` itself is cheap and
+  # no-ops when a PR touches no docs.
   pull_request:
-    paths:
-      - "docs/**"
-      - ".github/validate_docs.py"
-      - ".github/pii-denylist.txt"
-      - ".github/workflows/docs-validation.yml"
   push:
     branches: [master]
     paths:
@@ -48,3 +48,21 @@ jobs:
           echo "Changed docs: ${CHANGED:-<none>}"
       - name: Validate documentation (format · links · secrets · PII · hygiene)
         run: python3 .github/validate_docs.py --scoped ${{ steps.changed.outputs.files }}
+
+  # The required status check. Aggregates so that exactly one context must be green,
+  # and reports on EVERY pull request regardless of what the PR touched.
+  # `skipped` counts as pass; only a real failure or cancellation blocks.
+  ci-gate:
+    name: CI Gate
+    if: always()
+    needs: [validate]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check results
+        run: |
+          r="${{ needs.validate.result }}"
+          echo "validate: $r"
+          case "$r" in
+            success|skipped) echo "gate: pass" ;;
+            *) echo "gate: FAIL"; exit 1 ;;
+          esac
