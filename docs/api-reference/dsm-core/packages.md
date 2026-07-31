@@ -23,6 +23,12 @@
 - `_sid` (required): Session ID
 - `additional` (optional): Additional fields (comma-separated): `description`, `dependent_packages`, `beta`, `distributor`, `maintainer`, `dsm_apps`, `install_type`, `autoupdate`
 
+> **`status` is nested under `additional`, not at the top level of the package object.**
+> Reading `package["status"]` yields `None` and looks like "status unknown"; the real
+> value is `package["additional"]["status"]` (`running`, `stop`, …) alongside
+> `status_code` and `status_description`. Also note `get` (version 2) does **not** exist
+> on DSM 7.x — it returns **103**; use `list` and filter.
+
 **Response:**
 ```json
 {

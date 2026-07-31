@@ -21,6 +21,7 @@
 | **[Packages](packages.md)** | Package/application management |
 | **[Shares](shares.md)** | Shared folder management |
 | **[Certificates](certificates.md)** | SSL certificate management |
+| **[Terminal](terminal.md)** | SSH/Telnet service state and cipher suites |
 
 ---
 

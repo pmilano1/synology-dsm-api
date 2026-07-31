@@ -305,6 +305,18 @@ Validates a proposed User Home change before applying it. Returns hard/soft bloc
 - `task_id` (required): the id returned by `set`. Ids are prefixed `userhome`.
 - `_sid` (required): Session ID
 
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "finish": false
+  }
+}
+```
+
+`finish` is the field to poll on; the UI stops when it turns `true`.
+
 **Error codes:**
 - `114` — `task_id` omitted.
 - `117` — no task by that id. Confirmed by supplying four different values
