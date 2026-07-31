@@ -279,46 +279,54 @@ Validates a proposed User Home change before applying it. Returns hard/soft bloc
 
 **Error codes / notes:**
 - `3103` — missing the required `location` parameter (`enable` alone is rejected).
-- **`requestFormat` is `JSON`** for this API (per DSM's own `SYNO.API.Info`). Params are
-  still **form-encoded**, but each VALUE is parsed as JSON — so a bare word is invalid.
-  `synowebapi` says so out loud: `Not a json value: volume1`. Quote strings
-  (`location='"volume1"'`); booleans and numbers are already valid JSON unquoted.
-  Sending the whole request as a JSON *body* to `entry.cgi` does NOT work — that
-  returns **101** (`No parameter of API, method or version`).
-- `3103` — missing the required `location` parameter (`enable` alone is rejected).
-- `3327` — returned for `location="/volume1"` (a leading-slash volume path).
-- `3101` — returned for `location="volume1"` and `location="volume_1"`.
+- **Methods that exist** (probed; `103` = absent): `get`, `set`, `status`, `stop`,
+  `validate_set`. `status` needs a parameter (bare call returns `114`).
+- **`requestFormat` is `JSON`** (per `SYNO.API.Info`). Params are still form-encoded, but
+  each VALUE is parsed as JSON, so bare words are invalid — `synowebapi` says
+  `Not a json value: volume1`. Quote strings (`location='"volume1"'`). Sending the whole
+  request as a JSON *body* returns **101**.
+- **`set` with NO params returns `success:true` and changes nothing** — a no-op. Useful
+  as a control: it proves method, auth, session and encryption are all fine, so a failure
+  with params is about the params, not the plumbing.
+- `3103` — `location` missing entirely (`enable` alone is rejected).
+- **`3327` vs `3101` splits purely on a leading slash**, across 11 tested values:
 
-  **Enabling User Home over the API is UNSOLVED as of 2026-07-30 (DSM 7.x).** Recorded
-  so nobody repeats this: `get` works fine from the same session that `set` rejects, so
-  it is not auth, session, token, or privilege. Ruled out by direct test:
+  | `location` | Code |
+  |---|---|
+  | `/volume1`, `/volume1/` | **3327** |
+  | `volume1`, `volume_1`, `1`, `md2`, `reuse_1`, `internal`, `/dev/md2`†, `vol1`, `Volume1` | **3101** |
+
+  († `/dev/md2` returns 3101, so the split is on a *volume-path* shape, not merely on a
+  leading slash.) Read 3327 as "path-shaped but rejected" and 3101 as "not a volume
+  reference" — 3327 is therefore the *closer* of the two.
+
+  **Enabling User Home over the API is UNSOLVED as of 2026-07-31 (DSM 7.x).** Eliminated
+  by direct test, so nobody repeats them:
 
   | Tried | Result |
   |---|---|
-  | `validate_set` (both location forms) | success, **empty** `hard_reasons` and `soft_reasons` |
-  | `force=true` | 3101 |
+  | `validate_set`, both forms | success, **empty** `hard_reasons` and `soft_reasons` |
+  | `force=true`, `enable_recycle_bin`, `encryption=0` | no change |
   | curl + valid `SynoToken` | 3101 |
-  | real DSM UI session + token from `_S('SynoToken')` | 3101 |
+  | real DSM UI session, token via `_S('SynoToken')` | 3101 |
   | local `synowebapi --exec`, `runner=SYSTEM_ADMIN` | 3101 |
-  | `/volume<n>/homes` present vs moved aside | 3101 **both** |
-  | JSON-quoted `location` | 3101 (the parse warning clears, the code does not) |
-  | stale `homes` row in `/usr/syno/etc/synoshare.db` | none — DB is clean |
+  | **full `SYNO.API.Encryption` RSA+AES envelope** | 3101 — envelope accepted, so encryption is NOT the gap |
+  | `/volume<n>/homes` present vs moved aside | 3101 both |
+  | stale `homes` row in `synoshare.db` | none; DB clean |
 
-  `SYNO.API.Encryption` is NOT the missing piece: APIs needing it fail with **403**
-  (`SYNO.Core.Share` `create` does exactly that), and a local `synowebapi --exec`
-  needs no encryption yet still returns 3101.
+  Note the params both known Ansible implementations send
+  (`ppouliot/ansible-collection-synology`, `agaffney/ansible-synology-dsm`) are
+  `enable` + `location: "/volume1"` + `enable_recycle_bin` — i.e. the 3327 form. Neither
+  project reports the result of that call, so neither corroborates that it succeeds.
 
-  What the UI does, from `/usr/syno/synoman/webman/modules/AdminCenter/admin_center.js`:
-  the panel declares `webapi:{api:"SYNO.Core.User.Home",version:1,methods:{get:"get",
-  set:"set"},params:{get:{additional:["personal_photo_enable"]}}}`, its form fields are
-  `enable` and `location` (a store-backed combo, `valueField:"value"`), and it holds a
-  `homePollingId` with a `stopHomePollingCallback` — so **enabling is an async job the
-  UI polls**, not a synchronous set. That polling half is the most likely missing piece
-  and is where to look next. No `method:"set"` call for this API appears anywhere in the
-  shipped client JS, so the exact payload has not been recovered from source alone;
-  capturing it from a live UI interaction is the remaining route.
-
-  Until then: enable it in Control Panel → User & Group → Advanced → User Home.
+  Where to look next: the UI panel
+  (`/usr/syno/synoman/webman/modules/AdminCenter/admin_center.js`) declares
+  `webapi:{api:"SYNO.Core.User.Home",version:1,methods:{get:"get",set:"set"}}` **and**
+  holds a `homePollingId` with a `stopHomePollingCallback` — so enabling is an async job
+  the UI polls, and `status` (which exists but needs an undiscovered parameter) is
+  presumably its poll. Recovering `status`'s parameter, or capturing a live UI
+  interaction, is the open thread. No `method:"set"` call for this API appears anywhere
+  in the shipped client JS, so the payload cannot be read from source alone.
 - **Must run through the encrypted Web session.** Like `SYNO.Core.Share.set`, enabling User Home via local `synowebapi --exec` may return `success:true` **without** actually flipping `userHomeEnable` — issue it over the authenticated Web API (with [param encryption](authentication.md#syno-api-encryption) + `SynoToken`).
 
 ---
