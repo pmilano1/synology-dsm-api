@@ -222,6 +222,16 @@ Binary ZIP archive containing the certificate files (no JSON envelope on success
 
 ---
 
+#### Method: `get`
+
+**Does not exist on DSM 7.3.2.** Calling it returns `{"error":{"code":103}}` even with
+a valid `SynoToken`. The section above documenting it is retained only so this note
+sits with it — do not build against it.
+
+The service list comes from `SYNO.Core.Certificate.CRT.list` instead: each certificate
+carries a `services` array, and the union across certificates is every assignable
+service. See the [SSL certificate workflow](../../guides/ssl-certificate-workflow.md).
+
 #### Method: `set`
 
 Assigns certificates to services. **This is the only way to change which certificate a

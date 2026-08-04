@@ -40,9 +40,37 @@ POST api=SYNO.Core.Certificate.CRT&method=list&version=1
 
 Returns the certificates with their ids, descriptions, expiry and which is default.
 
-**Capture the current service-to-certificate mapping before changing anything.** It
-is what a rollback needs, and it cannot be reconstructed afterwards from the
-certificate list alone.
+**This is also the service enumeration.** There is no separate "list services" call —
+`SYNO.Core.Certificate.Service` exposes only `set`, and asking it for `get` returns
+error 103. Instead each certificate carries a `services` array of the services bound
+to it, so the union across all certificates is every assignable service:
+
+```json
+{ "id": "rHYpUM", "desc": "", "is_default": true,
+  "services": [
+    { "display_name": "DSM Desktop Service", "service": "default",
+      "subscriber": "system", "owner": "root", "isPkg": false,
+      "multiple_cert": true, "user_setable": true,
+      "display_name_i18n": "common:web_desktop" },
+    { "display_name": "FTPS", "service": "ftpd",
+      "subscriber": "smbftpd", "owner": "root", "isPkg": false }
+  ] }
+```
+
+Fields beyond the four needed by `Service.set`:
+
+| Field | Meaning |
+|---|---|
+| `display_name_i18n` | Translation key; absent on some services |
+| `multiple_cert` | Service can hold more than one certificate |
+| `user_setable` | Whether the UI lets it be reassigned — respect it |
+
+A service whose `subscriber` is `ReverseProxy` is a DSM reverse-proxy vhost, and its
+`service` is a UUID rather than a name. Those are assignable like any other.
+
+**Capture the current mapping before changing anything.** It is what a rollback
+needs, and it cannot be reconstructed afterwards from the certificate list alone —
+because once reassigned, the old binding is simply gone.
 
 ## 2. Import
 
@@ -121,6 +149,11 @@ certificate, so keep the old one.
   to have one issuance path rather than two.
 - **Advanced → Reset Certificate** — resets to the Synology default and, per DSM's own
   warning, *deletes every other certificate on the NAS*. Not a rollback mechanism.
+- **`SYNO.Core.Certificate.CSR`** — backs the Advanced tab's "Create certificate
+  signing request". Present on DSM 7.3.2 (v1) and not documented here; its methods
+  were not probed.
+- **`SYNO.Core.Certificate.LetsEncrypt.Account`** and
+  **`SYNO.Core.Certificate.Tencent`** — also present and undocumented.
 - **A reverse proxy in front of DSM** — if TLS terminates at a proxy, DSM's own
   certificate is only ever seen on the internal leg, and none of this is needed for
   browser-facing trust. It still matters for API clients that talk to DSM directly,
