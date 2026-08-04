@@ -313,3 +313,12 @@ Activity logs, share monitoring, deletion status
 Backup task management, run, cancel, suspend, resume
 
 ---
+
+## Probed API Surface
+
+### [Probed APIs](probed/README.md)
+320 APIs confirmed against a live DSM 7.4 appliance but not covered by the curated
+pages above — endpoint, version range, which methods exist, and the shape of what
+each returns. Machine-derived and explicit about what was *not* determined.
+
+---
