@@ -21,30 +21,56 @@
 - `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID
-- `share_type` (optional): Share type (`all`, `user`, `system`)
-- `additional` (optional): Additional fields (comma-separated): `hidden`, `encryption`, `is_aclmode`, `recyclebin`, `share_quota`, `enable_share_compress`, `enable_share_cow`
+- `shareType` (optional): Share type (`all`, `user`, `system`). Note the
+  camelCase spelling; `share_type` is silently ignored, and omitting the
+  parameter altogether returns every share.
+- `additional` (optional): Additional fields, as a **JSON array**:
+  `additional=["hidden","encryption","is_aclmode","recyclebin","share_quota","enable_share_compress","enable_share_cow"]`
 
-**Response:**
+> ⚠️ **`additional` must be a JSON array.** A bare string
+> (`additional=recyclebin`) or a comma-separated list
+> (`additional=recyclebin,enable_share_cow`) — the form this page documented
+> until now — is answered with **`{"data":{"shares":[],"total":0},"success":true}`**.
+> That is a success response carrying zero shares, so a client written from the
+> old text concludes the NAS has no shared folders rather than reporting an
+> error. Verified on DSM 7.3.2 (DS1525+).
+
+**Response** (DSM 7.3.2, `additional` as above):
 ```json
 {
   "success": true,
   "data": {
-    "total": 5,
+    "total": 9,
     "shares": [
       {
         "name": "docker",
-        "path": "/volume1/docker",
         "vol_path": "/volume1",
-        "description": "Docker shared folder",
-        "encryption": false,
+        "desc": "",
+        "enable_recycle_bin": false,
+        "recycle_bin_admin_only": false,
+        "enable_share_cow": true,
+        "enable_share_compress": false,
         "hidden": false,
-        "recyclebin": true,
-        "share_quota": 0
+        "encryption": 0,
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "share_quota_used": 1024
       }
     ]
   }
 }
 ```
+
+**Response field names** — these differ from what an older revision of this page
+showed, and each was read back from a live unit:
+
+| Field | Notes |
+| --- | --- |
+| `desc` | the description. There is no `description` field. |
+| `vol_path` | the volume, e.g. `/volume1`. **There is no `path` field** — the share path is `<vol_path>/<name>`, composed by the caller. |
+| `enable_recycle_bin`, `recycle_bin_admin_only` | the recycle bin pair. There is no `recyclebin` field in the response, even though `recyclebin` is the name used when *requesting* it through `additional`. |
+| `encryption` | a **number** (`0` when not encrypted), not a boolean — note that `shareinfo` takes a boolean for the same concept. |
+| `enable_share_cow`, `enable_share_compress` | Btrfs properties. **Absent entirely for some shares** rather than reported as `false` — see the note under `get`. |
+| `uuid` | DSM's internal identifier for the share. |
 
 ---
 
@@ -56,24 +82,47 @@
 - `api` (required): `SYNO.Core.Share`
 - `version` (required): `1`
 - `method` (required): `get`
-- `name` (required): Share name
+- `name` (required): Share name. Unlike `create` and `set`, `get` accepts the
+  bare form (`name=docker`) as well as the JSON-quoted one.
 - `_sid` (required): Session ID
-- `additional` (optional): Additional fields
+- `additional` (optional): Additional fields, as a **JSON array** — same
+  requirement as `list` above. Without it the response carries only
+  `name`, `vol_path`, `desc`, `uuid` and `is_usb_share`.
 
-**Response:**
+**Response** (DSM 7.3.2 — note there is **no `share` wrapper**; the share object
+is `data` itself):
 ```json
 {
   "success": true,
   "data": {
-    "share": {
-      "name": "docker",
-      "path": "/volume1/docker",
-      "vol_path": "/volume1",
-      "description": "Docker shared folder"
-    }
+    "name": "docker",
+    "vol_path": "/volume1",
+    "desc": "",
+    "enable_recycle_bin": false,
+    "recycle_bin_admin_only": false,
+    "enable_share_cow": true,
+    "enable_share_compress": false,
+    "hidden": false,
+    "encryption": 0,
+    "uuid": "00000000-0000-0000-0000-000000000000"
   }
 }
 ```
+
+> ⚠️ **A missing share answers `{"error":{"code":402},"success":false}` — not
+> 3302.** 402 is a generic code that also carries "permission denied" elsewhere
+> in the DSM API, so it cannot be read as "not found" on its own. Anything that
+> deletes local records on a not-found (a Terraform provider dropping a resource
+> from state, a reconciler recreating what it thinks is missing) should confirm
+> against `list` before acting: an account that has lost visibility of a share
+> produces the same code as one that was deleted. Verified on DSM 7.3.2.
+
+> ⚠️ **`enable_share_cow` and `enable_share_compress` are sometimes omitted
+> entirely**, not returned as `false`. On the reference unit one share of nine
+> reports neither field (along with no `share_quota_*` fields), while the other
+> eight report both. Treat absent as "off" rather than assuming the key is
+> always present, and do not report a difference between absent and `false` as a
+> change.
 
 ---
 
@@ -276,10 +325,16 @@ path. Setting a non-empty rule makes DSM (re)generate `/etc/exports` and apply i
 - `share_name` (required): Share name — **note: `share_name`, not `name`**, and quoted as a JSON string (`share_name="backups"`)
 - `_sid` (required): Session ID
 
-**Response:** the current rule set (empty array when the share is not exported):
+**Response:** the current rule set (empty array when the share exists but is not
+exported):
 ```json
 { "success": true, "data": { "rule": [] } }
 ```
+
+> ⚠️ **A share that does not exist answers `{"error":{"code":2370},"success":false}`.**
+> That is distinct from an existing-but-unexported share, which succeeds with
+> `rule: []`. Note that this API uses a different not-found code from
+> [`SYNO.Core.Share get`](#method-get), which answers 402. Verified on DSM 7.3.2.
 
 #### Method: `save`
 
