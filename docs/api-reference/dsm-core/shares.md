@@ -112,10 +112,10 @@ is `data` itself):
 > ⚠️ **A missing share answers `{"error":{"code":402},"success":false}` — not
 > 3302.** 402 is a generic code that also carries "permission denied" elsewhere
 > in the DSM API, so it cannot be read as "not found" on its own. Anything that
-> deletes local records on a not-found (a Terraform provider dropping a resource
-> from state, a reconciler recreating what it thinks is missing) should confirm
-> against `list` before acting: an account that has lost visibility of a share
-> produces the same code as one that was deleted. Verified on DSM 7.3.2.
+> deletes or recreates local records on a not-found — any client holding its own
+> copy of what exists — should confirm against `list` before acting: an account
+> that has lost visibility of a share produces exactly the same code as one that
+> was deleted. Verified on DSM 7.3.2.
 
 > ⚠️ **`enable_share_cow` and `enable_share_compress` are sometimes omitted
 > entirely**, not returned as `false`. On the reference unit one share of nine
