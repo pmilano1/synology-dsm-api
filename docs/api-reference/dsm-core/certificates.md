@@ -222,15 +222,15 @@ Binary ZIP archive containing the certificate files (no JSON envelope on success
 
 ---
 
-#### Method: `get`
-
-**Does not exist on DSM 7.3.2.** Calling it returns `{"error":{"code":103}}` even with
-a valid `SynoToken`. The section above documenting it is retained only so this note
-sits with it — do not build against it.
-
-The service list comes from `SYNO.Core.Certificate.CRT.list` instead: each certificate
-carries a `services` array, and the union across certificates is every assignable
-service. See the [SSL certificate workflow](../../guides/ssl-certificate-workflow.md).
+> **`get` does not exist on DSM 7.3.2.** Calling it returns `{"error":{"code":103}}`
+> even with a valid `SynoToken`, so anything built against it fails in a way that
+> looks like an authentication problem. It is not documented as a method here for
+> that reason.
+>
+> The service list comes from `SYNO.Core.Certificate.CRT.list` instead: each
+> certificate carries a `services` array, and the union across certificates is every
+> assignable service. See the
+> [SSL certificate workflow](../../guides/ssl-certificate-workflow.md).
 
 #### Method: `set`
 
@@ -280,6 +280,22 @@ api=SYNO.Core.Certificate.Service&method=set&version=1&settings=[
    "old_id":"rHYpUM","id":"CrRATM"}
 ]
 ```
+
+**Response:**
+
+Not observed. The capture that produced this documentation deliberately BLOCKED the
+request rather than let it reach the appliance, so no response body was returned —
+the DSM dialog sat on "Processing. Please wait..." indefinitely, which is what a
+blocked write looks like from the UI side.
+
+By analogy with other `SYNO.Core` setters the success shape is expected to be:
+
+```json
+{ "success": true }
+```
+
+Marked unverified rather than presented as fact. Confirming it requires performing a
+real certificate reassignment, which restarts the affected services.
 
 **`old_id` is required and is not decorative.** DSM uses it to detect a concurrent
 change; supplying a stale value is how it avoids silently overwriting an assignment
