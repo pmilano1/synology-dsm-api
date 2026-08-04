@@ -1,4 +1,11 @@
-# DSM 7.3 APIs not covered by any existing client
+# DSM 7.3 — APIs not covered by any existing client
+
+**Category:** API Coverage
+
+[← Back to API Reference](../README.md)
+
+---
+
 
 50 APIs present on **DSM 7.3.2** that appear in neither this repo nor the two
 most complete open-source clients (`py-synologydsm-api`, `synology-api`). Established
