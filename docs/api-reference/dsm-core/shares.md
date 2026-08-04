@@ -33,7 +33,7 @@
 > until now — is answered with **`{"data":{"shares":[],"total":0},"success":true}`**.
 > That is a success response carrying zero shares, so a client written from the
 > old text concludes the NAS has no shared folders rather than reporting an
-> error. Verified on DSM 7.3.2 (DS1525+).
+> error. Verified on DSM 7.3.2.
 
 **Response** (DSM 7.3.2, `additional` as above):
 ```json
@@ -161,7 +161,7 @@ is `data` itself):
 {"data": {"name": "ci_cache"}, "success": true}
 ```
 
-**Verified working call** (DSM 7.3.2, DS1525+, plain HTTPS session — see the
+**Verified working call** (DSM 7.3.2, plain HTTPS session — see the
 encryption note below):
 
 ```bash
@@ -263,7 +263,7 @@ to add NFS exports (do **not** hand-edit `/etc/exports`; DSM regenerates it):
 > ⚠️ **`create`/`set` do NOT require `SYNO.API.Encryption`.** An earlier revision
 > of this page claimed the `shareinfo` param had to be encrypted over the Web
 > API. That is wrong, and it sends readers down a long detour building an
-> RSA+AES envelope they do not need. **Verified on DSM 7.3.2 (DS1525+):**
+> RSA+AES envelope they do not need. **Verified on DSM 7.3.2:**
 > `create` and `SharePrivilege save` both succeed with **plaintext**
 > `shareinfo`/`rule` over an ordinary HTTPS session. What is genuinely required
 > is the **`X-SYNO-TOKEN` header** (from `enable_syno_token=yes` at login) — a
@@ -378,7 +378,7 @@ Replaces the **entire** rule set for the share (send all rules you want; an empt
 ##### `root_squash` values — what each one actually emits
 
 Every value below was set on a live share and the generated `/etc/exports` line
-read back (DSM 7.3.2, DS1525+):
+read back (DSM 7.3.2):
 
 | API value | UI label | `/etc/exports` | `anonuid` |
 | --- | --- | --- | --- |
