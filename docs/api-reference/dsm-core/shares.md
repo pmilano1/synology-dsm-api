@@ -85,27 +85,59 @@
 - `api` (required): `SYNO.Core.Share`
 - `version` (required): `1`
 - `method` (required): `create`
-- `name` (required): Share name
-- `vol_path` (required): Volume path (e.g., `/volume1`)
+- `name` (required): Share name, **JSON-encoded — i.e. sent with its quotes**
+  (`name="ci_cache"`, not `name=ci_cache`)
+- `shareinfo` (required): JSON object carrying the actual settings (below)
 - `_sid` (required): Session ID
-- `desc` (optional): Description
-- `encryption` (optional): Enable encryption (default: false)
-- `enable_share_compress` (optional): Enable compression (default: false)
-- `enable_share_cow` (optional): Enable Btrfs COW (default: false)
-- `recyclebin` (optional): Enable recycle bin (default: false)
+
+> **`create` takes the same `shareinfo` envelope that `set` does, plus a
+> JSON-quoted top-level `name`.** The flat form (`name=…&vol_path=…&desc=…`)
+> that earlier revisions of this page documented is rejected with **403**.
+
+`shareinfo` fields:
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `name` | string | share name, repeated from the top-level `name` (unquoted here) |
+| `vol_path` | string | volume path, e.g. `/volume1` |
+| `desc` | string | description |
+| `enable_recycle_bin` | bool | **must be `true` if `recycle_bin_admin_only` is `true`** — the contradictory pair fails with 3300 |
+| `recycle_bin_admin_only` | bool | restrict recycle bin to admins |
+| `enable_share_cow` | bool | Btrfs COW |
+| `enable_share_compress` | bool | compression |
+| `name_org` | string | `""` on create; DSM uses it to detect renames |
 
 **Response:**
 ```json
-{
-  "success": true
-}
+{"data": {"name": "ci_cache"}, "success": true}
 ```
+
+**Verified working call** (DSM 7.3.2, plain HTTPS session — see the
+encryption note below):
+
+```bash
+curl -sk -X POST "https://nas:5001/webapi/entry.cgi" -H "X-SYNO-TOKEN: $TOK" \
+  --data-urlencode "api=SYNO.Core.Share" --data-urlencode "version=1" \
+  --data-urlencode "method=create" \
+  --data-urlencode 'name="ci_cache"' \
+  --data-urlencode 'shareinfo={"name":"ci_cache","vol_path":"/volume1","desc":"…","enable_recycle_bin":true,"recycle_bin_admin_only":true,"enable_share_cow":false,"enable_share_compress":false,"name_org":""}' \
+  --data-urlencode "_sid=$SID"
+```
+
+**Error codes observed on `create`:**
+
+| Code | Meaning |
+| --- | --- |
+| `403` | malformed request — flat params instead of the `shareinfo` envelope, or a missing/unquoted top-level `name`. Reads like a permission error; it is not. |
+| `3300` | envelope accepted, payload invalid — e.g. `enable_recycle_bin:false` together with `recycle_bin_admin_only:true`, or a `vol_path` that has no `shareinfo` counterpart |
+| `3301` | share already exists |
 
 **Notes:**
 - `create` targets a new folder and does **not** adopt an existing folder at
-  `<vol_path>/<name>`. If the folder already exists on disk, `create` fails with
-  **403** (via a local privileged session) or **119** (via an authenticated
-  `_sid`+`SynoToken` session).
+  `<vol_path>/<name>`.
+- The `synoshare --add` CLI is **not** a working substitute on Btrfs volumes with
+  share-level ACLs: it fails with `share create failed.[0x0D00 share_is_acl_share.c:49]`.
+  Use the Web API.
 - **Reserved share names** — `photo`, `homes`, `home`, `music`, `video`,
   `surveillance`, `web` and similar are owned by their packages/services and are
   created when the owning feature is enabled (Synology Photos creates `photo`;
@@ -177,7 +209,21 @@ to add NFS exports (do **not** hand-edit `/etc/exports`; DSM regenerates it):
 > `security_flavor` as an **object of booleans** instead of the `security` string).
 > Prefer `SharePrivilege` on DSM 7.2+. See below.
 
-**Local execution** — `synowebapi --exec api=SYNO.Core.Share method=set version=1 name=<share> shareinfo='{…}'` works directly as SYSTEM_ADMIN (no encryption). **Over the Web API**, `set`/`create` additionally require the `shareinfo` param to be **encrypted** via [`SYNO.API.Encryption`](authentication.md#syno-api-encryption) plus a valid `SynoToken`.
+**Local execution** — `synowebapi --exec api=SYNO.Core.Share method=set version=1 name=<share> shareinfo='{…}'` runs as SYSTEM_ADMIN.
+
+> ⚠️ **`create`/`set` do NOT require `SYNO.API.Encryption`.** An earlier revision
+> of this page claimed the `shareinfo` param had to be encrypted over the Web
+> API. That is wrong, and it sends readers down a long detour building an
+> RSA+AES envelope they do not need. **Verified on DSM 7.3.2:**
+> `create` and `SharePrivilege save` both succeed with **plaintext**
+> `shareinfo`/`rule` over an ordinary HTTPS session. What is genuinely required
+> is the **`X-SYNO-TOKEN` header** (from `enable_syno_token=yes` at login) — a
+> missing token is one of the things that surfaces as the same generic `403`
+> as a malformed envelope, which is probably how the encryption theory started.
+>
+> Note also that `synowebapi --exec ... method=create` returns **403** even as
+> SYSTEM_ADMIN when given flat params, so the local CLI is not a way around the
+> envelope requirement either.
 
 **Response:**
 ```json
@@ -272,7 +318,39 @@ Replaces the **entire** rule set for the share (send all rules you want; an empt
 | --- | --- | --- |
 | `client` | IP / subnet (`192.168.1.0/24`) / hostname / `*` | one object per client |
 | `privilege` | `"rw"` \| `"ro"` | **lowercase** (legacy `nfs_rule` used `RW`/`RO`) |
-| `root_squash` | `"root"` \| `"no_mapping"` \| `"all"` | maps to `root_squash` / `no_root_squash` / `all_squash` in `/etc/exports`. `"root"` = **No mapping** in the UI (root stays root) |
+| `root_squash` | `"root"` \| `"admin"` \| `"guest"` \| `"all_admin"` \| `"all_guest"` | ⚠️ **`"root"` means "No mapping" and emits `no_root_squash` — root is NOT squashed.** The value names describe *what root is mapped to*, not the exports keyword. Full table below. |
+
+##### `root_squash` values — what each one actually emits
+
+Every value below was set on a live share and the generated `/etc/exports` line
+read back (DSM 7.3.2):
+
+| API value | UI label | `/etc/exports` | `anonuid` |
+| --- | --- | --- | --- |
+| `"root"` | No mapping | `no_root_squash` | 1025 |
+| `"admin"` | Map root to admin | `root_squash` | 1024 |
+| `"guest"` | Map root to guest | `root_squash` | 1025 |
+| `"all_admin"` | Map all users to admin | `all_squash` | 1024 |
+| `"all_guest"` | Map all users to guest | `all_squash` | 1025 |
+
+> 🔑 **Two traps here, and this is the second gotcha on this API after
+> `security_flavor`.**
+>
+> 1. **`"root"` is the value that DISABLES squashing.** It names the identity
+>    root keeps, not the exports flag. If you want containers to write to the
+>    share as root — which is what every Docker/NFS setup needs — this is the
+>    value you want. Every share on this fleet that is written to as root
+>    (`docker`, `registry`, `backups`, `ci_cache`) carries `root_squash: "root"`.
+> 2. **The exports keywords are NOT accepted as input.** Passing
+>    `"no_root_squash"`, `"root_squash"` or `"all_squash"` — the obvious guess,
+>    since that is what lands in the file — fails with **2301**. So do
+>    `"no_mapping"` and `"all"`, which earlier revisions of this page listed as
+>    the valid set; they are not valid on DSM 7.3.2.
+>
+> Because a rejected `save` leaves the **previous rule in place** and returns
+> only `{"error":{"code":2301}}`, an unchecked write looks indistinguishable
+> from a successful one when you inspect `/etc/exports` afterwards. Always
+> assert on `success` rather than on the resulting exports line.
 | `async` | bool | async writes |
 | `insecure` | bool | allow connections from non-privileged ports (>1024) |
 | `crossmnt` | bool | allow access to mounted subfolders |
