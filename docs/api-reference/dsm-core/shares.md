@@ -33,7 +33,7 @@
 > until now — is answered with **`{"data":{"shares":[],"total":0},"success":true}`**.
 > That is a success response carrying zero shares, so a client written from the
 > old text concludes the NAS has no shared folders rather than reporting an
-> error. Verified on DSM 7.3.2 (DS1525+).
+> error. Verified on DSM 7.3.2.
 
 **Response** (DSM 7.3.2, `additional` as above):
 ```json
