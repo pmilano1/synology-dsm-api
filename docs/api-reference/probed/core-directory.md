@@ -47,6 +47,66 @@ no-argument call to an unknown write method executes it. Those need a disposable
 }
 ```
 
+## SYNO.Core.Directory.Domain
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–3
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.Directory.Domain`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_sys_info.py:1681`):
+- `get` (required)
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "enable_domain": "boolean"
+  }
+}
+```
+
+## SYNO.Core.Directory.Domain.Conf
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–3
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.Directory.Domain.Conf`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "buildDatabaseWithMembership": "boolean",
+    "direct_connect_trust": "boolean",
+    "disable_domain_admins": "boolean",
+    "domain_nested_group": "integer",
+    "enable_rpc_enum_usergroup": "boolean",
+    "enable_sync_time": "boolean",
+    "encrypt_ad_ldap": "string"
+  }
+}
+```
+
 ## SYNO.Core.Directory.Domain.Schedule
 
 **Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
@@ -134,7 +194,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Directory.LDAP`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -153,12 +213,12 @@ The exact signature was not determined; it is listed here so it is known to exis
     "enable_idmap": "boolean",
     "encryption": "string",
     "error": "integer",
-    "expand_nested_groups": "boolean",
+    "host": "string",
     "is_syno_server": "boolean",
     "ldap_schema": "string",
     "nested_group_level": "integer",
+    "no_nested_group": "boolean",
     "profile": "string",
-    "server_address": "string",
     "server_support_samba_schema": "boolean",
     "tls_reqcert": "boolean",
     "update_min": "integer"
@@ -176,7 +236,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Directory.LDAP.BaseDN`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -190,6 +250,55 @@ The exact signature was not determined; it is listed here so it is known to exis
   "success": false,
   "error": {
     "code": 2701
+  }
+}
+```
+
+## SYNO.Core.Directory.LDAP.Profile
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.Directory.LDAP.Profile`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present: DSM returned error 2701 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 2701
+  }
+}
+```
+
+#### Method: `list`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.Directory.LDAP.Profile`
+- `version` (required): `1`
+- `method` (required): `list`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "profiles": "array<string>"
   }
 }
 ```
@@ -238,7 +347,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Directory.SSO`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -248,11 +357,9 @@ The exact signature was not determined; it is listed here so it is known to exis
 {
   "success": true,
   "data": {
-    "allow_local_user": "boolean",
     "appid": "string",
     "enable_sso": "boolean",
     "host": "string",
-    "name": "string",
     "pingpong": "null",
     "sso_default_login": "boolean"
   }

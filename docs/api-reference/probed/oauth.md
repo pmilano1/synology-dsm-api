@@ -33,7 +33,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -56,6 +56,11 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/oauth.py:19`):
+- `limit` (optional)
+- `offset` (optional)
 
 **Response:**
 
@@ -109,6 +114,12 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/oauth.py:67`):
+- `action` (required)
+- `limit` (optional)
+- `offset` (optional)
+
 **Response:**
 
 ```json
@@ -134,6 +145,11 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/oauth.py:43`):
+- `limit` (optional)
+- `offset` (optional)
 
 **Response:**
 

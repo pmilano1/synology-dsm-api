@@ -109,7 +109,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Security.DSM`
-- `version` (required): `6`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -119,12 +119,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 {
   "success": true,
   "data": {
-    "allow_2fa_device_lost_option": "boolean",
-    "allow_stay_signed_in_option": "boolean",
-    "allow_trust_device_2fa_option": "boolean",
-    "csp_header_option": "boolean",
     "enable_csrf_protection": "boolean",
-    "restart_clean_session": "boolean",
     "skip_ip_checking": "boolean",
     "timeout": "integer"
   }
@@ -192,11 +187,11 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Security.DoS`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -250,7 +245,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -324,7 +319,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -377,7 +372,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -426,7 +421,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `status`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**

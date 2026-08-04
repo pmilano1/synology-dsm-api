@@ -94,3 +94,31 @@ no-argument call to an unknown write method executes it. Those need a disposable
   }
 }
 ```
+
+## SYNO.Core.Share.KeyManager.Store
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.Share.KeyManager.Store`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present: DSM returned error 3300 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 3300
+  }
+}
+```

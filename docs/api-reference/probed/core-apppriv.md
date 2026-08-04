@@ -57,7 +57,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.AppPriv.App`
-- `version` (required): `3`
+- `version` (required): `2`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -70,7 +70,6 @@ The exact signature was not determined; it is listed here so it is known to exis
     "applications": [
       {
         "app_id": "string",
-        "grant_by_default": "boolean",
         "grant_type": "array",
         "isInternal": "boolean",
         "name": "string",

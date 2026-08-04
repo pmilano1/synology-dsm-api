@@ -19,17 +19,18 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 ---
 
-**320 APIs** across 43 pages, **351 confirmed methods**.
+**350 APIs** across 46 pages, **391 confirmed methods**.
 
 | Page | APIs | Methods |
 |---|---:|---:|
 | [API](api.md) | 4 | 4 |
+| [Backup](backup.md) | 18 | 21 |
 | [Core-other](core-other.md) | 38 | 39 |
 | [Core · AppPriv](core-apppriv.md) | 3 | 4 |
-| [Core · BandwidthControl](core-bandwidthcontrol.md) | 3 | 3 |
+| [Core · BandwidthControl](core-bandwidthcontrol.md) | 3 | 4 |
 | [Core · CMS](core-cms.md) | 3 | 3 |
 | [Core · DDNS](core-ddns.md) | 4 | 4 |
-| [Core · Directory](core-directory.md) | 13 | 15 |
+| [Core · Directory](core-directory.md) | 16 | 19 |
 | [Core · ExternalDevice](core-externaldevice.md) | 15 | 16 |
 | [Core · FileServ](core-fileserv.md) | 12 | 13 |
 | [Core · Hardware](core-hardware.md) | 11 | 11 |
@@ -37,14 +38,15 @@ no-argument call to an unknown write method executes it. Those need a disposable
 | [Core · MediaIndexing](core-mediaindexing.md) | 5 | 5 |
 | [Core · MyDSCenter](core-mydscenter.md) | 3 | 3 |
 | [Core · Network](core-network.md) | 19 | 23 |
-| [Core · Notification](core-notification.md) | 15 | 20 |
+| [Core · Notification](core-notification.md) | 15 | 21 |
+| [Core · OTP](core-otp.md) | 3 | 4 |
 | [Core · Package](core-package.md) | 12 | 7 |
 | [Core · PersonalNotification](core-personalnotification.md) | 4 | 4 |
 | [Core · PortForwarding](core-portforwarding.md) | 3 | 4 |
-| [Core · QuickConnect](core-quickconnect.md) | 3 | 3 |
-| [Core · Region](core-region.md) | 3 | 3 |
+| [Core · QuickConnect](core-quickconnect.md) | 4 | 5 |
+| [Core · Region](core-region.md) | 3 | 4 |
 | [Core · Security](core-security.md) | 12 | 16 |
-| [Core · Share](core-share.md) | 3 | 3 |
+| [Core · Share](core-share.md) | 4 | 4 |
 | [Core · Sharing](core-sharing.md) | 3 | 3 |
 | [Core · SmartBlock](core-smartblock.md) | 5 | 5 |
 | [Core · Storage](core-storage.md) | 3 | 4 |
@@ -53,11 +55,12 @@ no-argument call to an unknown write method executes it. Those need a disposable
 | [Core · System](core-system.md) | 3 | 3 |
 | [Core · Theme](core-theme.md) | 5 | 5 |
 | [Core · Web](core-web.md) | 4 | 4 |
-| [Docker](docker.md) | 3 | 4 |
-| [FileStation](filestation.md) | 15 | 17 |
+| [DR](dr.md) | 3 | 4 |
+| [Docker](docker.md) | 4 | 5 |
+| [FileStation](filestation.md) | 17 | 19 |
 | [OAUTH](oauth.md) | 4 | 5 |
 | [PersonMailAccount](personmailaccount.md) | 3 | 3 |
-| [Personal](personal.md) | 14 | 15 |
+| [Personal](personal.md) | 14 | 16 |
 | [Remote](remote.md) | 3 | 3 |
 | [ResourceMonitor](resourcemonitor.md) | 3 | 4 |
 | [S2S](s2s.md) | 3 | 5 |
@@ -65,7 +68,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 | [SecureSignIn](securesignin.md) | 15 | 15 |
 | [SecurityAdvisor](securityadvisor.md) | 6 | 6 |
 | [Storage](storage.md) | 6 | 7 |
-| [other](other.md) | 17 | 18 |
+| [other](other.md) | 15 | 15 |
 
 ---
 

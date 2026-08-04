@@ -279,7 +279,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.FileStation.Snapshot`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -499,9 +499,19 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.FileStation.VirtualFolder`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/filestation.py:590`):
+- `additional` (optional)
+- `limit` (optional)
+- `mount_type` (required)
+- `offset` (optional)
+- `sort_by` (optional)
+- `sort_direction` (optional)
+- `type` (required)
 
 **Response:**
 
@@ -512,6 +522,62 @@ The exact signature was not determined; it is listed here so it is known to exis
     "folders": "array<empty>",
     "offset": "integer",
     "total": "integer"
+  }
+}
+```
+
+## SYNO.FileStation.Worm
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.FileStation.Worm`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present: DSM returned error 1500 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 1500
+  }
+}
+```
+
+## SYNO.FileStation.Worm.Lock
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
+
+#### Method: `status`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.FileStation.Worm.Lock`
+- `version` (required): `1`
+- `method` (required): `status`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present: DSM returned error 599 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 599
   }
 }
 ```

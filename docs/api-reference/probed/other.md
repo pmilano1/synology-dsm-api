@@ -72,110 +72,6 @@ The exact signature was not determined; it is listed here so it is known to exis
 }
 ```
 
-## SYNO.Backup.App.Backup
-
-**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
-
-#### Method: `list`
-
-**HTTP Method:** POST
-
-**Parameters:**
-- `api` (required): `SYNO.Backup.App.Backup`
-- `version` (required): `1`
-- `method` (required): `list`
-- `_sid` (required): Session ID from `SYNO.API.Auth`
-
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
-The exact signature was not determined; it is listed here so it is known to exist.
-
-**Response:**
-
-```json
-{
-  "success": false,
-  "error": {
-    "code": 120
-  }
-}
-```
-
-## SYNO.DR.Node
-
-**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
-
-#### Method: `info`
-
-**HTTP Method:** POST
-
-**Parameters:**
-- `api` (required): `SYNO.DR.Node`
-- `version` (required): `1`
-- `method` (required): `info`
-- `_sid` (required): Session ID from `SYNO.API.Auth`
-
-**Response:**
-
-```json
-{
-  "success": true,
-  "data": {
-    "hostname": "string",
-    "node_id": "string",
-    "serial": "string"
-  }
-}
-```
-
-## SYNO.DR.Node.Credential
-
-**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
-
-#### Method: `get`
-
-**HTTP Method:** POST
-
-**Parameters:**
-- `api` (required): `SYNO.DR.Node.Credential`
-- `version` (required): `1`
-- `method` (required): `get`
-- `_sid` (required): Session ID from `SYNO.API.Auth`
-
-Confirmed present: DSM returned error 401 rather than 103, so the method exists. What it additionally requires was not determined.
-The exact signature was not determined; it is listed here so it is known to exist.
-
-**Response:**
-
-```json
-{
-  "success": false,
-  "error": {
-    "code": 401
-  }
-}
-```
-
-#### Method: `list`
-
-**HTTP Method:** POST
-
-**Parameters:**
-- `api` (required): `SYNO.DR.Node.Credential`
-- `version` (required): `1`
-- `method` (required): `list`
-- `_sid` (required): Session ID from `SYNO.API.Auth`
-
-**Response:**
-
-```json
-{
-  "success": true,
-  "data": {
-    "creds": "null"
-  }
-}
-```
-
 ## SYNO.DSM.Network
 
 **Endpoint:** `/webapi/entry.cgi` · **Versions:** 2
@@ -308,7 +204,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -332,7 +228,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `status`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -356,7 +252,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.FolderSharing.List`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -384,7 +280,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.FolderSharing.Thumb`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -450,7 +346,15 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_backup.py:346`):
+- `filter_date_from` (optional)
+- `filter_date_to` (optional)
+- `filter_keyword` (optional)
+- `limit` (optional)
+- `offset` (optional)
+
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -478,7 +382,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -513,6 +417,31 @@ The exact signature was not determined; it is listed here so it is known to exis
   "success": true,
   "data": {
     "share_list": "array<empty>"
+  }
+}
+```
+
+## SYNO.SupportService.Setting
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.SupportService.Setting`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "fast_support": "boolean"
   }
 }
 ```

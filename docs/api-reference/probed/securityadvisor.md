@@ -61,7 +61,11 @@ no-argument call to an unknown write method executes it. Those need a disposable
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/security_advisor.py:52`):
+- `group` (required)
+
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -116,6 +120,11 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/security_advisor.py:69`):
+- `limit` (optional)
+- `offser` (optional)
 
 **Response:**
 

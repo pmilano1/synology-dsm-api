@@ -29,7 +29,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Web.DSM`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -42,6 +42,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
     "enable_avahi": "boolean",
     "enable_custom_domain": "boolean",
     "enable_hsts": "boolean",
+    "enable_https": "boolean",
     "enable_https_redirect": "boolean",
     "enable_max_connections": "boolean",
     "enable_reuseport": "boolean",

@@ -1,4 +1,4 @@
-# Core · CMS APIs (probed)
+# Core · OTP APIs (probed)
 
 **Category:** System Management
 
@@ -19,7 +19,35 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 ---
 
-## SYNO.Core.CMS.Info
+## SYNO.Core.OTP
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–3
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.OTP`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present: DSM returned error 4203 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 4203
+  }
+}
+```
+
+## SYNO.Core.OTP.Admin
 
 **Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
 
@@ -28,7 +56,35 @@ no-argument call to an unknown write method executes it. Those need a disposable
 **HTTP Method:** POST
 
 **Parameters:**
-- `api` (required): `SYNO.Core.CMS.Info`
+- `api` (required): `SYNO.Core.OTP.Admin`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present: DSM returned error 4203 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 4203
+  }
+}
+```
+
+## SYNO.Core.OTP.EnforcePolicy
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.OTP.EnforcePolicy`
 - `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
@@ -39,26 +95,22 @@ no-argument call to an unknown write method executes it. Those need a disposable
 {
   "success": true,
   "data": {
-    "joined": "boolean"
+    "otp_enforce_option": "string"
   }
 }
 ```
 
-## SYNO.Core.CMS.Task
-
-**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
-
-#### Method: `query`
+#### Method: `list`
 
 **HTTP Method:** POST
 
 **Parameters:**
-- `api` (required): `SYNO.Core.CMS.Task`
+- `api` (required): `SYNO.Core.OTP.EnforcePolicy`
 - `version` (required): `1`
-- `method` (required): `query`
+- `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
+Confirmed present: DSM returned error 4203 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -67,35 +119,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 {
   "success": false,
   "error": {
-    "code": 120
-  }
-}
-```
-
-## SYNO.Core.CMS.Token
-
-**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
-
-#### Method: `get`
-
-**HTTP Method:** POST
-
-**Parameters:**
-- `api` (required): `SYNO.Core.CMS.Token`
-- `version` (required): `1`
-- `method` (required): `get`
-- `_sid` (required): Session ID from `SYNO.API.Auth`
-
-Confirmed present, but not callable with the common parameters alone — it the session lacks permission for this method.
-The exact signature was not determined; it is listed here so it is known to exist.
-
-**Response:**
-
-```json
-{
-  "success": false,
-  "error": {
-    "code": 105
+    "code": 4203
   }
 }
 ```

@@ -29,8 +29,37 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 **Parameters:**
 - `api` (required): `SYNO.Core.BandwidthControl`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_group.py:176`):
+- `name` (required)
+- `owner_type` (required)
+
+Confirmed present: DSM returned error 5300 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 5300
+  }
+}
+```
+
+#### Method: `list`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.BandwidthControl`
+- `version` (required): `1`
+- `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
 Confirmed present: DSM returned error 5300 rather than 103, so the method exists. What it additionally requires was not determined.
@@ -60,6 +89,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_sys_info.py:118`):
+- `protocol` (required)
 
 Confirmed present: DSM returned error 5300 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.

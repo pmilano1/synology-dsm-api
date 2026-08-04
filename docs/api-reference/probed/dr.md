@@ -1,6 +1,6 @@
-# Core · CMS APIs (probed)
+# DR APIs (probed)
 
-**Category:** System Management
+**Category:** DSM Services
 
 [← Back to Probed APIs](README.md)
 
@@ -19,18 +19,18 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 ---
 
-## SYNO.Core.CMS.Info
+## SYNO.DR.Node
 
 **Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
 
-#### Method: `get`
+#### Method: `info`
 
 **HTTP Method:** POST
 
 **Parameters:**
-- `api` (required): `SYNO.Core.CMS.Info`
+- `api` (required): `SYNO.DR.Node`
 - `version` (required): `1`
-- `method` (required): `get`
+- `method` (required): `info`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
 **Response:**
@@ -39,40 +39,14 @@ no-argument call to an unknown write method executes it. Those need a disposable
 {
   "success": true,
   "data": {
-    "joined": "boolean"
+    "hostname": "string",
+    "node_id": "string",
+    "serial": "string"
   }
 }
 ```
 
-## SYNO.Core.CMS.Task
-
-**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
-
-#### Method: `query`
-
-**HTTP Method:** POST
-
-**Parameters:**
-- `api` (required): `SYNO.Core.CMS.Task`
-- `version` (required): `1`
-- `method` (required): `query`
-- `_sid` (required): Session ID from `SYNO.API.Auth`
-
-Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
-The exact signature was not determined; it is listed here so it is known to exist.
-
-**Response:**
-
-```json
-{
-  "success": false,
-  "error": {
-    "code": 120
-  }
-}
-```
-
-## SYNO.Core.CMS.Token
+## SYNO.DR.Node.Credential
 
 **Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
 
@@ -81,12 +55,12 @@ The exact signature was not determined; it is listed here so it is known to exis
 **HTTP Method:** POST
 
 **Parameters:**
-- `api` (required): `SYNO.Core.CMS.Token`
+- `api` (required): `SYNO.DR.Node.Credential`
 - `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the common parameters alone — it the session lacks permission for this method.
+Confirmed present: DSM returned error 401 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -95,7 +69,56 @@ The exact signature was not determined; it is listed here so it is known to exis
 {
   "success": false,
   "error": {
-    "code": 105
+    "code": 401
+  }
+}
+```
+
+#### Method: `list`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.DR.Node.Credential`
+- `version` (required): `1`
+- `method` (required): `list`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "creds": "null"
+  }
+}
+```
+
+## SYNO.DR.Node.Session
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.DR.Node.Session`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present: DSM returned error 401 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 401
   }
 }
 ```

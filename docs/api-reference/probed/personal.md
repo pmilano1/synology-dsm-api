@@ -110,11 +110,11 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Personal.Notification.Conf`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -138,7 +138,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Personal.Notification.Device`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -158,17 +158,41 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
 
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Personal.Notification.Event`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 114
+  }
+}
+```
+
 #### Method: `list`
 
 **HTTP Method:** POST
 
 **Parameters:**
 - `api` (required): `SYNO.Personal.Notification.Event`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -196,7 +220,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -271,11 +295,11 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Personal.Notification.Settings`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -352,7 +376,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Personal.Profile`
-- `version` (required): `3`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -364,15 +388,14 @@ The exact signature was not determined; it is listed here so it is known to exis
   "data": {
     "email": "string",
     "emails": "array<empty>",
+    "groups": "array<empty>",
     "id": "string",
-    "isGuest": "boolean",
     "nickName": "string",
     "photo": "string",
-    "photoHash": "string",
     "preferredColor": "string",
     "preferredLanguage": "string",
     "timezone": "string",
-    "timezoneDef": "string",
+    "timezoneUI": "string",
     "title": "string",
     "uid": "integer",
     "userName": "string"
@@ -386,20 +409,17 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Personal.Profile`
-- `version` (required): `3`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
-
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
-The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
 
 ```json
 {
-  "success": false,
-  "error": {
-    "code": 120
+  "success": true,
+  "data": {
+    "users": "array<empty>"
   }
 }
 ```
@@ -414,11 +434,11 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Personal.Profile.Photo`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Confirmed present, but not callable with the common parameters alone — it rejected the call as invalid without the method's own parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -427,7 +447,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 {
   "success": false,
   "error": {
-    "code": 120
+    "code": 101
   }
 }
 ```
