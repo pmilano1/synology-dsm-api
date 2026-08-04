@@ -72,6 +72,9 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 ---
 
+See also: **[DSM API error codes](error-codes.md)** — what each code returned by
+these APIs means, which ones are global, and the three that routinely mislead.
+
 ## How this was produced
 
 `SYNO.API.Info` (`query`, `SYNO.API.` prefix) enumerates every API the appliance
