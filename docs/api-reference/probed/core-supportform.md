@@ -29,7 +29,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 **Parameters:**
 - `api` (required): `SYNO.Core.SupportForm.Form`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -43,6 +43,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
     "model": "string",
     "server_baseurl": "string",
     "sn": "string",
+    "tid": "string",
     "timestamp": "integer",
     "version": "string"
   }
@@ -63,7 +64,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 - `method` (required): `status`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**

@@ -57,11 +57,11 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.Advance.FilterSettings`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it rejected the call as invalid without the method's own parameters.
+Confirmed present, but not callable with the common parameters alone — it rejected the call as invalid without the method's own parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -81,7 +81,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.Advance.FilterSettings`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -94,10 +94,15 @@ The exact signature was not determined; it is listed here so it is known to exis
     "All": [
       {
         "appid": "string",
+        "cms": "boolean",
+        "desktop": "boolean",
         "format": "string",
         "group": "string",
         "level": "string",
+        "mail": "boolean",
+        "mobile": "boolean",
         "name": "string",
+        "sms": "boolean",
         "source": "string",
         "tag": "string",
         "title": "string",
@@ -225,7 +230,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.CMS.Conf`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -235,15 +240,8 @@ The exact signature was not determined; it is listed here so it is known to exis
 {
   "success": true,
   "data": {
-    "available_templates": [
-      {
-        "name": "string",
-        "template_id": "integer"
-      }
-    ],
     "cms_enable": "boolean",
-    "join_dsm_cms": "boolean",
-    "template_id": "integer"
+    "join_dsm_cms": "boolean"
   }
 }
 ```
@@ -286,7 +284,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.Mail.Conf`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -299,7 +297,7 @@ The exact signature was not determined; it is listed here so it is known to exis
     "enable_mail": "boolean",
     "enable_oauth": "boolean",
     "in_use": "array<empty>",
-    "profiles": "array<empty>",
+    "mail": "array<empty>",
     "send_welcome_mail": "boolean",
     "sender_mail": "string",
     "sender_name": "string",
@@ -411,7 +409,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.Push.Mail`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -423,8 +421,28 @@ The exact signature was not determined; it is listed here so it is known to exis
   "data": {
     "enable_mail": "boolean",
     "mail": "array<empty>",
-    "subject_prefix": "string",
-    "template_id": "integer"
+    "subject_prefix": "string"
+  }
+}
+```
+
+#### Method: `status`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.Notification.Push.Mail`
+- `version` (required): `1`
+- `method` (required): `status`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "verified_mail": "array<empty>"
   }
 }
 ```
@@ -439,7 +457,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.Push.Mobile`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -466,11 +484,11 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.Push.Webhook.Provider`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present: DSM returned error 4683 rather than 103, so the method exists. What it additionally requires was not determined.
+Confirmed present: DSM returned error 4681 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -479,7 +497,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 {
   "success": false,
   "error": {
-    "code": 4683
+    "code": 4681
   }
 }
 ```
@@ -490,7 +508,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.Push.Webhook.Provider`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -516,7 +534,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.SMS.Conf`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -529,13 +547,7 @@ The exact signature was not determined; it is listed here so it is known to exis
     "api_id": "string",
     "enable_sms": "boolean",
     "msg_interval": "integer",
-    "phone_info": [
-      {
-        "code": "string",
-        "num": "string",
-        "prefix": "string"
-      }
-    ],
+    "phone_info": "null",
     "provider_name": "string",
     "sender": "string",
     "user": "string"
@@ -553,7 +565,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.SMS.Provider`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -577,7 +589,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Notification.SMS.Provider`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -590,14 +602,8 @@ The exact signature was not determined; it is listed here so it is known to exis
     "provider_info": [
       {
         "api_id": "string",
-        "api_key": "string",
-        "param_used": "object",
         "provider_id": "string",
         "provider_name": "string",
-        "req_header": "string",
-        "req_method": "string",
-        "req_param": "string",
-        "sep_char": "string",
         "template": "string"
       }
     ]

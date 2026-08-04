@@ -56,7 +56,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Region.NTP`
-- `version` (required): `3`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -67,16 +67,35 @@ no-argument call to an unknown write method executes it. Those need a disposable
   "success": true,
   "data": {
     "date": "string",
-    "date_format": "string",
     "enable_ntp": "string",
     "hour": "integer",
     "minute": "integer",
     "now": "string",
     "second": "integer",
     "server": "string",
-    "time_format": "string",
     "timestamp": "integer",
     "timezone": "string"
+  }
+}
+```
+
+#### Method: `status`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.Region.NTP`
+- `version` (required): `1`
+- `method` (required): `status`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "ntp_status": "boolean"
   }
 }
 ```

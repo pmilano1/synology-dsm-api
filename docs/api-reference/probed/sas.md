@@ -33,7 +33,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 - `method` (required): `status`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -61,7 +61,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it rejected the call as invalid without the method's own parameters.
+Confirmed present, but not callable with the common parameters alone — it rejected the call as invalid without the method's own parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -89,7 +89,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it rejected the call as invalid without the method's own parameters.
+Confirmed present, but not callable with the common parameters alone — it rejected the call as invalid without the method's own parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -117,7 +117,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**

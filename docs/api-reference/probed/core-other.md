@@ -19,6 +19,58 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 ---
 
+## SYNO.Core.ACL
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.ACL`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present: DSM returned error 403 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 403
+  }
+}
+```
+
+#### Method: `status`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.ACL`
+- `version` (required): `1`
+- `method` (required): `status`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Confirmed present: DSM returned error 403 rather than 103, so the method exists. What it additionally requires was not determined.
+The exact signature was not determined; it is listed here so it is known to exist.
+
+**Response:**
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": 403
+  }
+}
+```
+
 ## SYNO.Core.ActionPriv
 
 **Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
@@ -1782,6 +1834,15 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_sys_info.py:1933`):
+- `action` (required)
+- `forceReload` (required)
+- `limit` (optional)
+- `offset` (optional)
+- `sort_by` (optional)
+- `sort_direction` (optional)
+
 **Response:**
 
 ```json
@@ -1888,6 +1949,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_system.py:746`):
+- `group` (optional)
+
 Confirmed present: DSM returned error 117 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.
 
@@ -1898,6 +1963,38 @@ The exact signature was not determined; it is listed here so it is known to exis
   "success": false,
   "error": {
     "code": 117
+  }
+}
+```
+
+## SYNO.Core.NormalUser
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.NormalUser`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "OTP_enable": "boolean",
+    "OTP_enforced": "boolean",
+    "disallowchpasswd": "boolean",
+    "editable": "boolean",
+    "email": "string",
+    "fullname": "string",
+    "password_last_change": "integer",
+    "username": "string"
   }
 }
 ```
@@ -1961,83 +2058,6 @@ The exact signature was not determined; it is listed here so it is known to exis
 }
 ```
 
-## SYNO.Core.OTP.Admin
-
-**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
-
-#### Method: `get`
-
-**HTTP Method:** POST
-
-**Parameters:**
-- `api` (required): `SYNO.Core.OTP.Admin`
-- `version` (required): `1`
-- `method` (required): `get`
-- `_sid` (required): Session ID from `SYNO.API.Auth`
-
-Confirmed present: DSM returned error 4203 rather than 103, so the method exists. What it additionally requires was not determined.
-The exact signature was not determined; it is listed here so it is known to exist.
-
-**Response:**
-
-```json
-{
-  "success": false,
-  "error": {
-    "code": 4203
-  }
-}
-```
-
-## SYNO.Core.OTP.EnforcePolicy
-
-**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
-
-#### Method: `get`
-
-**HTTP Method:** POST
-
-**Parameters:**
-- `api` (required): `SYNO.Core.OTP.EnforcePolicy`
-- `version` (required): `1`
-- `method` (required): `get`
-- `_sid` (required): Session ID from `SYNO.API.Auth`
-
-**Response:**
-
-```json
-{
-  "success": true,
-  "data": {
-    "otp_enforce_option": "string"
-  }
-}
-```
-
-#### Method: `list`
-
-**HTTP Method:** POST
-
-**Parameters:**
-- `api` (required): `SYNO.Core.OTP.EnforcePolicy`
-- `version` (required): `1`
-- `method` (required): `list`
-- `_sid` (required): Session ID from `SYNO.API.Auth`
-
-Confirmed present: DSM returned error 4203 rather than 103, so the method exists. What it additionally requires was not determined.
-The exact signature was not determined; it is listed here so it is known to exist.
-
-**Response:**
-
-```json
-{
-  "success": false,
-  "error": {
-    "code": 4203
-  }
-}
-```
-
 ## SYNO.Core.PhotoViewer
 
 **Endpoint:** `/webapi/entry.cgi` · **Versions:** 1
@@ -2052,7 +2072,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `info`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -2076,7 +2096,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters — DSM names the missing one in `error.errors`.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters; DSM names the missing one in `error.errors`.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -2103,6 +2123,13 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_group.py:225`):
+- `name` (required)
+- `subject_type` (required)
+- `support_share_quota` (required)
+- `volume_path` (required)
 
 Confirmed present: DSM returned error 5403 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.
@@ -2156,6 +2183,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_storage.py:543`):
+- `user` (required)
 
 **Response:**
 
@@ -2212,7 +2243,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Service`
-- `version` (required): `3`
+- `version` (required): `2`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -2224,7 +2255,7 @@ The exact signature was not determined; it is listed here so it is known to exis
   "data": {
     "service": [
       {
-        "display_name_section_key": "string",
+        "display_name": "string",
         "enable_status": "string",
         "service_id": "string"
       }
@@ -2307,7 +2338,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -2385,6 +2416,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_system.py:798`):
+- `user` (optional)
 
 **Response:**
 

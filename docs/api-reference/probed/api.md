@@ -58,7 +58,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it the session lacks permission for this method.
+Confirmed present, but not callable with the common parameters alone — it the session lacks permission for this method.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**

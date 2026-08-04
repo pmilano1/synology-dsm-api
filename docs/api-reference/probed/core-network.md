@@ -57,7 +57,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Network.Bond`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -81,7 +81,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Network.Bond`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -134,7 +134,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Network.Ethernet`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -158,7 +158,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.Network.Ethernet`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -498,6 +498,11 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_sys_info.py:1762`):
+- `iptype` (optional)
+- `type` (optional)
+
 Confirmed present: DSM returned error 4302 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.
 
@@ -525,6 +530,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_network.py:545`):
+- `id` (required)
 
 Confirmed present: DSM returned error 4302 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.
@@ -604,6 +613,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_sys_info.py:571`):
+- `additional` (required)
 
 **Response:**
 

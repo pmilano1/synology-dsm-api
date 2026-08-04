@@ -33,7 +33,18 @@ no-argument call to an unknown write method executes it. Those need a disposable
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/docker_api.py:1076`):
+- `from` (optional)
+- `keyword` (optional)
+- `level` (optional)
+- `limit` (optional)
+- `name` (optional)
+- `offset` (optional)
+- `sort_dir` (optional)
+- `to` (optional)
+
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -61,7 +72,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
-Confirmed present, but not callable with the four parameters above — it requires additional parameters.
+Confirmed present, but not callable with the common parameters alone — it requires additional parameters.
 The exact signature was not determined; it is listed here so it is known to exist.
 
 **Response:**
@@ -88,6 +99,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/docker_api.py:590`):
+- `id` (optional)
 
 Confirmed present: DSM returned error 2104 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.
@@ -119,5 +134,42 @@ The exact signature was not determined; it is listed here so it is known to exis
 {
   "success": true,
   "data": {}
+}
+```
+
+## SYNO.Docker.Registry
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–2
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Docker.Registry`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "offset": "integer",
+    "registries": [
+      {
+        "enable_registry_mirror": "boolean",
+        "enable_trust_SSC": "boolean",
+        "mirror_urls": "array<empty>",
+        "name": "string",
+        "syno": "boolean",
+        "url": "string"
+      }
+    ],
+    "total": "integer",
+    "using": "string"
+  }
 }
 ```

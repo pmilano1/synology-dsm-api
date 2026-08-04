@@ -29,7 +29,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 **Parameters:**
 - `api` (required): `SYNO.Core.FileServ.FTP`
-- `version` (required): `3`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -47,6 +47,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
     "enable_ftp": "boolean",
     "enable_ftps": "boolean",
     "enable_fxp": "boolean",
+    "enable_utf8": "boolean",
     "ext_ip": "string",
     "max_conn_per_ip": "integer",
     "maxdownloadrate": "integer",
@@ -54,8 +55,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
     "modify_time_std": "string",
     "portnum": "integer",
     "timeout": "integer",
-    "use_ext_ip": "boolean",
-    "utf8_mode": "integer"
+    "use_ext_ip": "boolean"
   }
 }
 ```

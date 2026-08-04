@@ -19,6 +19,58 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 ---
 
+## SYNO.Core.QuickConnect
+
+**Endpoint:** `/webapi/entry.cgi` · **Versions:** 1–3
+
+#### Method: `get`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.QuickConnect`
+- `version` (required): `1`
+- `method` (required): `get`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "domain": "string",
+    "enabled": "boolean",
+    "myds_account": "string",
+    "region": "string",
+    "server_alias": "string",
+    "server_id": "string"
+  }
+}
+```
+
+#### Method: `status`
+
+**HTTP Method:** POST
+
+**Parameters:**
+- `api` (required): `SYNO.Core.QuickConnect`
+- `version` (required): `1`
+- `method` (required): `status`
+- `_sid` (required): Session ID from `SYNO.API.Auth`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "alias_status": "string",
+    "status": "string"
+  }
+}
+```
+
 ## SYNO.Core.QuickConnect.Permission
 
 **Endpoint:** `/webapi/entry.cgi` · **Versions:** 1

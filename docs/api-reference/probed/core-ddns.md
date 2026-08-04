@@ -58,9 +58,13 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 **Parameters:**
 - `api` (required): `SYNO.Core.DDNS.ExtIP`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_sys_info.py:1419`):
+- `retry` (required)
 
 **Response:**
 

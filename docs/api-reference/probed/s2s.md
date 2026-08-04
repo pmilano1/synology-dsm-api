@@ -128,6 +128,10 @@ no-argument call to an unknown write method executes it. Those need a disposable
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_sys_info.py:1614`):
+- `additional` (required)
+
 **Response:**
 
 ```json

@@ -29,7 +29,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 **Parameters:**
 - `api` (required): `SYNO.Core.ExternalDevice.Bluetooth`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -53,7 +53,7 @@ The exact signature was not determined; it is listed here so it is known to exis
 
 **Parameters:**
 - `api` (required): `SYNO.Core.ExternalDevice.Bluetooth`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -339,6 +339,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `get`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_external_device.py:488`):
+- `id` (required)
+
 Confirmed present: DSM returned error 3600 rather than 103, so the method exists. What it additionally requires was not determined.
 The exact signature was not determined; it is listed here so it is known to exist.
 
@@ -422,6 +426,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_sys_info.py:1273`):
+- `additional` (required)
+
 **Response:**
 
 ```json
@@ -446,6 +454,10 @@ The exact signature was not determined; it is listed here so it is known to exis
 - `version` (required): `1`
 - `method` (required): `list`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
+
+Additional parameters, from open-source client implementations rather than
+from this probe (`synology-api/synology_api/core_sys_info.py:1290`):
+- `additional` (required)
 
 **Response:**
 

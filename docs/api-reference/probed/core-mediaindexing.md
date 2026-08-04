@@ -87,7 +87,7 @@ no-argument call to an unknown write method executes it. Those need a disposable
 
 **Parameters:**
 - `api` (required): `SYNO.Core.MediaIndexing.MediaConverter`
-- `version` (required): `2`
+- `version` (required): `1`
 - `method` (required): `status`
 - `_sid` (required): Session ID from `SYNO.API.Auth`
 
@@ -97,23 +97,14 @@ no-argument call to an unknown write method executes it. Those need a disposable
 {
   "success": true,
   "data": {
-    "duration": "integer",
-    "manual_action_by_user": "string",
-    "mode": "string",
-    "pause_time_left": "integer",
     "photo_remain": "integer",
     "photo_total": "integer",
     "resume_time": "integer",
-    "start": {
-      "hour": "integer"
-    },
     "status": "string",
-    "thumb_complete": "integer",
     "thumb_remain": "integer",
     "thumb_total": "integer",
     "video_remain": "integer",
-    "video_total": "integer",
-    "week": "array<boolean>"
+    "video_total": "integer"
   }
 }
 ```
